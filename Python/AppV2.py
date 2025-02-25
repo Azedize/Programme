@@ -1284,7 +1284,7 @@ class CloseChromeThread(QThread):
 
 
 
-            
+
 def launch_new_window():
     try:
         python_executable = sys.executable
@@ -1292,15 +1292,17 @@ def launch_new_window():
         script_dir = os.path.dirname(script_path)
         script_path_run = os.path.join(script_dir, '..', '..', 'checkV2.py')
 
-
         command = [python_executable, script_path_run]
         subprocess.Popen(command,
                          creationflags=subprocess.CREATE_NEW_PROCESS_GROUP | subprocess.DETACHED_PROCESS,
                          close_fds=True)
 
-        print("[INFO] New instance of the application launched.")
+        print("[INFO] Nouvelle instance de l'application lancée.")
+        sys.exit(0) 
+
     except Exception as e:
-        print(f"❌ [ERROR] Failed to launch new instance: {e}")
+        print(f"❌ [ERREUR] Échec du lancement de la nouvelle instance : {e}")
+
 
 
 
@@ -1559,37 +1561,43 @@ class MainWindow(QMainWindow):
 
 
     def on_submit_button_clicked(self, window):
-        new_versions = checkVersion()
+        print("[DEBUG] Début de la fonction on_submit_button_clicked")
 
-        print(f"🔍 Debug: new_version = {new_versions}")  
+        new_versions = checkVersion()
+        print(f"[DEBUG] Résultat de checkVersion() : {new_versions}")
 
         if not new_versions:
-            print("❌ [ERROR] checkVersion() لم يُرجع أي بيانات! تأكد من عمله بشكل صحيح.")
-            return  
+            print("❌ [ERROR] checkVersion() n'a retourné aucune donnée ! Assurez-vous qu'il fonctionne correctement.")
+            return
+
         if 'version_interface' in new_versions:
-            print("[INFO] Version mismatch detected. Closing current window...")
+            print("[INFO] Incompatibilité de version détectée. Fermeture de la fenêtre actuelle...")
             window.close()
 
-            print("[INFO] Starting download...")
+            print("[INFO] Démarrage du téléchargement...")
             download_result = DownloadFile(new_versions)
             if download_result == -1:
-                print("❌ [ERROR] Download failed. Aborting update.")
+                print("❌ [ERROR] Échec du téléchargement. Mise à jour abandonnée.")
                 return
 
-            print("[INFO] Starting extraction...")
+            print("[INFO] Démarrage de l'extraction...")
             extractAll(new_versions)
 
-            print("[INFO] Launching new window...")
-            launch_new_window()  
+            print("[INFO] Lancement de la nouvelle fenêtre...")
+            launch_new_window()
+            # Arrête le traitement, fin du programme
         else:
-            print("[INFO] No interface update. Starting download of other tools...")
+            print("[INFO] Aucune mise à jour de l'interface. Démarrage du téléchargement des autres outils...")
             download_result = DownloadFile(new_versions)
             if download_result == -1:
-                print("❌ [ERROR] Download failed. Aborting update.")
+                print("❌ [ERROR] Échec du téléchargement. Mise à jour abandonnée.")
                 return
 
-            print("[INFO] Starting extraction...")
+            print("[INFO] Démarrage de l'extraction...")
             extractAll(new_versions)
+
+        print("[DEBUG] Fin de la fonction on_submit_button_clicked")
+
         
         global current_hour, current_date
 
