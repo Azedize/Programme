@@ -29,7 +29,6 @@ import urllib3
 urllib3.disable_warnings()
 
 
-print('ffffffffffffffffffffffffffffffff')
 
 process_pids = []
 notification_badges = {}
