@@ -1,0 +1,229 @@
+{
+    "openInbox": {
+        "id": "open_inbox",
+        "label": "Open Inbox",
+        "showOnInit": true,
+        "actions": ["inboxOpenMessage", "inboxSelectAll"],
+        "Template": "Template1" 
+    },
+    "inboxOpenMessage": {
+        "id": "open_message",
+        "label": "Open Message",
+        "actions": ["inboxAddContact", "inboxClick","inboxMarkAsImportant","inboxDelete","inboxReply","inboxAddStar","inboxArchive","inboxReportSpam"],
+        "Template": "Template2",
+        "name_previous":null
+    },
+    "inboxSelectAll": {
+        "id": "select_all",
+        "label": "Select All",
+        "actions": ["SelectMarkAsRead","SelectMarkAsImportant","SelectAddStar","SelectArchive"],
+        "Template": "Template2"
+    },
+    "SelectMarkAsImportant": {
+        "id": "mark_as_important",
+        "label": "Mark As Important",
+        "actions": ["SelectMarkAsRead","SelectAddStar","SelectArchive"],
+        "Template": "Template2"
+    },
+    "SelectMarkAsRead": {
+        "id": "mark_as_read",
+        "label": "Mark As Read",
+        "actions": ["SelectMarkAsImportant","SelectAddStar","SelectArchive"],
+        "Template": "Template2"
+    },
+    "SelectAddStar": {
+        "id": "add_star",
+        "label": "Mark Add Star",
+        "actions": ["SelectMarkAsImportant","SelectMarkAsRead","SelectArchive"],
+        "Template": "Template2"
+    },
+    "SelectArchive": {
+        "id": "archive",
+        "label": "Archive",
+        "actions": [],
+        "Template": "Template2"
+    },
+      "inboxAddContact": {
+        "id": "add_contacts",
+        "label": "Add Contact",
+        "actions": [ "inboxClick","inboxMarkAsImportant","inboxDelete","inboxReply","inboxAddStar","inboxArchive","inboxReportSpam"],
+        "Template": "Template2"
+      },
+      "inboxMarkAsImportant": {
+        "id": "mark_as_important",
+        "label": "Mark As Important",
+        "actions": [ "inboxAddContact", "inboxClick","inboxDelete","inboxReply","inboxAddStar","inboxArchive","inboxReportSpam"],
+        "Template": "Template2"
+      },
+      "inboxReply": {
+        "id": "reply_message",
+        "label": "Reply",
+        "actions": [ "inboxAddContact", "inboxClick","inboxMarkAsImportant","inboxDelete","inboxAddStar","inboxArchive","inboxReportSpam"],
+        "Template": "Template2"
+      },
+      "inboxDelete": {
+        "id": "delete",
+        "label": "Delete",
+        "actions": [],
+        "Template": "Template2"
+      },
+      "inboxClick": {
+        "id": "click_link",
+        "label": "Click",
+        "actions": [ "inboxAddContact","inboxMarkAsImportant","inboxDelete","inboxReply","inboxAddStar","inboxArchive","inboxReportSpam"],
+        "Template": "Template2"
+      },
+      "inboxAddStar": {
+        "id": "add_star",
+        "label": "Add As Star",
+        "actions": [ "inboxAddContact", "inboxClick","inboxMarkAsImportant","inboxDelete","inboxReply","inboxArchive","inboxReportSpam"],
+        "Template": "Template2"
+      },
+      "inboxArchive": {
+        "id": "archive",
+        "label": "Archive",
+        "actions": [],
+        "Template": "Template2"
+      },
+      "inboxReportSpam": {
+        "id": "report_spam",
+        "label": "Report Spam",
+        "actions": [],
+        "Template": "Template2"
+      },
+      "openSpam": {
+        "id": "open_spam",
+        "label": "Open Spam",
+        "showOnInit": true,
+        "actions": ["spamOpenMessage", "spamSelectAll"],
+        "Template": "Template1"
+      },
+      "spamOpenMessage": {
+        "id": "open_message",
+        "label": "Open Message",
+        "actions": ["spamAddContact", "spamClick","spamMarkAsImportant","spamDelete","spamReply","spamAddStar","spamArchive","spamNotSpam"],
+        "Template": "Template2"
+    },
+    "spamSelectAll": {
+        "id": "select_all",
+        "label": "Select All",
+        "actions": ["spamSelectMarkAsRead","spamSelectMarkAsImportant","spamSelectAddStar","spamSelectArchive","spamSelectNotSpam"],
+        "Template": "Template2"
+    },
+    "spamSelectMarkAsImportant": {
+        "id": "mark_as_important",
+        "label": "Mark As Important",
+        "actions": ["spamSelectMarkAsRead","spamSelectAddStar","spamSelectArchive","spamSelectNotSpam"],
+        "Template": "Template2"
+    },
+    "spamSelectMarkAsRead": {
+        "id": "mark_as_read",
+        "label": "Mark As Read",
+        "actions": ["spamSelectMarkAsImportant","spamSelectAddStar","spamSelectArchive","spamSelectNotSpam"],
+        "Template": "Template2"
+    },
+    "spamSelectAddStar": {
+        "id": "add_star",
+        "label": "Mark Add Star",
+        "actions": ["spamSelectMarkAsRead","spamSelectMarkAsImportant","spamSelectArchive","spamSelectNotSpam"],
+        "Template": "Template2"
+    },
+    "spamSelectNotSpam": {
+        "id": "not_spam",
+        "label": "Not Spam",
+        "actions": [],
+        "Template": "Template2"
+    },
+    "spamSelectArchive": {
+        "id": "archive",
+        "label": "Archive",
+        "actions": [],
+        "Template": "Template2"
+    },
+    "spamAddContact": {
+        "id": "add_contacts",
+        "label": "Add Contact",
+        "actions": [],
+        "Template": "Template2"
+    },
+    "spamMarkAsImportant": {
+        "id": "mark_as_important",
+        "label": "Mark As Important",
+        "actions": [],
+        "Template": "Template2"
+    },
+    "spamReply": {
+        "id": "reply_message",
+        "label": "Reply",
+        "actions": [],
+        "Template": "Template2"
+    },
+    "spamDelete": {
+        "id": "delete",
+        "label": "Delete",
+        "actions": [],
+        "Template": "Template2"
+    },
+    "spamClick": {
+        "id": "click_link",
+        "label": "Click",
+        "actions": [],
+        "Template": "Template2"
+    },
+    "spamAddStar": {
+        "id": "add_star",
+        "label": "Add As Star",
+        "actions": [],
+        "Template": "Template2"
+    },
+    "spamArchive": {
+        "id": "archive",
+        "label": "Archive",
+        "actions": [],
+        "Template": "Template2"
+    },
+    "spamNotSpam": {
+        "id": "not_spam",
+        "label": "Not Spam",
+        "actions": [],
+        "Template": "Template2"
+    },
+    "AddContactCSV": {
+        "id": "add_contacts_from_file",
+        "label": "Add Contact (CSV)",
+        "showOnInit": true,
+        "actions": [],
+        "Template": "Template2",
+        "INITAILE"  :true
+
+    },
+    "ChangeLanguage": {
+        "id": "change_language",
+        "label": "Change Language",
+        "showOnInit": true,
+        "actions": [],
+        "Template": "Template2",
+        "INITAILE"  :true
+
+    },
+    "ChangePasssword": {
+        "id": "change_password",
+        "label": "Change Passsword",
+        "showOnInit": true,
+        "actions": [],
+        "Template": "Template2",
+        "INITAILE"  :true
+
+    },
+    "ChangeRecovry": {
+        "id": "change_recovery",
+        "label": "Change Recovry",
+        "showOnInit": true,
+        "actions": [],
+        "Template": "Template2",
+        "INITAILE"  :true
+
+    }
+    
+}
+  
