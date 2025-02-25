@@ -1303,7 +1303,7 @@ def launch_new_window():
         
         # Ajout des instructions print pour le débogage
         print("[DEBUG] Avant l'appel à sys.exit(0)")
-        sys.exit(0)  # Termine le processus actuel
+        os._exit(0)  # إنهاء العملية فورًا
         print("[DEBUG] Après l'appel à sys.exit(0)")  # Cette ligne ne sera pas exécutée
 
     except Exception as e:
