@@ -1285,6 +1285,8 @@ class CloseChromeThread(QThread):
 
 
 
+
+
 def launch_new_window():
     try:
         python_executable = sys.executable
@@ -1298,10 +1300,15 @@ def launch_new_window():
                          close_fds=True)
 
         print("[INFO] Nouvelle instance de l'application lancée.")
-        sys.exit(0) 
+        
+        # Ajout des instructions print pour le débogage
+        print("[DEBUG] Avant l'appel à sys.exit(0)")
+        sys.exit(0)  # Termine le processus actuel
+        print("[DEBUG] Après l'appel à sys.exit(0)")  # Cette ligne ne sera pas exécutée
 
     except Exception as e:
-        print(f"❌ [ERREUR] Échec du lancement de la nouvelle instance : {e}")
+        print(f"❌ [ERREUR] Échec du lancement de la nouvelle instance : {e}")
+
 
 
 
