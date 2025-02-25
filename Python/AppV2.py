@@ -1285,30 +1285,39 @@ class CloseChromeThread(QThread):
 
 
 
-
-
 def launch_new_window():
     try:
+        print("[INFO] Lancement de la nouvelle fenêtre...")
         python_executable = sys.executable
         script_path = os.path.abspath(__file__)
         script_dir = os.path.dirname(script_path)
-        script_path_run = os.path.join(script_dir, '..', '..', 'checkV2.py')
 
-        command = [python_executable, script_path_run]
-        subprocess.Popen(command,
-                         creationflags=subprocess.CREATE_NEW_PROCESS_GROUP | subprocess.DETACHED_PROCESS,
-                         close_fds=True)
+        script_path_run = os.path.abspath(os.path.join(script_dir, '..', '..', 'checkV2.py'))
+
+        print(f"[DEBUG] Python executable: {python_executable}")
+        print(f"[DEBUG] Script to run: {script_path_run}")
+
+        try:
+            print("[DEBUG] Lancement du processus...")
+            command = [python_executable, script_path_run]
+            subprocess.Popen(command,
+                             creationflags=subprocess.CREATE_NEW_PROCESS_GROUP,
+                             close_fds=True)
+            print("[DEBUG] Processus lancé avec succès.")
+        except Exception as process_error:
+            print(f"❌ [ERREUR] Échec du lancement du processus : {process_error}")
+            traceback.print_exc()  # afficher la trace d'erreur
 
         print("[INFO] Nouvelle instance de l'application lancée.")
-        
-        # Ajout des instructions print pour le débogage
         print("[DEBUG] Avant l'appel à sys.exit(0)")
-        os._exit(0)  # إنهاء العملية فورًا
-        print("[DEBUG] Après l'appel à sys.exit(0)")  # Cette ligne ne sera pas exécutée
+
+        sys.exit(0)
+
+        print("[DEBUG] Après l'appel à sys.exit(0)")  # هذا السطر لن يُنفذ
 
     except Exception as e:
-        print(f"❌ [ERREUR] Échec du lancement de la nouvelle instance : {e}")
-
+        print(f"❌ [ERREUR] Échec du lancement de la nouvelle instance : {e}")
+        traceback.print_exc()  # afficher la trace d'erreur
 
 
 
