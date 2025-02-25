@@ -1583,13 +1583,13 @@ class MainWindow(QMainWindow):
             launch_new_window()  
         else:
             print("[INFO] No interface update. Starting download of other tools...")
-            download_result = DownloadFile(new_version)
+            download_result = DownloadFile(new_versions)
             if download_result == -1:
                 print("❌ [ERROR] Download failed. Aborting update.")
                 return
 
             print("[INFO] Starting extraction...")
-            extractAll()
+            extractAll(new_versions)
         
         global current_hour, current_date
 
