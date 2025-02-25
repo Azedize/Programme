@@ -332,7 +332,7 @@ def checkVersion():
                 os.system("pause")
                 exit()
             
-            client_version_path_Python = os.path.join(script_dir, "..","version.txt")
+            client_version_path_Python = os.path.join(script_dir,"version.txt")
             client_version_path_Extention = os.path.join(script_dir, "..", "tools","version.txt")
             client_version_path_interface  = os.path.join(script_dir, "..","interface" ,"version.txt")
 
