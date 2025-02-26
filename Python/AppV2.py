@@ -30,6 +30,7 @@ urllib3.disable_warnings()
 
 
 
+
 process_pids = []
 notification_badges = {}
 extraction_thread = None 
@@ -44,24 +45,21 @@ print(f"Base Directory: {base_directory}")
 print(f"Template Directory: {template_directory}")
 
 
+
+
 def check_directory(path, name):
     if os.path.exists(path):
         print(f"✅ {name} existe : {path}")
     else:
         print(f"❌ {name} n'existe pas : {path}")
 
-
-
-
-
 def DownloadFile(new_versions):
-
-    print('🎉 New version(s) detected:', new_versions)
+    print('New version detected :', new_versions)
     local_filename = os.path.join(script_dir, "Programme-main.zip")
 
     print(f"🚀 [INFO] Starting download process for: {local_filename}")
-    print(f"📁 [DEBUG] Script directory: {script_dir}")
-    print(f"💾 [DEBUG] Local filename: {local_filename}")
+    print(f"📁 [DEBUG] Script directory: {script_dir}") 
+    print(f"💾 [DEBUG] Local filename: {local_filename}") 
     try:
         if os.path.exists(local_filename):
             print(f"🔍 [INFO] File '{local_filename}' already exists.")
@@ -78,7 +76,7 @@ def DownloadFile(new_versions):
     except Exception as e:
         print(f"❌ [ERROR] Error while checking/removing existing file: {e}")
         print(f"   └─ Details: {e}")
-        print(f"   └─ [DEBUG] Error type: {type(e)}")
+        print(f"   └─ [DEBUG] Error type: {type(e)}") 
         traceback.print_exc()
         return -1
 
@@ -102,7 +100,7 @@ def DownloadFile(new_versions):
 
         total_size = int(response.headers.get('content-length', 0))
         print(f"📦 [INFO] Total file size: {total_size} bytes")
-        print(f"📏 [DEBUG] Content-Length header: {response.headers.get('content-length')}")
+        print(f"📏 [DEBUG] Content-Length header: {response.headers.get('content-length')}") 
 
         with open(local_filename, "wb") as handle:
             print("⏳ [INFO] Starting download progress bar...")
@@ -132,59 +130,21 @@ def DownloadFile(new_versions):
             sys.stdout.write('\r[' + '=' * 50 + ']\n')
             print(f"✅ [INFO] File '{local_filename}' downloaded successfully.")
 
-
-        # Prepare for extraction by removing specific directories
         tools_dir = "Programme-main"
         tools_dir_path = os.path.join(script_dir, tools_dir)
         print(f"📁 [DEBUG] Tools directory path: {tools_dir_path}")
 
-        # Delete specific directories within the tools directory BEFORE extraction
         if os.path.exists(tools_dir_path):
-            if 'version_python' in new_versions and os.path.exists(os.path.join(tools_dir_path, 'Python')):
-                try:
-                    shutil.rmtree(os.path.join(tools_dir_path, 'Python'))
-                    print("🗑️ [INFO] Removing existing 'Python' directory.")
-                except Exception as e:
-                    print(f"⚠️ [WARNING] Failed to remove 'Python' directory: {e}")
-                    print(f"   └─ Details: {e}")
-                    print(f"   └─ [DEBUG] Error type: {type(e)}")
-            elif 'version_python' in new_versions:
-                print("❓ [INFO] 'version_python' detected, but 'Python' directory not found. Possible issue with existing installation.")
-
-            if 'version_interface' in new_versions and os.path.exists(os.path.join(tools_dir_path, 'interface')):
-                try:
-                    shutil.rmtree(os.path.join(tools_dir_path, 'interface'))
-                    print("🗑️ [INFO] Removing existing 'interface' directory.")
-                except Exception as e:
-                    print(f"⚠️ [WARNING] Failed to remove 'interface' directory: {e}")
-                    print(f"   └─ Details: {e}")
-                    print(f"   └─ [DEBUG] Error type: {type(e)}")
-            elif 'version_interface' in new_versions:
-                print("❓ [INFO] 'version_interface' detected, but 'interface' directory not found. Possible issue with existing installation.")
-
-            if 'version_extention' in new_versions and os.path.exists(os.path.join(tools_dir_path, 'tools')):
-                try:
-                    shutil.rmtree(os.path.join(tools_dir_path, 'tools'))
-                    print("🗑️ [INFO] Removing existing 'tools' directory.")
-                except Exception as e:
-                    print(f"⚠️ [WARNING] Failed to remove 'tools' directory: {e}")
-                    print(f"   └─ Details: {e}")
-                    print(f"   └─ [DEBUG] Error type: {type(e)}")
-            elif 'version_extention' in new_versions:
-                print("❓ [INFO] 'version_extention' detected, but 'tools' directory not found. Possible issue with existing installation.")
-
-            # If all versions are present, remove the entire directory for a clean slate
-            if all(key in new_versions for key in ['version_python', 'version_interface', 'version_extention']):
-                try:
-                    shutil.rmtree(tools_dir_path)
-                    print(f"🗑️ [INFO] Removing entire folder '{tools_dir}'.")
-                except Exception as e:
-                    print(f"⚠️ [WARNING] Failed to remove entire folder '{tools_dir}': {e}")
-                    print(f"   └─ Details: {e}")
-                    print(f"   └─ [DEBUG] Error type: {type(e)}")
+            print(f"🔍 [INFO] Folder '{tools_dir}' already exists.")
+            try:
+                shutil.rmtree(tools_dir_path)
+                print(f"🗑️ [INFO] Folder '{tools_dir}' removed successfully.")
+            except Exception as e:
+                print(f"⚠️ [WARNING] Failed to remove folder '{tools_dir}': {e}")
+                print(f"   └─ Details: {e}")
+                print(f"   └─ [DEBUG] Error type: {type(e)}")
         else:
             print(f"✅ [INFO] Folder '{tools_dir}' does not exist. Ready for extraction.")
-
 
     except requests.exceptions.RequestException as e:
         print(f"❌ [ERROR] Request failed: {e}")
@@ -195,93 +155,36 @@ def DownloadFile(new_versions):
     except Exception as e:
         print(f"❌ [ERROR] Exception occurred: {e}")
         print(f"   └─ Details: {e}")
-        print(f"   └─ [DEBUG] Error type: {type(e)}")
+        print(f"   └─ [DEBUG] Error type: {type(e)}") 
         traceback.print_exc()
         return -1
 
     print("✅ [INFO] Download process completed.")
     return 0
 
-
-
-
-
-def extractAll(new_versions):
-    tools_dir = "Programme-main"
+def extractAll():
     try:
         sleep(1)
         local_filename = os.path.join(script_dir, "Programme-main.zip")
 
         print(f"⚙️ [INFO] Starting extraction process in directory: {script_dir}")
-        print(f"📁 [DEBUG] Script directory: {script_dir}")
-        print(f"💾 [DEBUG] Local filename: {local_filename}")
+        print(f"📁 [DEBUG] Script directory: {script_dir}") 
+        print(f"💾 [DEBUG] Local filename: {local_filename}") 
 
         if os.path.exists(local_filename):
             print(f"🔍 [INFO] Found zip file: {local_filename}")
             try:
-                # Extract the entire zip file to a temporary directory
-                temp_extract_dir = os.path.join(script_dir, "temp_extract")  # Create a temporary directory
-                os.makedirs(temp_extract_dir, exist_ok=True) # Make sure the directory exists
-                print(f"🏗️ [INFO] Creating temporary directory: {temp_extract_dir}")
                 with zipfile.ZipFile(local_filename, 'r') as zip_ref:
-                    print(f"📦 [DEBUG] Extracting all files to temporary directory: {temp_extract_dir}")
-                    zip_ref.extractall(temp_extract_dir)
+                    print(f"📦 [DEBUG] Extracting all files to: {script_dir}") 
+                    zip_ref.extractall(script_dir)
+                print("✅ [INFO] Extraction completed successfully.")
 
-                # Determine the source directory inside the zip (assuming it's 'Programme-main')
-                source_dir = os.path.join(temp_extract_dir, 'Programme-main')  # Correct source directory
-                dest_dir = os.path.join(script_dir, tools_dir)
-
-                # Selective copying based on new_versions
-                if 'version_python' in new_versions:
-                    source_path = os.path.join(source_dir, 'Python')
-                    dest_path = os.path.join(dest_dir, 'Python')
-                    if os.path.exists(source_path):  # Check source exists
-                        print(f"➡️ [INFO] Copying 'Python' from {source_path} to {dest_path}")
-                        shutil.copytree(source_path, dest_path, dirs_exist_ok=True)
-                    else:
-                        print(f"⚠️ [WARNING] 'Python' directory not found in extracted zip. Extraction may be incomplete.")
-
-                if 'version_interface' in new_versions:
-                    source_path = os.path.join(source_dir, 'interface')
-                    dest_path = os.path.join(dest_dir, 'interface')
-                    if os.path.exists(source_path):  # Check source exists
-                        print(f"➡️ [INFO] Copying 'interface' from {source_path} to {dest_path}")
-                        shutil.copytree(source_path, dest_path, dirs_exist_ok=True)
-                    else:
-                        print(f"⚠️ [WARNING] 'interface' directory not found in extracted zip. Extraction may be incomplete.")
-
-                if 'version_extention' in new_versions:
-                    source_path = os.path.join(source_dir, 'tools')
-                    dest_path = os.path.join(dest_dir, 'tools')
-                    if os.path.exists(source_path):  # Check source exists
-                        print(f"➡️ [INFO] Copying 'tools' from {source_path} to {dest_path}")
-                        shutil.copytree(source_path, dest_path, dirs_exist_ok=True)
-                    else:
-                        print(f"⚠️ [WARNING] 'tools' directory not found in extracted zip. Extraction may be incomplete.")
-
-
-                # If all versions are new, copy the entire extracted directory (if it exists)
-                if all(key in new_versions for key in ['version_python', 'version_interface', 'version_extention']):
-                    if os.path.exists(source_dir):
-                        print(f"➡️ [INFO] Copying entire directory '{source_dir}' to '{dest_dir}'")
-                        shutil.copytree(source_dir, dest_dir, dirs_exist_ok=True)
-                    else:
-                        print(f"⚠️ [WARNING] Source directory '{source_dir}' does not exist.  Full copy failed.")
-
-                print("✅ [INFO] Extraction and selective copy completed successfully.")
-
-                # Clean up: Remove the zip file and the temporary extraction directory
                 os.remove(local_filename)
                 print(f"🗑️ [INFO] Deleted zip file: {local_filename}")
-
-                shutil.rmtree(temp_extract_dir)  # Remove the temporary directory
-                print(f"🧹 [INFO] Deleted temporary extraction directory: {temp_extract_dir}")
-
-
             except Exception as e:
                 print(f"❌ [ERROR] Failed to extract zip file: {e}")
                 print(f"   └─ Details: {e}")
-                print(f"   └─ [DEBUG] Error type: {type(e)}")
+                print(f"   └─ [DEBUG] Error type: {type(e)}") 
                 traceback.print_exc()
                 os.system("pause")
                 exit()
@@ -291,21 +194,10 @@ def extractAll(new_versions):
     except Exception as e:
         print(f"❌ [ERROR] Unexpected error during extraction: {e}")
         print(f"   └─ Details: {e}")
-        print(f"   └─ [DEBUG] Error type: {type(e)}")
+        print(f"   └─ [DEBUG] Error type: {type(e)}") 
         traceback.print_exc()
         os.system("pause")
         exit()
-
-
-
-
-
-
-
-
-
-
-
 
 def checkVersion():
 
@@ -331,9 +223,9 @@ def checkVersion():
                 os.system("pause")
                 exit()
             
-            client_version_path_Python = os.path.join(script_dir,"version.txt")
-            client_version_path_Extention = os.path.join(script_dir, "..", "tools","version.txt")
-            client_version_path_interface  = os.path.join(script_dir, "..","interface" ,"version.txt")
+            client_version_path_Python = os.path.join(script_dir, "Programme-main", "Python","version.txt")
+            client_version_path_Extention = os.path.join(script_dir, "Programme-main", "tools","version.txt")
+            client_version_path_interface  = os.path.join(script_dir, "Programme-main","interface" ,"version.txt")
 
             client_version_Python = ""
             client_version_Extention = ""
@@ -394,6 +286,7 @@ def checkVersion():
         traceback.print_exc()
         os.system("pause")
         exit()
+
 
 
 
@@ -746,7 +639,7 @@ def create_extension_for_email(email, password, host, port, user, passwordP, rec
 
 
 def add_pid_to_text_file(pid, email):
-    text_file_path = os.path.join(base_directory, email, ".." ,"Tools" , "data.txt")
+    text_file_path = os.path.join(base_directory, email , "data.txt")
 
     os.makedirs(os.path.dirname(text_file_path), exist_ok=True)
 
@@ -1283,41 +1176,19 @@ class CloseChromeThread(QThread):
 
 
 
-
+            
 def launch_new_window():
     try:
-        print("[INFO] Lancement de la nouvelle fenêtre...")
         python_executable = sys.executable
         script_path = os.path.abspath(__file__)
-        script_dir = os.path.dirname(script_path)
+        command = [python_executable, script_path]
+        subprocess.Popen(command,
+                         creationflags=subprocess.CREATE_NEW_PROCESS_GROUP | subprocess.DETACHED_PROCESS,
+                         close_fds=True)
 
-        script_path_run = os.path.abspath(os.path.join(script_dir, '..', '..', 'checkV2.py'))
-
-        print(f"[DEBUG] Python executable: {python_executable}")
-        print(f"[DEBUG] Script to run: {script_path_run}")
-
-        try:
-            print("[DEBUG] Lancement du processus...")
-            command = [python_executable, script_path_run]
-            subprocess.Popen(command,
-                             creationflags=subprocess.CREATE_NEW_PROCESS_GROUP,
-                             close_fds=True)
-            print("[DEBUG] Processus lancé avec succès.")
-        except Exception as process_error:
-            print(f"❌ [ERREUR] Échec du lancement du processus : {process_error}")
-            traceback.print_exc()  # afficher la trace d'erreur
-
-        print("[INFO] Nouvelle instance de l'application lancée.")
-        print("[DEBUG] Avant l'appel à sys.exit(0)")
-
-        sys.exit(0)
-
-        print("[DEBUG] Après l'appel à sys.exit(0)")  # هذا السطر لن يُنفذ
-
+        print("[INFO] New instance of the application launched.")
     except Exception as e:
-        print(f"❌ [ERREUR] Échec du lancement de la nouvelle instance : {e}")
-        traceback.print_exc()  # afficher la trace d'erreur
-
+        print(f"❌ [ERROR] Failed to launch new instance: {e}")
 
 
 
@@ -1576,43 +1447,37 @@ class MainWindow(QMainWindow):
 
 
     def on_submit_button_clicked(self, window):
-        # print("[DEBUG] Début de la fonction on_submit_button_clicked")
+        # new_version = checkVersion()
 
-        # new_versions = checkVersion()
-        # print(f"[DEBUG] Résultat de checkVersion() : {new_versions}")
+        # print(f"🔍 Debug: new_version = {new_version}")  
 
-        # if not new_versions:
-        #     print("❌ [ERROR] checkVersion() n'a retourné aucune donnée ! Assurez-vous qu'il fonctionne correctement.")
-        #     return
-
-        # if 'version_interface' in new_versions:
-        #     print("[INFO] Incompatibilité de version détectée. Fermeture de la fenêtre actuelle...")
+        # if not new_version:
+        #     print("❌ [ERROR] checkVersion() لم يُرجع أي بيانات! تأكد من عمله بشكل صحيح.")
+        #     return  
+        # if 'version_Extention' in new_version:
+        #     print("[INFO] Version mismatch detected. Closing current window...")
         #     window.close()
 
-        #     print("[INFO] Démarrage du téléchargement...")
-        #     download_result = DownloadFile(new_versions)
+        #     print("[INFO] Starting download...")
+        #     download_result = DownloadFile(new_version)
         #     if download_result == -1:
-        #         print("❌ [ERROR] Échec du téléchargement. Mise à jour abandonnée.")
+        #         print("❌ [ERROR] Download failed. Aborting update.")
         #         return
 
-        #     print("[INFO] Démarrage de l'extraction...")
-        #     extractAll(new_versions)
+        #     print("[INFO] Starting extraction...")
+        #     extractAll()
 
-        #     print("[INFO] Lancement de la nouvelle fenêtre...")
-        #     launch_new_window()
-        #     # Arrête le traitement, fin du programme
+        #     print("[INFO] Launching new window...")
+        #     launch_new_window()  
         # else:
-        #     print("[INFO] Aucune mise à jour de l'interface. Démarrage du téléchargement des autres outils...")
-        #     download_result = DownloadFile(new_versions)
+        #     print("[INFO] No interface update. Starting download of other tools...")
+        #     download_result = DownloadFile(new_version)
         #     if download_result == -1:
-        #         print("❌ [ERROR] Échec du téléchargement. Mise à jour abandonnée.")
+        #         print("❌ [ERROR] Download failed. Aborting update.")
         #         return
 
-        #     print("[INFO] Démarrage de l'extraction...")
-        #     extractAll(new_versions)
-
-        # print("[DEBUG] Fin de la fonction on_submit_button_clicked")
-
+        #     print("[INFO] Starting extraction...")
+        #     extractAll()
         
         global current_hour, current_date
 
@@ -1662,13 +1527,16 @@ class MainWindow(QMainWindow):
                     if checkbox.isChecked():
                         search_value = next((child.text() for child in reversed(widget.children()) if isinstance(child, QLineEdit)), None)
                         
+                        # Vérifier si la dernière action ajoutée dans output_json est "open_spam"
                         if output_json and output_json[-1]["process"] == "open_spam":
+                            # Ajouter "in:spam" avant la valeur de recherche
                             output_json.append({
                                 "process": "search",
                                 "value": f"in:spam {search_value}"
                             })
                             print("🟢 Action ajoutée : Recherche dans 'in:spam' avec la valeur :", search_value)
                         else:
+                            # Ajouter l'action normale "search"
                             output_json.append({
                                 "process": "search",
                                 "value": search_value
@@ -2139,11 +2007,39 @@ class MainWindow(QMainWindow):
 
 
 
+# def main():
+#     check_directory(script_dir, "script_dir")
+#     check_directory(base_directory, "base_directory")
+#     check_directory(template_directory, "template_directory")
+ 
 
+#     json_path = os.path.join(script_dir, "Tools-main", "action.json")
+#     print('json_path :', json_path)
+
+#     with open(json_path, "r") as file:
+#         json_data = json.load(file)
+  
+#     if json_data is None:
+#         print("Failed to load action.json. Waiting 5 minutes before exiting...")
+#         sys.exit(1)
+
+#     app = QApplication([])
+#     window = MainWindow(json_data)
+#     window.stopButton.clicked.connect(lambda: stop_all_processes(window))
+#     window.setWindowTitle("Automatisation des Processus Gmail")
+#     window.show()
+#     app.exec()
+
+# if __name__ == "__main__":
+#     main()
 
 
 
 def verify_key(encrypted_key: str, secret_key: str) -> bool:
+    """
+    Vérifie que la clé chiffrée est valide en la déchiffrant avec la clé secrète.
+    La fonction renvoie True si le message déchiffré correspond à "authorized", sinon False.
+    """
     try:
         fernet = Fernet(secret_key.encode())
         decrypted = fernet.decrypt(encrypted_key.encode())
@@ -2156,9 +2052,8 @@ def verify_key(encrypted_key: str, secret_key: str) -> bool:
         print("La vérification de la clé a échoué :", e)
         return False
 
-
-
 def main():
+    # Vérification de la présence des clés en arguments
     if len(sys.argv) < 3:
         print("Clés insuffisantes fournies, arrêt du programme.")
         sys.exit(1)
@@ -2171,6 +2066,7 @@ def main():
         else:
             print("[INFO] Clé validée, lancement du programme.")
 
+    # Suite du programme
     check_directory(script_dir, "script_dir")
     check_directory(base_directory, "base_directory")
     check_directory(template_directory, "template_directory")
