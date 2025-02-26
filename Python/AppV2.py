@@ -1057,7 +1057,7 @@ class CloseChromeThread(QThread):
 
             print(f"📧 Email extrait du fichier : {email}")
 
-            logs_directory = os.path.join(script_dir, 'logs')
+            logs_directory = os.path.join(script_dir, '..','Tools', 'logs')
 
             session_folder = f"{current_date}_{current_hour}"
             target_folder = os.path.join(logs_directory, session_folder)
@@ -1124,7 +1124,7 @@ class CloseChromeThread(QThread):
             session_id, pid, email, etat = match.groups()
             print(f"✅ Données extraites - Session ID: {session_id}, PID: {pid}, Email: {email}, Status: {etat}")
 
-            result_file_path = os.path.join(script_dir, "Tools-main", "result.txt")
+            result_file_path = os.path.join(script_dir, '..','Tools', "result.txt")
             try:
                 with open(result_file_path, 'a', encoding='utf-8') as result_file:
                     result_file.write(f"{session_id}:{pid}:{email}:{etat}\n")
