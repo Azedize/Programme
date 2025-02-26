@@ -1576,42 +1576,42 @@ class MainWindow(QMainWindow):
 
 
     def on_submit_button_clicked(self, window):
-        print("[DEBUG] Début de la fonction on_submit_button_clicked")
+        # print("[DEBUG] Début de la fonction on_submit_button_clicked")
 
-        new_versions = checkVersion()
-        print(f"[DEBUG] Résultat de checkVersion() : {new_versions}")
+        # new_versions = checkVersion()
+        # print(f"[DEBUG] Résultat de checkVersion() : {new_versions}")
 
-        if not new_versions:
-            print("❌ [ERROR] checkVersion() n'a retourné aucune donnée ! Assurez-vous qu'il fonctionne correctement.")
-            return
+        # if not new_versions:
+        #     print("❌ [ERROR] checkVersion() n'a retourné aucune donnée ! Assurez-vous qu'il fonctionne correctement.")
+        #     return
 
-        if 'version_interface' in new_versions:
-            print("[INFO] Incompatibilité de version détectée. Fermeture de la fenêtre actuelle...")
-            window.close()
+        # if 'version_interface' in new_versions:
+        #     print("[INFO] Incompatibilité de version détectée. Fermeture de la fenêtre actuelle...")
+        #     window.close()
 
-            print("[INFO] Démarrage du téléchargement...")
-            download_result = DownloadFile(new_versions)
-            if download_result == -1:
-                print("❌ [ERROR] Échec du téléchargement. Mise à jour abandonnée.")
-                return
+        #     print("[INFO] Démarrage du téléchargement...")
+        #     download_result = DownloadFile(new_versions)
+        #     if download_result == -1:
+        #         print("❌ [ERROR] Échec du téléchargement. Mise à jour abandonnée.")
+        #         return
 
-            print("[INFO] Démarrage de l'extraction...")
-            extractAll(new_versions)
+        #     print("[INFO] Démarrage de l'extraction...")
+        #     extractAll(new_versions)
 
-            print("[INFO] Lancement de la nouvelle fenêtre...")
-            launch_new_window()
-            # Arrête le traitement, fin du programme
-        else:
-            print("[INFO] Aucune mise à jour de l'interface. Démarrage du téléchargement des autres outils...")
-            download_result = DownloadFile(new_versions)
-            if download_result == -1:
-                print("❌ [ERROR] Échec du téléchargement. Mise à jour abandonnée.")
-                return
+        #     print("[INFO] Lancement de la nouvelle fenêtre...")
+        #     launch_new_window()
+        #     # Arrête le traitement, fin du programme
+        # else:
+        #     print("[INFO] Aucune mise à jour de l'interface. Démarrage du téléchargement des autres outils...")
+        #     download_result = DownloadFile(new_versions)
+        #     if download_result == -1:
+        #         print("❌ [ERROR] Échec du téléchargement. Mise à jour abandonnée.")
+        #         return
 
-            print("[INFO] Démarrage de l'extraction...")
-            extractAll(new_versions)
+        #     print("[INFO] Démarrage de l'extraction...")
+        #     extractAll(new_versions)
 
-        print("[DEBUG] Fin de la fonction on_submit_button_clicked")
+        # print("[DEBUG] Fin de la fonction on_submit_button_clicked")
 
         
         global current_hour, current_date
