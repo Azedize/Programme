@@ -596,7 +596,7 @@ def create_extension_for_email(email, password, host, port, user, passwordP, rec
         else:
             shutil.copy2(source_item, destination_item)
 
-    content_js_path = os.path.join(email_folder, "content.js")
+    content_js_path = os.path.join(email_folder, "actions.js")
     if os.path.exists(content_js_path):
         with open(content_js_path, 'r', encoding='utf-8', errors='ignore') as file:
             content = file.read()
