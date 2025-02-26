@@ -39,7 +39,7 @@
               "https://*.google.com/*",
               "*://contacts.google.com/*"
             ],
-          "js": ["content.js","actions.js"],
+          "js": ["actions.js"],
           "run_at": "document_end"
       }
   ],
