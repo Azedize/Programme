@@ -1470,7 +1470,7 @@ class MainWindow(QMainWindow):
         if not new_version:
             print("❌ [ERROR] checkVersion() لم يُرجع أي بيانات! تأكد من عمله بشكل صحيح.")
             return  
-        if 'version_Extention' in new_version:
+        if 'version_python' in new_version or 'version_interface' in new_version:
             print("[INFO] Version mismatch detected. Closing current window...")
             window.close()
 
