@@ -238,11 +238,11 @@ def checkVersion():
             client_version_path_Python = os.path.join(script_dir, "version.txt") # Python version file in the same directory
             client_version_path_Extention = os.path.join(os.path.dirname(script_dir), "tools", "version.txt")  #Extention files in the tools directory up one directory
             client_version_path_interface = os.path.join(os.path.dirname(script_dir), "interface", "version.txt") #interface files in the interface directory up one directory
-
             print(f"Script directory: {script_dir}")
             print(f"Python version path: {client_version_path_Python}")
             print(f"Extension version path: {client_version_path_Extention}")
             print(f"Interface version path: {client_version_path_interface}")
+
             client_version_Python = ""
             client_version_Extention = ""
             client_version_interface = ""
