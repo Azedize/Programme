@@ -1192,19 +1192,48 @@ class CloseChromeThread(QThread):
 
 
 
-            
 def launch_new_window():
+    # Chemin du script actuel (AppV2.pyc est supposé être dans ce dossier)
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+
+    # Aller au dossier parent de script_dir (E:\Lastversion\Programme-main)
+    parent_dir = os.path.dirname(script_dir)
+
+    # Aller encore au dossier parent (E:\Lastversion)
+    target_dir = os.path.dirname(parent_dir)
+
+    # Construire le chemin vers checkV2.py
+    script_path = os.path.join(target_dir, "checkV2.py")
+
+    print(f"Script directory: {script_dir}")
+    print(f"Parent directory: {parent_dir}")
+    print(f"Target directory: {target_dir}")
+    print(f"Script to execute: {script_path}")
+
+    # Vérifier si le fichier checkV2.py existe
+    if not os.path.exists(script_path):
+        print(f"❌ [ERROR] Le fichier {script_path} n'existe pas.")
+        return target_dir  # Retourne le répertoire cible même en cas d'erreur
+
     try:
-        python_executable = sys.executable
-        script_path = os.path.abspath(__file__)
+        python_executable = sys.executable  # Chemin de l'interpréteur Python
+
+        # Commande pour exécuter checkV2.py
         command = [python_executable, script_path]
+
         subprocess.Popen(command,
                          creationflags=subprocess.CREATE_NEW_PROCESS_GROUP | subprocess.DETACHED_PROCESS,
                          close_fds=True)
 
-        print("[INFO] New instance of the application launched.")
+        print("[INFO] Nouvelle instance de checkV2.py lancée avec succès.")
     except Exception as e:
-        print(f"❌ [ERROR] Failed to launch new instance: {e}")
+        print(f"❌ [ERROR] Impossible de lancer checkV2.py : {e}")
+
+    return target_dir  # Retourne le chemin du répertoire cible
+
+# Tester la fonction
+directory = launch_new_window()
+print(f"✅ Le répertoire retourné est : {directory}")
 
 
 
