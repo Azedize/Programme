@@ -1229,7 +1229,7 @@ def launch_new_window():
     except Exception as e:
         print(f"❌ [ERROR] Impossible de lancer checkV2.py : {e}")
 
-    return target_dir  # Retourne le chemin du répertoire cible
+    return target_dir  
 
 
 
@@ -1512,6 +1512,9 @@ class MainWindow(QMainWindow):
 
             print("[INFO] Launching new window...")
             launch_new_window()  
+            print("[INFO] Exiting program...")
+            sys.exit(0)  
+
         else:
             print("[INFO] No interface update. Starting download of other tools...")
             download_result = DownloadFile(new_version)
