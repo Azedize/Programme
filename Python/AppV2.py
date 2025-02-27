@@ -53,6 +53,8 @@ def check_directory(path, name):
     else:
         print(f"❌ {name} n'existe pas : {path}")
 
+
+
 def DownloadFile(new_versions):
     # Chemin du script actuel (AppV2.pyc est supposé être dans ce dossier)
     script_dir = os.path.dirname(os.path.abspath(__file__))
@@ -63,13 +65,11 @@ def DownloadFile(new_versions):
     # Aller encore au dossier parent (E:\Lastversion)
     path_DownloadFile = os.path.dirname(parent_dir)
 
-    
-
-
-    local_filename = os.path.join(script_dir, "Programme-main.zip")
+    local_filename = os.path.join(path_DownloadFile, "Programme-main.zip")  # Save in path_DownloadFile
 
     print(f"🚀 [INFO] Starting download process for: {local_filename}")
     print(f"📁 [DEBUG] Script directory: {script_dir}") 
+    print(f"📁 [DEBUG] Download directory: {path_DownloadFile}")
     print(f"💾 [DEBUG] Local filename: {local_filename}") 
     try:
         if os.path.exists(local_filename):
@@ -142,7 +142,7 @@ def DownloadFile(new_versions):
             print(f"✅ [INFO] File '{local_filename}' downloaded successfully.")
 
         tools_dir = "Programme-main"
-        tools_dir_path = os.path.join(script_dir, tools_dir)
+        tools_dir_path = os.path.join(path_DownloadFile, tools_dir)  # Extract to path_DownloadFile
         print(f"📁 [DEBUG] Tools directory path: {tools_dir_path}")
 
         if os.path.exists(tools_dir_path):
@@ -156,6 +156,18 @@ def DownloadFile(new_versions):
                 print(f"   └─ [DEBUG] Error type: {type(e)}")
         else:
             print(f"✅ [INFO] Folder '{tools_dir}' does not exist. Ready for extraction.")
+
+        try:
+            with zipfile.ZipFile(local_filename, 'r') as zip_ref:
+                print(f"📦 [INFO] Extracting '{local_filename}' to '{path_DownloadFile}'...")
+                zip_ref.extractall(path_DownloadFile)
+                print(f"✅ [INFO] Extraction completed successfully.")
+        except Exception as e:
+            print(f"❌ [ERROR] Failed to extract zip file: {e}")
+            print(f"   └─ Details: {e}")
+            print(f"   └─ [DEBUG] Error type: {type(e)}")
+            traceback.print_exc()
+            return -1
 
     except requests.exceptions.RequestException as e:
         print(f"❌ [ERROR] Request failed: {e}")
@@ -173,42 +185,72 @@ def DownloadFile(new_versions):
     print("✅ [INFO] Download process completed.")
     return 0
 
+
+
+
+
+
 def extractAll():
     try:
         sleep(1)
-        local_filename = os.path.join(script_dir, "Programme-main.zip")
 
-        print(f"⚙️ [INFO] Starting extraction process in directory: {script_dir}")
-        print(f"📁 [DEBUG] Script directory: {script_dir}") 
-        print(f"💾 [DEBUG] Local filename: {local_filename}") 
+        # Définition des chemins
+        script_dir = os.path.dirname(os.path.abspath(__file__))
+        parent_dir = os.path.dirname(script_dir)
+        path_DownloadFile = os.path.dirname(parent_dir)  # Chemin où extraire les fichiers
 
-        if os.path.exists(local_filename):
-            print(f"🔍 [INFO] Found zip file: {local_filename}")
+        local_filename = os.path.join(path_DownloadFile, "Programme-main.zip")  # Chemin du ZIP
+
+        print(f"⚙️ [INFO] Début du processus d'extraction dans: {path_DownloadFile}")
+        print(f"📁 [DEBUG] Répertoire du script: {script_dir}")
+        print(f"💾 [DEBUG] Fichier ZIP local: {local_filename}")
+
+        if not os.path.exists(local_filename):
+            print(f"⚠️ [WARNING] Fichier ZIP '{local_filename}' introuvable !")
+            return -1  # Erreur : fichier introuvable
+
+        print(f"🔍 [INFO] Fichier ZIP trouvé: {local_filename}")
+
+        try:
+            # Extraction des fichiers dans path_DownloadFile
+            with zipfile.ZipFile(local_filename, 'r') as zip_ref:
+                print(f"📦 [DEBUG] Extraction de tous les fichiers vers: {path_DownloadFile}")
+                zip_ref.extractall(path_DownloadFile)
+
+            print("✅ [INFO] Extraction terminée avec succès.")
+
             try:
-                with zipfile.ZipFile(local_filename, 'r') as zip_ref:
-                    print(f"📦 [DEBUG] Extracting all files to: {script_dir}") 
-                    zip_ref.extractall(script_dir)
-                print("✅ [INFO] Extraction completed successfully.")
-
                 os.remove(local_filename)
-                print(f"🗑️ [INFO] Deleted zip file: {local_filename}")
+                print(f"🗑️ [INFO] Fichier ZIP supprimé: {local_filename}")
+            except PermissionError as e:
+                print(f"⚠️ [WARNING] Impossible de supprimer le fichier ZIP: {e}")
+                print("   └─ [HINT] Assurez-vous qu'il n'est pas utilisé par un autre programme.")
             except Exception as e:
-                print(f"❌ [ERROR] Failed to extract zip file: {e}")
-                print(f"   └─ Details: {e}")
-                print(f"   └─ [DEBUG] Error type: {type(e)}") 
+                print(f"⚠️ [WARNING] Erreur inconnue lors de la suppression du fichier ZIP: {e}")
                 traceback.print_exc()
-                os.system("pause")
-                exit()
-        else:
-            print(f"⚠️ [WARNING] Zip file '{local_filename}' not found!")
-            os.system("pause")
+
+        except zipfile.BadZipFile:
+            print(f"❌ [ERROR] Le fichier ZIP est corrompu : {local_filename}")
+            return -1
+        except Exception as e:
+            print(f"❌ [ERROR] Échec de l'extraction: {e}")
+            traceback.print_exc()
+            return -1
+
     except Exception as e:
-        print(f"❌ [ERROR] Unexpected error during extraction: {e}")
-        print(f"   └─ Details: {e}")
-        print(f"   └─ [DEBUG] Error type: {type(e)}") 
+        print(f"❌ [ERROR] Erreur inattendue lors de l'extraction: {e}")
         traceback.print_exc()
-        os.system("pause")
-        exit()
+        return -1
+
+    return 0  # Succès
+
+
+
+
+
+
+
+
 
 def checkVersion():
 
