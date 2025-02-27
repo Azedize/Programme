@@ -1447,37 +1447,37 @@ class MainWindow(QMainWindow):
 
 
     def on_submit_button_clicked(self, window):
-        # new_version = checkVersion()
+        new_version = checkVersion()
 
-        # print(f"🔍 Debug: new_version = {new_version}")  
+        print(f"🔍 Debug: new_version = {new_version}")  
 
-        # if not new_version:
-        #     print("❌ [ERROR] checkVersion() لم يُرجع أي بيانات! تأكد من عمله بشكل صحيح.")
-        #     return  
-        # if 'version_Extention' in new_version:
-        #     print("[INFO] Version mismatch detected. Closing current window...")
-        #     window.close()
+        if not new_version:
+            print("❌ [ERROR] checkVersion() لم يُرجع أي بيانات! تأكد من عمله بشكل صحيح.")
+            return  
+        if 'version_Extention' in new_version:
+            print("[INFO] Version mismatch detected. Closing current window...")
+            window.close()
 
-        #     print("[INFO] Starting download...")
-        #     download_result = DownloadFile(new_version)
-        #     if download_result == -1:
-        #         print("❌ [ERROR] Download failed. Aborting update.")
-        #         return
+            print("[INFO] Starting download...")
+            download_result = DownloadFile(new_version)
+            if download_result == -1:
+                print("❌ [ERROR] Download failed. Aborting update.")
+                return
 
-        #     print("[INFO] Starting extraction...")
-        #     extractAll()
+            print("[INFO] Starting extraction...")
+            extractAll()
 
-        #     print("[INFO] Launching new window...")
-        #     launch_new_window()  
-        # else:
-        #     print("[INFO] No interface update. Starting download of other tools...")
-        #     download_result = DownloadFile(new_version)
-        #     if download_result == -1:
-        #         print("❌ [ERROR] Download failed. Aborting update.")
-        #         return
+            print("[INFO] Launching new window...")
+            launch_new_window()  
+        else:
+            print("[INFO] No interface update. Starting download of other tools...")
+            download_result = DownloadFile(new_version)
+            if download_result == -1:
+                print("❌ [ERROR] Download failed. Aborting update.")
+                return
 
-        #     print("[INFO] Starting extraction...")
-        #     extractAll()
+            print("[INFO] Starting extraction...")
+            extractAll()
         
         global current_hour, current_date
 
