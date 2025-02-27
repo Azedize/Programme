@@ -1231,9 +1231,7 @@ def launch_new_window():
 
     return target_dir  # Retourne le chemin du répertoire cible
 
-# Tester la fonction
-directory = launch_new_window()
-print(f"✅ Le répertoire retourné est : {directory}")
+
 
 
 
