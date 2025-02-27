@@ -54,7 +54,18 @@ def check_directory(path, name):
         print(f"❌ {name} n'existe pas : {path}")
 
 def DownloadFile(new_versions):
-    print('New version detected :', new_versions)
+    # Chemin du script actuel (AppV2.pyc est supposé être dans ce dossier)
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+
+    # Aller au dossier parent de script_dir (E:\Lastversion\Programme-main)
+    parent_dir = os.path.dirname(script_dir)
+
+    # Aller encore au dossier parent (E:\Lastversion)
+    path_DownloadFile = os.path.dirname(parent_dir)
+
+    
+
+
     local_filename = os.path.join(script_dir, "Programme-main.zip")
 
     print(f"🚀 [INFO] Starting download process for: {local_filename}")
@@ -1500,15 +1511,6 @@ class MainWindow(QMainWindow):
         if 'version_python' in new_version or 'version_interface' in new_version:
             print("[INFO] Version mismatch detected. Closing current window...")
             window.close()
-
-            print("[INFO] Starting download...")
-            download_result = DownloadFile(new_version)
-            if download_result == -1:
-                print("❌ [ERROR] Download failed. Aborting update.")
-                return
-
-            print("[INFO] Starting extraction...")
-            extractAll()
 
             print("[INFO] Launching new window...")
             launch_new_window()  
