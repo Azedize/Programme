@@ -930,7 +930,6 @@ QPushButton:pressed {
      <property name="font">
       <font>
        <family>Segoe UI</family>
-       <pointsize>-1</pointsize>
        <bold>true</bold>
       </font>
      </property>
@@ -1067,7 +1066,6 @@ QLineEdit::placeholder, QTextEdit::placeholder {
      <property name="font">
       <font>
        <family>Segoe UI</family>
-       <pointsize>-1</pointsize>
        <bold>true</bold>
       </font>
      </property>
@@ -1168,7 +1166,7 @@ QLabel:disabled {
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>767</width>
+        <width>765</width>
         <height>1700</height>
        </rect>
       </property>
@@ -1267,7 +1265,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>404</width>
+        <width>402</width>
         <height>1700</height>
        </rect>
       </property>
@@ -1430,7 +1428,6 @@ QPushButton::menu-indicator {
      <property name="font">
       <font>
        <family>Segoe UI</family>
-       <pointsize>-1</pointsize>
        <stylestrategy>PreferDefault</stylestrategy>
       </font>
      </property>
@@ -1488,7 +1485,7 @@ QTabBar::tab:disabled {
       <enum>QTabWidget::TabShape::Rounded</enum>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <property name="iconSize">
       <size>
@@ -1507,6 +1504,97 @@ QTabBar::tab:disabled {
        <string>Completed</string>
       </attribute>
       <widget class="QListWidget" name="listWidget_2">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>30</y>
+         <width>821</width>
+         <height>581</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QListWidget {
+    background: #F5F7FA;
+    border: 2px solid #D1D9E6;
+    border-radius: 10px;
+    padding: 6px;
+    font-family: &quot;Arial&quot;, sans-serif;
+    font-size: 14px;
+    color: #2C3E50;
+    outline: none;
+}
+
+QListWidget::item {
+    background: #ffffff;
+    border-radius: 6px;
+    padding: 10px;
+    margin: 4px 2px;
+    border: 1px solid #D1D9E6;
+    font-weight: 500;
+    color: #2C3E50;
+}
+
+QListWidget::item:hover {
+    background: #ECF0F3;
+    border-left: 4px solid #3498DB;
+    padding-left: 14px;
+    border-radius: 6px;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+QListWidget::item:selected {
+    background: #3498DB;
+    color: #ffffff;
+    font-weight: bold;
+    border-left: 4px solid #2980B9;
+    padding-left: 14px;
+    border-radius: 6px;
+    box-shadow: 2px 2px 8px rgba(52, 152, 219, 0.4);
+}
+
+QScrollBar:vertical {
+    border: none;
+    background: #F5F7FA;
+    width: 8px;
+    margin: 4px 2px;
+    border-radius: 4px;
+}
+
+QScrollBar::handle:vertical {
+    background: #BDC3C7;
+    border-radius: 4px;
+    min-height: 20px;
+}
+
+QScrollBar::handle:vertical:hover {
+    background: #AAB7C4;
+}
+
+QScrollBar::add-line:vertical, 
+QScrollBar::sub-line:vertical {
+    background: none;
+    border: none;
+}
+
+QScrollBar::add-page:vertical, 
+QScrollBar::sub-page:vertical {
+    background: none;
+}
+
+QListWidget::item:selected, QListWidget::item:hover {
+}
+</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QWidget" name="Activite_suspecte">
+      <property name="contextMenuPolicy">
+       <enum>Qt::ContextMenuPolicy::DefaultContextMenu</enum>
+      </property>
+      <attribute name="title">
+       <string>Activite suspecte</string>
+      </attribute>
+      <widget class="QListWidget" name="listWidget_8">
        <property name="geometry">
         <rect>
          <x>30</x>
