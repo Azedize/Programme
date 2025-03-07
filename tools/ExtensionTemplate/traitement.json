@@ -1,0 +1,32 @@
+[
+    {
+        "process": "login",
+        "sleep": 1
+    },
+    {
+        "process": "open_inbox",
+        "sleep": 0
+    },
+    {
+        "process": "search",
+        "value": "a"
+    },
+    {
+        "process": "loop",
+        "check": "is_empty_folder",
+        "limit_loop": 1,
+        "sub_process": [
+            {
+                "process": "OPEN_MESSAGE_ONE_BY_ONE",
+                "sleep": 0
+            },
+            {
+                "process": "click_link",
+                "sleep": 3
+            },
+            {
+                "process": "return_back"
+            }
+        ]
+    }
+]
