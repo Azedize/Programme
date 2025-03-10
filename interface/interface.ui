@@ -656,6 +656,9 @@ QCheckBox{
      <height>925</height>
     </rect>
    </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
    <property name="styleSheet">
     <string notr="true">QTabWidget {
     background-color: transparent;
@@ -740,6 +743,9 @@ QTabBar::tab:disabled {
        <verstretch>3</verstretch>
       </sizepolicy>
      </property>
+     <property name="cursor">
+      <cursorShape>ClosedHandCursor</cursorShape>
+     </property>
      <property name="styleSheet">
       <string notr="true">QPushButton {
     background-color: #0E94A0; 
@@ -769,7 +775,7 @@ QPushButton::menu-indicator {
     <widget class="QTextEdit" name="textEdit_4">
      <property name="geometry">
       <rect>
-       <x>440</x>
+       <x>861</x>
        <y>190</y>
        <width>431</width>
        <height>61</height>
@@ -819,7 +825,7 @@ QLineEdit::placeholder, QTextEdit::placeholder {
     <widget class="QLabel" name="label_5">
      <property name="geometry">
       <rect>
-       <x>380</x>
+       <x>764</x>
        <y>10</y>
        <width>191</width>
        <height>31</height>
@@ -915,8 +921,8 @@ QPushButton:pressed {
     <widget class="QLabel" name="label">
      <property name="geometry">
       <rect>
-       <x>140</x>
-       <y>50</y>
+       <x>559</x>
+       <y>61</y>
        <width>291</width>
        <height>61</height>
       </rect>
@@ -944,7 +950,7 @@ QPushButton:pressed {
      </property>
      <property name="styleSheet">
       <string notr="true">QLabel {
-    color: #ffffff; 
+    color: #0E94A0; 
     font-size: 12px; 
     font-family: &quot;Segoe UI&quot;;
     text-align: center;
@@ -952,8 +958,7 @@ QPushButton:pressed {
     border: 3px solid #0E94A0; 
     border-radius: 12px;
     text-align: center;
-    background-color: #0E94A0;
-
+    background-color: #ffffff;
 }
 
 
@@ -976,7 +981,7 @@ QLabel:disabled {
       <number>10</number>
      </property>
      <property name="indent">
-      <number>-2</number>
+      <number>0</number>
      </property>
      <property name="openExternalLinks">
       <bool>false</bool>
@@ -985,8 +990,8 @@ QLabel:disabled {
     <widget class="QTextEdit" name="textEdit_3">
      <property name="geometry">
       <rect>
-       <x>440</x>
-       <y>50</y>
+       <x>861</x>
+       <y>61</y>
        <width>431</width>
        <height>127</height>
       </rect>
@@ -1051,7 +1056,7 @@ QLineEdit::placeholder, QTextEdit::placeholder {
     <widget class="QLabel" name="label_6">
      <property name="geometry">
       <rect>
-       <x>140</x>
+       <x>559</x>
        <y>190</y>
        <width>291</width>
        <height>61</height>
@@ -1080,7 +1085,7 @@ QLineEdit::placeholder, QTextEdit::placeholder {
      </property>
      <property name="styleSheet">
       <string notr="true">QLabel {
-    color: #ffffff; 
+    color: #0E94A0; 
     font-size: 12px; 
     font-family: &quot;Segoe UI&quot;;
     text-align: center;
@@ -1088,7 +1093,7 @@ QLineEdit::placeholder, QTextEdit::placeholder {
     border: 3px solid #0E94A0; 
     border-radius: 12px;
     text-align: center;
-    background-color: #0E94A0;
+    background-color: #ffffff;
 
 }
 
@@ -1112,7 +1117,7 @@ QLabel:disabled {
       <number>10</number>
      </property>
      <property name="indent">
-      <number>-2</number>
+      <number>0</number>
      </property>
      <property name="openExternalLinks">
       <bool>false</bool>
@@ -1126,6 +1131,9 @@ QLabel:disabled {
        <width>231</width>
        <height>41</height>
       </rect>
+     </property>
+     <property name="cursor">
+      <cursorShape>ClosedHandCursor</cursorShape>
      </property>
      <property name="styleSheet">
       <string notr="true">QPushButton {
@@ -1408,7 +1416,7 @@ QPushButton::menu-indicator {
       <normaloff>icons/resultat.png</normaloff>icons/resultat.png</iconset>
     </attribute>
     <attribute name="title">
-     <string>Resultat</string>
+     <string>Result</string>
     </attribute>
     <widget class="QTabWidget" name="tabWidgetResult">
      <property name="geometry">
@@ -1430,6 +1438,9 @@ QPushButton::menu-indicator {
        <family>Segoe UI</family>
        <stylestrategy>PreferDefault</stylestrategy>
       </font>
+     </property>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
      </property>
      <property name="styleSheet">
       <string notr="true">QTabBar::tab {
@@ -1485,7 +1496,7 @@ QTabBar::tab:disabled {
       <enum>QTabWidget::TabShape::Rounded</enum>
      </property>
      <property name="currentIndex">
-      <number>1</number>
+      <number>2</number>
      </property>
      <property name="iconSize">
       <size>
