@@ -951,14 +951,14 @@ QPushButton:pressed {
      <property name="styleSheet">
       <string notr="true">QLabel {
     color: #0E94A0; 
-    font-size: 12px; 
+    font-size: 14px; 
     font-family: &quot;Segoe UI&quot;;
     text-align: center;
     padding: 5px; 
     border: 3px solid #0E94A0; 
     border-radius: 12px;
     text-align: center;
-    background-color: #ffffff;
+    background-color: transparent;
 }
 
 
@@ -1086,14 +1086,14 @@ QLineEdit::placeholder, QTextEdit::placeholder {
      <property name="styleSheet">
       <string notr="true">QLabel {
     color: #0E94A0; 
-    font-size: 12px; 
+    font-size: 14px; 
     font-family: &quot;Segoe UI&quot;;
     text-align: center;
     padding: 5px; 
     border: 3px solid #0E94A0; 
     border-radius: 12px;
     text-align: center;
-    background-color: #ffffff;
+    background-color: transparent;
 
 }
 
@@ -1174,7 +1174,7 @@ QLabel:disabled {
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>765</width>
+        <width>767</width>
         <height>1700</height>
        </rect>
       </property>
@@ -1273,7 +1273,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>402</width>
+        <width>404</width>
         <height>1700</height>
        </rect>
       </property>
@@ -1399,9 +1399,6 @@ QPushButton::menu-indicator {
         <property name="text">
          <string/>
         </property>
-        <property name="icon">
-         <iconset theme="QIcon::ThemeIcon::EditClear"/>
-        </property>
        </widget>
       </widget>
      </widget>
@@ -1496,7 +1493,7 @@ QTabBar::tab:disabled {
       <enum>QTabWidget::TabShape::Rounded</enum>
      </property>
      <property name="currentIndex">
-      <number>2</number>
+      <number>0</number>
      </property>
      <property name="iconSize">
       <size>
