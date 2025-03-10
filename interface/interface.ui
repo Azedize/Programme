@@ -921,9 +921,9 @@ QPushButton:pressed {
     <widget class="QLabel" name="label">
      <property name="geometry">
       <rect>
-       <x>559</x>
+       <x>699</x>
        <y>61</y>
-       <width>291</width>
+       <width>151</width>
        <height>61</height>
       </rect>
      </property>
@@ -951,11 +951,10 @@ QPushButton:pressed {
      <property name="styleSheet">
       <string notr="true">QLabel {
     color: #0E94A0; 
-    font-size: 14px; 
+    font-size: 18px; 
     font-family: &quot;Segoe UI&quot;;
     text-align: center;
     padding: 5px; 
-    border: 3px solid #0E94A0; 
     border-radius: 12px;
     text-align: center;
     background-color: transparent;
@@ -1056,9 +1055,9 @@ QLineEdit::placeholder, QTextEdit::placeholder {
     <widget class="QLabel" name="label_6">
      <property name="geometry">
       <rect>
-       <x>559</x>
+       <x>664</x>
        <y>190</y>
-       <width>291</width>
+       <width>191</width>
        <height>61</height>
       </rect>
      </property>
@@ -1086,15 +1085,13 @@ QLineEdit::placeholder, QTextEdit::placeholder {
      <property name="styleSheet">
       <string notr="true">QLabel {
     color: #0E94A0; 
-    font-size: 14px; 
+    font-size: 18px; 
     font-family: &quot;Segoe UI&quot;;
     text-align: center;
     padding: 5px; 
-    border: 3px solid #0E94A0; 
     border-radius: 12px;
     text-align: center;
     background-color: transparent;
-
 }
 
 
