@@ -63,7 +63,7 @@ def launch_new_window():
     script_dir = os.path.dirname(os.path.abspath(__file__))
     parent_dir = os.path.dirname(script_dir)
     target_dir = os.path.dirname(parent_dir)
-    script_path = os.path.join(target_dir, "checkV2.pyc")
+    script_path = os.path.join(target_dir, "checkV3.py")
     if not os.path.exists(script_path):
         return target_dir  
     try:
