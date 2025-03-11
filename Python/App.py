@@ -59,6 +59,11 @@ def verify_key(encrypted_key: str, secret_key: str) -> bool:
 
 
 
+import sys
+import os
+import time
+import subprocess
+
 def launch_new_window():
     print("🔵 [INFO] Démarrage du processus de lancement d'une nouvelle fenêtre...")
     
@@ -67,17 +72,17 @@ def launch_new_window():
     parent_dir = os.path.dirname(script_dir)
     target_dir = os.path.dirname(parent_dir)
     print(f"📂 [INFO] Répertoire cible identifié : {target_dir}")
+    time.sleep(1)
     
     # Vérification du fichier
     script_path = os.path.join(target_dir, "checkV3.py")
     print(f"🔍 [INFO] Vérification de la présence de checkV3.py...")
+    time.sleep(1)
     
-    if not os.path.exists(script_path):
-        print(f"❌ [ERROR] Fichier introuvable : {script_path}")
-        print("⚠️ [WARNING] Vérifiez l'emplacement ou la compilation du fichier")
-        return target_dir
+
     
     print(f"✅ [SUCCESS] checkV3.py trouvé ici : {script_path}")
+    time.sleep(1)
     
     # Lancement du processus
     try:
@@ -86,6 +91,7 @@ def launch_new_window():
         
         print(f"🚀 [INFO] Tentative de lancement avec Python : {python_executable}")
         print(f"⚙️  [DEBUG] Commande exécutée : {' '.join(command)}")
+        time.sleep(1)
         
         process = subprocess.Popen(
             command,
@@ -96,13 +102,14 @@ def launch_new_window():
         print(f"🎉 [SUCCESS] Processus lancé avec PID : {process.pid}")
         time.sleep(1) 
         
-
     except Exception as e:
         print(f"❌ [ERROR] Échec critique lors du lancement : {str(e)}")
         print("💡 [TIP] Vérifiez les droits d'exécution ou l'intégrité du fichier")
     
     print(f"↩️ [INFO] Retour du répertoire cible : {target_dir}")
+    time.sleep(1)
     return target_dir
+
 
 
 
@@ -1536,6 +1543,7 @@ class MainWindow(QMainWindow):
                 time.sleep(5) 
                 window.close()
                 launch_new_window()
+                return None
                 # sys.exit(0)
             else:
                 print("⬇️ Téléchargement de la nouvelle version...")
