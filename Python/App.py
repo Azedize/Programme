@@ -1561,8 +1561,7 @@ class MainWindow(QMainWindow):
                 print("🔄 Mise à jour détectée, redémarrage de l'application...")
                 window.close()
                 launch_new_window()
-                return None
-                # sys.exit(0)
+                sys.exit(0)
             else:
                 print("⬇️ Téléchargement de la nouvelle version...")
                 download_result = DownloadFile(new_version)
