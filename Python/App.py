@@ -65,6 +65,9 @@ import time
 import subprocess
 
 
+
+
+
 def launch_new_window():
     print("🔵 [INFO] Démarrage du processus de lancement d'une nouvelle fenêtre...")
 
@@ -95,6 +98,12 @@ def launch_new_window():
         print(f"🚀 [INFO] Tentative de lancement avec Python : {python_executable}")
         print(f"⚙️  [DEBUG] Commande exécutée : {' '.join(command)}")
         time.sleep(1)
+        # Modifier l'encodage de la console (ATTENTION : peut ne pas fonctionner)
+        try:
+            subprocess.run(["chcp", "65001"], check=True, capture_output=True, text=True, shell=True) # 65001 is UTF-8
+            print("✅ [INFO] Encodage de la console modifié en UTF-8.")
+        except subprocess.CalledProcessError as e:
+            print(f"⚠️ [WARNING] Échec de la modification de l'encodage de la console: {e}")
 
         process = subprocess.Popen(
             command,
@@ -109,12 +118,12 @@ def launch_new_window():
         if process.returncode != 0:
             print(f"❌ [ERROR] Processus retourné avec code : {process.returncode}")
             try:
-                print(f"   [ERROR] Standard Error: {stderr.decode(encoding='latin-1', errors='replace')}")
+                print(f"   [ERROR] Standard Error: {stderr.decode(encoding='utf-8', errors='replace')}") # Use UTF-8 here now
             except Exception as decode_err:
                 print(f"   [ERROR] Failed to decode stderr: {decode_err}")
                 print(f"   [ERROR] Raw stderr: {stderr}")  # Print the raw bytes
             try:
-                print(f"   [ERROR] Standard Output: {stdout.decode(encoding='latin-1', errors='replace')}")
+                print(f"   [ERROR] Standard Output: {stdout.decode(encoding='utf-8', errors='replace')}") # Use UTF-8 here now
             except Exception as decode_err:
                 print(f"   [ERROR] Failed to decode stdout: {decode_err}")
                 print(f"   [ERROR] Raw stdout: {stdout}") # Print the raw bytes
