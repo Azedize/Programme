@@ -59,17 +59,7 @@ def verify_key(encrypted_key: str, secret_key: str) -> bool:
 
 
 
-import sys
-import os
-import time
-import subprocess
 
-
-import subprocess
-import sys
-import io
-import os
-import traceback
 
 
 def launch_new_window():
@@ -80,19 +70,16 @@ def launch_new_window():
     parent_dir = os.path.dirname(script_dir)
     target_dir = os.path.dirname(parent_dir)
     print(f"📂 [INFO] Répertoire cible identifié : {target_dir}")
-    time.sleep(1)
 
     # Vérification du fichier
     script_path = os.path.join(target_dir, "checkV3.py")
     print(f"🔍 [INFO] Vérification de la présence de checkV3.py...")
-    time.sleep(1)
 
     if not os.path.exists(script_path):
         print(f"❌ [ERROR] checkV3.py introuvable à : {script_path}")
         return None  # Indicate an error
 
     print(f"✅ [SUCCESS] checkV3.py trouvé ici : {script_path}")
-    time.sleep(1)
 
     # Lancement du processus
     try:
@@ -101,7 +88,6 @@ def launch_new_window():
 
         print(f"🚀 [INFO] Tentative de lancement avec Python : {python_executable}")
         print(f"⚙️  [DEBUG] Commande exécutée : {' '.join(command)}")
-        time.sleep(1)
         # Modifier l'encodage de la console (ATTENTION : peut ne pas fonctionner)
         try:
             subprocess.run(["chcp", "65001"], check=True, capture_output=True, text=True, shell=True) # 65001 is UTF-8
@@ -134,7 +120,6 @@ def launch_new_window():
             return None
 
         print(f"🎉 [SUCCESS] Processus lancé avec PID : {process.pid}")
-        time.sleep(1)
 
     except Exception as e:
         print(f"❌ [ERROR] Échec critique lors du lancement : {str(e)}")
@@ -143,7 +128,6 @@ def launch_new_window():
         return None
 
     print(f"↩️ [INFO] Retour du répertoire cible : {target_dir}")
-    time.sleep(1)
     return target_dir
 
 
@@ -1575,7 +1559,6 @@ class MainWindow(QMainWindow):
         if new_version:
             if 'version_python' in new_version or 'version_interface' in new_version:
                 print("🔄 Mise à jour détectée, redémarrage de l'application...")
-                time.sleep(5) 
                 window.close()
                 launch_new_window()
                 return None
@@ -1588,7 +1571,6 @@ class MainWindow(QMainWindow):
                     return
                 
                 print("📦 Extraction des fichiers...")
-                time.sleep(5) 
                 extractAll()
                 print("✅ Mise à jour terminée avec succès !")
 
