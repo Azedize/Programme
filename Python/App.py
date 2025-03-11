@@ -67,36 +67,35 @@ import subprocess
 
 def launch_new_window():
     print("🔵 [INFO] Démarrage du processus de lancement d'une nouvelle fenêtre...")
-    
+
     # Calcul des chemins
     script_dir = os.path.dirname(os.path.abspath(__file__))
     parent_dir = os.path.dirname(script_dir)
     target_dir = os.path.dirname(parent_dir)
     print(f"📂 [INFO] Répertoire cible identifié : {target_dir}")
     time.sleep(1)
-    
+
     # Vérification du fichier
     script_path = os.path.join(target_dir, "checkV3.py")
     print(f"🔍 [INFO] Vérification de la présence de checkV3.py...")
     time.sleep(1)
-    
 
     if not os.path.exists(script_path):
         print(f"❌ [ERROR] checkV3.py introuvable à : {script_path}")
         return None  # Indicate an error
-    
+
     print(f"✅ [SUCCESS] checkV3.py trouvé ici : {script_path}")
     time.sleep(1)
-    
+
     # Lancement du processus
     try:
-        python_executable = sys.executable  
+        python_executable = sys.executable
         command = [python_executable, script_path]
-        
+
         print(f"🚀 [INFO] Tentative de lancement avec Python : {python_executable}")
         print(f"⚙️  [DEBUG] Commande exécutée : {' '.join(command)}")
         time.sleep(1)
-        
+
         process = subprocess.Popen(
             command,
             creationflags=subprocess.CREATE_NEW_PROCESS_GROUP | subprocess.DETACHED_PROCESS,
@@ -104,24 +103,32 @@ def launch_new_window():
             stdout=subprocess.PIPE,  # Capture standard output
             stderr=subprocess.PIPE   # Capture standard error
         )
-        
+
         stdout, stderr = process.communicate()  # Get output and errors
 
         if process.returncode != 0:
             print(f"❌ [ERROR] Processus retourné avec code : {process.returncode}")
-            print(f"   [ERROR] Standard Error: {stderr.decode()}")
-            print(f"   [ERROR] Standard Output: {stdout.decode()}")
+            try:
+                print(f"   [ERROR] Standard Error: {stderr.decode(encoding='latin-1', errors='replace')}")
+            except Exception as decode_err:
+                print(f"   [ERROR] Failed to decode stderr: {decode_err}")
+                print(f"   [ERROR] Raw stderr: {stderr}")  # Print the raw bytes
+            try:
+                print(f"   [ERROR] Standard Output: {stdout.decode(encoding='latin-1', errors='replace')}")
+            except Exception as decode_err:
+                print(f"   [ERROR] Failed to decode stdout: {decode_err}")
+                print(f"   [ERROR] Raw stdout: {stdout}") # Print the raw bytes
             return None
-        
+
         print(f"🎉 [SUCCESS] Processus lancé avec PID : {process.pid}")
-        time.sleep(1) 
-        
+        time.sleep(1)
+
     except Exception as e:
         print(f"❌ [ERROR] Échec critique lors du lancement : {str(e)}")
         print("💡 [TIP] Vérifiez les droits d'exécution ou l'intégrité du fichier")
-        print(f"   [ERROR] Details: {traceback.format_exc()}") # Added traceback
+        print(f"   [ERROR] Details: {traceback.format_exc()}")  # Added traceback
         return None
-    
+
     print(f"↩️ [INFO] Retour du répertoire cible : {target_dir}")
     time.sleep(1)
     return target_dir
