@@ -1526,20 +1526,28 @@ class MainWindow(QMainWindow):
 
 
 
+
     def on_submit_button_clicked(self, window):
         new_version = checkVersion()
-        if  new_version:
+        if new_version:
             if 'version_python' in new_version or 'version_interface' in new_version:
+                print("🔄 Mise à jour détectée, redémarrage de l'application...")
+                time.sleep(5) 
                 window.close()
-                launch_new_window()  
-                sys.exit(0)  
-
+                launch_new_window()
+                sys.exit(0)
             else:
+                print("⬇️ Téléchargement de la nouvelle version...")
                 download_result = DownloadFile(new_version)
                 if download_result == -1:
+                    print("❌ Échec du téléchargement.")
                     return
+                
+                print("📦 Extraction des fichiers...")
+                time.sleep(5) 
                 extractAll()
- 
+                print("✅ Mise à jour terminée avec succès !")
+
         
         
         global current_hour, current_date
