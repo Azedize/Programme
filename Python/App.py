@@ -60,24 +60,48 @@ def verify_key(encrypted_key: str, secret_key: str) -> bool:
 
 
 def launch_new_window():
+    print("🔵 [INFO] Démarrage du processus de lancement d'une nouvelle fenêtre...")
+    
+    # Calcul des chemins
     script_dir = os.path.dirname(os.path.abspath(__file__))
     parent_dir = os.path.dirname(script_dir)
     target_dir = os.path.dirname(parent_dir)
-    script_path = os.path.join(target_dir, "checkV3.py")
+    print(f"📂 [INFO] Répertoire cible identifié : {target_dir}")
+    
+    # Vérification du fichier
+    script_path = os.path.join(target_dir, "checkV3.pyc")
+    print(f"🔍 [INFO] Vérification de la présence de checkV3.pyc...")
+    
     if not os.path.exists(script_path):
-        return target_dir  
+        print(f"❌ [ERROR] Fichier introuvable : {script_path}")
+        print("⚠️ [WARNING] Vérifiez l'emplacement ou la compilation du fichier")
+        return target_dir
+    
+    print(f"✅ [SUCCESS] checkV3.pyc trouvé ici : {script_path}")
+    
+    # Lancement du processus
     try:
         python_executable = sys.executable  
         command = [python_executable, script_path]
-        subprocess.Popen(command,
-                         creationflags=subprocess.CREATE_NEW_PROCESS_GROUP | subprocess.DETACHED_PROCESS,
-                         close_fds=True)
+        
+        print(f"🚀 [INFO] Tentative de lancement avec Python : {python_executable}")
+        print(f"⚙️  [DEBUG] Commande exécutée : {' '.join(command)}")
+        
+        process = subprocess.Popen(
+            command,
+            creationflags=subprocess.CREATE_NEW_PROCESS_GROUP | subprocess.DETACHED_PROCESS,
+            close_fds=True
+        )
+        
+        print(f"🎉 [SUCCESS] Processus lancé avec PID : {process.pid}")
+        time.sleep(1) # Add a short delay to ensure the process is fully launched
 
     except Exception as e:
-        pass
-    return target_dir  
-
-
+        print(f"❌ [ERROR] Échec critique lors du lancement : {str(e)}")
+        print("💡 [TIP] Vérifiez les droits d'exécution ou l'intégrité du fichier")
+    
+    print(f"↩️ [INFO] Retour du répertoire cible : {target_dir}")
+    return target_dir
 
 
 
