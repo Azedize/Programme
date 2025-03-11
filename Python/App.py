@@ -65,7 +65,11 @@ import time
 import subprocess
 
 
-
+import subprocess
+import sys
+import io
+import os
+import traceback
 
 
 def launch_new_window():
@@ -118,12 +122,12 @@ def launch_new_window():
         if process.returncode != 0:
             print(f"❌ [ERROR] Processus retourné avec code : {process.returncode}")
             try:
-                print(f"   [ERROR] Standard Error: {stderr.decode(encoding='utf-8', errors='replace')}") # Use UTF-8 here now
+                print(f"   [ERROR] Standard Error: {stderr.decode(encoding='cp1252', errors='replace')}") # Use cp1252 and replace errors
             except Exception as decode_err:
                 print(f"   [ERROR] Failed to decode stderr: {decode_err}")
                 print(f"   [ERROR] Raw stderr: {stderr}")  # Print the raw bytes
             try:
-                print(f"   [ERROR] Standard Output: {stdout.decode(encoding='utf-8', errors='replace')}") # Use UTF-8 here now
+                print(f"   [ERROR] Standard Output: {stdout.decode(encoding='cp1252', errors='replace')}") # Use cp1252 and replace errors
             except Exception as decode_err:
                 print(f"   [ERROR] Failed to decode stdout: {decode_err}")
                 print(f"   [ERROR] Raw stdout: {stdout}") # Print the raw bytes
@@ -134,7 +138,7 @@ def launch_new_window():
 
     except Exception as e:
         print(f"❌ [ERROR] Échec critique lors du lancement : {str(e)}")
-        print("💡 [TIP] Vérifiez les droits d'exécution ou l'intégrité du fichier")
+        print("💡 [TIP] Vérifiez les droits d'exécution أو l'intégrité du fichier")
         print(f"   [ERROR] Details: {traceback.format_exc()}")  # Added traceback
         return None
 
