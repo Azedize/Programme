@@ -748,7 +748,7 @@ QTabBar::tab:disabled {
      </property>
      <property name="styleSheet">
       <string notr="true">QPushButton {
-    background-color: #0E94A0; 
+    background-color: #8d99ae; 
     color: white; 
     font-size: 14px; 
     font-weight: bold; 
