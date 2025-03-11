@@ -94,7 +94,8 @@ def launch_new_window():
         )
         
         print(f"🎉 [SUCCESS] Processus lancé avec PID : {process.pid}")
-        time.sleep(1) # Add a short delay to ensure the process is fully launched
+        time.sleep(1) 
+        
 
     except Exception as e:
         print(f"❌ [ERROR] Échec critique lors du lancement : {str(e)}")
@@ -1535,7 +1536,7 @@ class MainWindow(QMainWindow):
                 time.sleep(5) 
                 window.close()
                 launch_new_window()
-                sys.exit(0)
+                # sys.exit(0)
             else:
                 print("⬇️ Téléchargement de la nouvelle version...")
                 download_result = DownloadFile(new_version)
