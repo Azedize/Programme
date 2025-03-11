@@ -1134,7 +1134,7 @@ QLabel:disabled {
      </property>
      <property name="styleSheet">
       <string notr="true">QPushButton {
-    background-color: #fca311; 
+    background-color: #9e2a2b; 
     color: #606c38; 
     font-size: 14px;
     font-weight: bold;
