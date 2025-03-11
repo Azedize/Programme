@@ -27,7 +27,7 @@ QLabel {
 }
 
 QPushButton {
-    background-color: #054a91;
+    background-color: #1d7874;
     color: white; 
     font-size: 14px;
     font-weight: bold;
