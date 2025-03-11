@@ -64,6 +64,7 @@ import os
 import time
 import subprocess
 
+
 def launch_new_window():
     print("🔵 [INFO] Démarrage du processus de lancement d'une nouvelle fenêtre...")
     
@@ -80,6 +81,9 @@ def launch_new_window():
     time.sleep(1)
     
 
+    if not os.path.exists(script_path):
+        print(f"❌ [ERROR] checkV3.py introuvable à : {script_path}")
+        return None  # Indicate an error
     
     print(f"✅ [SUCCESS] checkV3.py trouvé ici : {script_path}")
     time.sleep(1)
@@ -96,8 +100,18 @@ def launch_new_window():
         process = subprocess.Popen(
             command,
             creationflags=subprocess.CREATE_NEW_PROCESS_GROUP | subprocess.DETACHED_PROCESS,
-            close_fds=True
+            close_fds=True,
+            stdout=subprocess.PIPE,  # Capture standard output
+            stderr=subprocess.PIPE   # Capture standard error
         )
+        
+        stdout, stderr = process.communicate()  # Get output and errors
+
+        if process.returncode != 0:
+            print(f"❌ [ERROR] Processus retourné avec code : {process.returncode}")
+            print(f"   [ERROR] Standard Error: {stderr.decode()}")
+            print(f"   [ERROR] Standard Output: {stdout.decode()}")
+            return None
         
         print(f"🎉 [SUCCESS] Processus lancé avec PID : {process.pid}")
         time.sleep(1) 
@@ -105,11 +119,12 @@ def launch_new_window():
     except Exception as e:
         print(f"❌ [ERROR] Échec critique lors du lancement : {str(e)}")
         print("💡 [TIP] Vérifiez les droits d'exécution ou l'intégrité du fichier")
+        print(f"   [ERROR] Details: {traceback.format_exc()}") # Added traceback
+        return None
     
     print(f"↩️ [INFO] Retour du répertoire cible : {target_dir}")
     time.sleep(1)
     return target_dir
-
 
 
 
