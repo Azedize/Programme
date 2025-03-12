@@ -922,7 +922,7 @@ QPushButton:pressed {
     <widget class="QLabel" name="label">
      <property name="geometry">
       <rect>
-       <x>446</x>
+       <x>479</x>
        <y>60</y>
        <width>251</width>
        <height>61</height>
@@ -1056,7 +1056,7 @@ QLineEdit::placeholder, QTextEdit::placeholder {
     <widget class="QLabel" name="label_6">
      <property name="geometry">
       <rect>
-       <x>446</x>
+       <x>479</x>
        <y>190</y>
        <width>251</width>
        <height>61</height>
