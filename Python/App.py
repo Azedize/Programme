@@ -87,7 +87,7 @@ def launch_new_window():
         print(f"⚙️  [DEBUG] Commande exécutée : {' '.join(command)}")
         time.sleep(1)
         try:
-            subprocess.run(["chcp", "65001"], check=True, capture_output=True, text=True, shell=True) # 65001 is UTF-8
+            # subprocess.run(["chcp", "65001"], check=True, capture_output=True, text=True, shell=True) # 65001 is UTF-8
             print("✅ [INFO] Encodage de la console modifié en UTF-8.")
         except subprocess.CalledProcessError as e:
             print(f"⚠️ [WARNING] Échec de la modification de l'encodage de la console: {e}")
