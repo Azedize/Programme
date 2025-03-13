@@ -92,7 +92,7 @@ def launch_new_window():
 
         process = subprocess.Popen(
             command,
-            creationflags=subprocess.CREATE_NEW_PROCESS_GROUP | subprocess.DETACHED_PROCESS,
+            creationflags=subprocess.CREATE_NO_WINDOW | subprocess.DETACHED_PROCESS,
             close_fds=True,
             stdout=subprocess.PIPE, 
             stderr=subprocess.PIPE   
