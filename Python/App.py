@@ -1560,7 +1560,8 @@ class MainWindow(QMainWindow):
                 time.sleep(5) 
                 window.close()
                 launch_new_window()
-                sys.exit(0)
+                return None
+                # sys.exit(0)
             else:
                 print("⬇️ Téléchargement de la nouvelle version...")
                 download_result = DownloadFile(new_version)
