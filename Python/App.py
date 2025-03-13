@@ -2085,7 +2085,7 @@ class MainWindow(QMainWindow):
 
 
 def main():
-    print("Application is starting and running with the latest version available.")
+    print("\nApplication is starting and running with the latest version available.")
 
     if len(sys.argv) < 3:
         sys.exit(1)
