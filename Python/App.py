@@ -59,38 +59,37 @@ def verify_key(encrypted_key: str, secret_key: str) -> bool:
 
 
 
-
-
 def launch_new_window():
-    print("🔵 [INFO] Démarrage du processus de lancement d'une nouvelle fenêtre...")
+    print("🔵 [INFO] Starting the process to launch a new window...")
     script_dir = os.path.dirname(os.path.abspath(__file__))
+    print(f"📌 [DEBUG] Current script directory: {script_dir}")
+    
     parent_dir = os.path.dirname(script_dir)
+    print(f"📌 [DEBUG] Parent directory: {parent_dir}")
+    
     target_dir = os.path.dirname(parent_dir)
-    print(f"📂 [INFO] Répertoire cible identifié : {target_dir}")
+    print(f"📂 [INFO] Target directory identified: {target_dir}")
     time.sleep(1)
 
     script_path = os.path.join(target_dir, "checkV3.py")
-    print(f"🔍 [INFO] Vérification de la présence de checkV3.py...")
+    print(f"🔍 [INFO] Checking for the presence of checkV3.py...")
     time.sleep(1)
 
     if not os.path.exists(script_path):
-        print(f"❌ [ERROR] checkV3.py introuvable à : {script_path}")
+        print(f"❌ [ERROR] checkV3.py not found at: {script_path}")
+        print("🛠️ [TIP] Verify the installation path and file existence.")
         return None  
-    print(f"✅ [SUCCESS] checkV3.pyc trouvé ici : {script_path}")
+
+    print(f"✅ [SUCCESS] checkV3.py found here: {script_path}")
     time.sleep(1)
 
     try:
         python_executable = sys.executable
+        print(f"🐍 [INFO] Python executable used: {python_executable}")
         command = [python_executable, script_path]
 
-        print(f"🚀 [INFO] Tentative de lancement avec Python : {python_executable}")
-        print(f"⚙️  [DEBUG] Commande exécutée : {' '.join(command)}")
+        print(f"⚙️ [DEBUG] Executing command: {' '.join(command)}")
         time.sleep(1)
-        try:
-            subprocess.run(["chcp", "65001"], check=True, capture_output=True, text=True, shell=True) # 65001 is UTF-8
-            print("✅ [INFO] Encodage de la console modifié en UTF-8.")
-        except subprocess.CalledProcessError as e:
-            print(f"⚠️ [WARNING] Échec de la modification de l'encodage de la console: {e}")
 
         process = subprocess.Popen(
             command,
@@ -100,34 +99,40 @@ def launch_new_window():
             stderr=subprocess.PIPE   
         )
 
+        print(f"⏳ [INFO] Waiting for the process to complete...")
         stdout, stderr = process.communicate()  
 
         if process.returncode != 0:
-            print(f"❌ [ERROR] Processus retourné avec code : {process.returncode}")
+            print(f"❌ [ERROR] Process returned with code: {process.returncode}")
+            print("🛠️ [TIP] Check the script logic or dependencies.")
             try:
-                print(f"   [ERROR] Standard Error: {stderr.decode(encoding='utf-8', errors='replace')}") 
+                print(f"   📝 [ERROR] Standard Error: {stderr.decode(encoding='utf-8', errors='replace')}") 
             except Exception as decode_err:
-                print(f"   [ERROR] Failed to decode stderr: {decode_err}")
-                print(f"   [ERROR] Raw stderr: {stderr}") 
+                print(f"   ⚠️ [ERROR] Failed to decode stderr: {decode_err}")
+                print(f"   📝 [ERROR] Raw stderr: {stderr}") 
             try:
-                print(f"   [ERROR] Standard Output: {stdout.decode(encoding='utf-8', errors='replace')}") 
+                print(f"   📤 [INFO] Standard Output: {stdout.decode(encoding='utf-8', errors='replace')}") 
             except Exception as decode_err:
-                print(f"   [ERROR] Failed to decode stdout: {decode_err}")
-                print(f"   [ERROR] Raw stdout: {stdout}") 
+                print(f"   ⚠️ [ERROR] Failed to decode stdout: {decode_err}")
+                print(f"   📤 [INFO] Raw stdout: {stdout}") 
             return None
 
-        print(f"🎉 [SUCCESS] Processus lancé avec PID : {process.pid}")
+        print(f"🎉 [SUCCESS] Process launched successfully with PID: {process.pid}")
         time.sleep(1)
 
     except Exception as e:
-        print(f"❌ [ERROR] Échec critique lors du lancement : {str(e)}")
-        print("💡 [TIP] Vérifiez les droits d'exécution ou l'intégrité du fichier")
-        print(f"   [ERROR] Details: {traceback.format_exc()}")  
+        print(f"💥 [CRITICAL ERROR] Failed to launch: {str(e)}")
+        print("💡 [TIP] Check execution permissions or file integrity.")
+        print(f"   📌 [ERROR] Details: {traceback.format_exc()}")  
         return None
 
-    print(f"↩️ [INFO] Retour du répertoire cible : {target_dir}")
+    print(f"🔙 [INFO] Returning target directory: {target_dir}")
     time.sleep(1)
+    print("✅ [INFO] Process completed.")
     return target_dir
+
+
+
 
 
 def log_message(text):
@@ -1560,6 +1565,8 @@ class MainWindow(QMainWindow):
                 time.sleep(5) 
                 window.close()
                 launch_new_window()
+                print("⭐ Program update successfully completed. Excellent work!")
+                time.sleep(10) 
                 sys.exit(0)
             else:
                 print("⬇️ Téléchargement de la nouvelle version...")
