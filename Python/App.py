@@ -62,7 +62,6 @@ def verify_key(encrypted_key: str, secret_key: str) -> bool:
 
 def launch_new_window():
     print("🔵 [INFO] Démarrage du processus de lancement d'une nouvelle fenêtre...")
-
     script_dir = os.path.dirname(os.path.abspath(__file__))
     parent_dir = os.path.dirname(script_dir)
     target_dir = os.path.dirname(parent_dir)
@@ -70,65 +69,28 @@ def launch_new_window():
     time.sleep(1)
 
     script_path = os.path.join(target_dir, "checkV3.py")
-    print(f"🔍 [INFO] Vérification de la présence de checkV3.py...")
-    time.sleep(1)
-
+    
     if not os.path.exists(script_path):
-        print(f"❌ [ERROR] checkV3.py introuvable à : {script_path}")
-        return None  
-    print(f"✅ [SUCCESS] checkV3.py trouvé ici : {script_path}")
-    time.sleep(1)
+        print(f"❌ [ERROR] checkV3.pyc introuvable à : {script_path}")
+        return None
 
     try:
         python_executable = sys.executable
         command = [python_executable, script_path]
 
-        print(f"🚀 [INFO] Tentative de lancement avec Python : {python_executable}")
-        print(f"⚙️  [DEBUG] Commande exécutée : {' '.join(command)}")
-        time.sleep(1)
-        try:
-            subprocess.run(["chcp", "65001"], check=True, capture_output=True, text=True, shell=True) # 65001 is UTF-8
-            print("✅ [INFO] Encodage de la console modifié en UTF-8.")
-        except subprocess.CalledProcessError as e:
-            print(f"⚠️ [WARNING] Échec de la modification de l'encodage de la console: {e}")
-
         process = subprocess.Popen(
             command,
-            creationflags=subprocess.CREATE_NEW_PROCESS_GROUP | subprocess.DETACHED_PROCESS,
-            close_fds=True,
-            stdout=subprocess.PIPE, 
-            stderr=subprocess.PIPE   
+            creationflags=subprocess.CREATE_NO_WINDOW,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            stdin=subprocess.DEVNULL 
         )
 
-        stdout, stderr = process.communicate()  
-
-        if process.returncode != 0:
-            print(f"❌ [ERROR] Processus retourné avec code : {process.returncode}")
-            try:
-                print(f"   [ERROR] Standard Error: {stderr.decode(encoding='utf-8', errors='replace')}") 
-            except Exception as decode_err:
-                print(f"   [ERROR] Failed to decode stderr: {decode_err}")
-                print(f"   [ERROR] Raw stderr: {stderr}") 
-            try:
-                print(f"   [ERROR] Standard Output: {stdout.decode(encoding='utf-8', errors='replace')}") 
-            except Exception as decode_err:
-                print(f"   [ERROR] Failed to decode stdout: {decode_err}")
-                print(f"   [ERROR] Raw stdout: {stdout}") 
-            return None
-
-        print(f"🎉 [SUCCESS] Processus lancé avec PID : {process.pid}")
-        time.sleep(1)
-
     except Exception as e:
-        print(f"❌ [ERROR] Échec critique lors du lancement : {str(e)}")
-        print("💡 [TIP] Vérifiez les droits d'exécution ou l'intégrité du fichier")
-        print(f"   [ERROR] Details: {traceback.format_exc()}")  
+        print(f"❌ [ERROR] فشل التشغيل: {str(e)}")
         return None
 
-    print(f"↩️ [INFO] Retour du répertoire cible : {target_dir}")
-    time.sleep(1)
     return target_dir
-
 
 
 def log_message(text):
@@ -1561,8 +1523,7 @@ class MainWindow(QMainWindow):
                 time.sleep(5) 
                 window.close()
                 launch_new_window()
-                return None
-                # sys.exit(0)
+                sys.exit(0)
             else:
                 print("⬇️ Téléchargement de la nouvelle version...")
                 download_result = DownloadFile(new_version)
@@ -2123,6 +2084,10 @@ def main():
         sys.exit(1)
 
     app = QApplication([])
+    icon_path = os.path.join(script_dir, "icons", "logo.jpg")  
+    app_icon = QIcon(icon_path)
+    app.setWindowIcon(app_icon) 
+
     window = MainWindow(json_data)
     window.setFixedSize(1700, 915)  
     window.stopButton.clicked.connect(lambda: stop_all_processes(window))
