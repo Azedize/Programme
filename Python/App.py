@@ -100,24 +100,6 @@ def launch_new_window():
         )
 
         print(f"⏳ [INFO] Waiting for the process to complete...")
-        stdout, stderr = process.communicate()  
-
-        if process.returncode != 0:
-            print(f"❌ [ERROR] Process returned with code: {process.returncode}")
-            print("🛠️ [TIP] Check the script logic or dependencies.")
-            try:
-                print(f"   📝 [ERROR] Standard Error: {stderr.decode(encoding='utf-8', errors='replace')}") 
-            except Exception as decode_err:
-                print(f"   ⚠️ [ERROR] Failed to decode stderr: {decode_err}")
-                print(f"   📝 [ERROR] Raw stderr: {stderr}") 
-            try:
-                print(f"   📤 [INFO] Standard Output: {stdout.decode(encoding='utf-8', errors='replace')}") 
-            except Exception as decode_err:
-                print(f"   ⚠️ [ERROR] Failed to decode stdout: {decode_err}")
-                print(f"   📤 [INFO] Raw stdout: {stdout}") 
-            return None
-
-        print(f"🎉 [SUCCESS] Process launched successfully with PID: {process.pid}")
         time.sleep(1)
 
     except Exception as e:
