@@ -59,36 +59,22 @@ def verify_key(encrypted_key: str, secret_key: str) -> bool:
 
 
 def launch_new_window():
-    print("🔵 [INFO] Starting the process to launch a new window...")
     script_dir = os.path.dirname(os.path.abspath(__file__))
-    print(f"📌 [DEBUG] Current script directory: {script_dir}")
-    
     parent_dir = os.path.dirname(script_dir)
-    print(f"📌 [DEBUG] Parent directory: {parent_dir}")
-    
     target_dir = os.path.dirname(parent_dir)
-    print(f"📂 [INFO] Target directory identified: {target_dir}")
-    time.sleep(1)
-
     script_path = os.path.join(target_dir, "checkV3.py")
-    print(f"🔍 [INFO] Checking for the presence of checkV3.py...")
     time.sleep(1)
 
     if not os.path.exists(script_path):
-        print(f"❌ [ERROR] checkV3.py not found at: {script_path}")
-        print("🛠️ [TIP] Verify the installation path and file existence.")
         return None  
 
-    print(f"✅ [SUCCESS] checkV3.py found here: {script_path}")
     time.sleep(1)
 
     try:
         python_executable = sys.executable
-        print(f"🐍 [INFO] Python executable used: {python_executable}")
         command = [python_executable, script_path]
 
-        print(f"⚙️ [DEBUG] Executing command: {' '.join(command)}")
-        time.sleep(1)
+
 
         process = subprocess.Popen(
             command,
@@ -96,12 +82,9 @@ def launch_new_window():
             close_fds=True
         )
 
-        print(f"⏳ [INFO] Waiting for the process to complete...")
         stdout, stderr = process.communicate()  
 
         if process.returncode != 0:
-            print(f"❌ [ERROR] Process returned with code: {process.returncode}")
-            print("🛠️ [TIP] Check the script logic or dependencies.")
             try:
                 print(f"   📝 [ERROR] Standard Error: {stderr.decode(encoding='utf-8', errors='replace')}") 
             except Exception as decode_err:
@@ -114,7 +97,6 @@ def launch_new_window():
                 print(f"   📤 [INFO] Raw stdout: {stdout}") 
             return None
 
-        print(f"🎉 [SUCCESS] Process launched successfully with PID: {process.pid}")
         time.sleep(1)
 
     except Exception as e:
@@ -123,9 +105,6 @@ def launch_new_window():
         print(f"   📌 [ERROR] Details: {traceback.format_exc()}")  
         return None
 
-    print(f"🔙 [INFO] Returning target directory: {target_dir}")
-    time.sleep(1)
-    print("✅ [INFO] Process completed.")
     return target_dir
 
 
@@ -2140,6 +2119,8 @@ def main():
 
 
 if __name__ == "__main__":
+    print("Application is starting and running with the latest version available.")
+
     main()
 
 
