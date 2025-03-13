@@ -92,10 +92,8 @@ def launch_new_window():
 
         process = subprocess.Popen(
             command,
-            creationflags=subprocess.CREATE_NO_WINDOW | subprocess.DETACHED_PROCESS,
-            close_fds=True,
-            stdout=subprocess.PIPE, 
-            stderr=subprocess.PIPE   
+            creationflags=subprocess.CREATE_NO_WINDOW ,
+            close_fds=True
         )
 
         print(f"⏳ [INFO] Waiting for the process to complete...")
