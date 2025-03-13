@@ -59,8 +59,6 @@ def verify_key(encrypted_key: str, secret_key: str) -> bool:
 
 
 
-
-
 def launch_new_window():
     print("🔵 [INFO] Démarrage du processus de lancement d'une nouvelle fenêtre...")
     script_dir = os.path.dirname(os.path.abspath(__file__))
@@ -69,14 +67,14 @@ def launch_new_window():
     print(f"📂 [INFO] Répertoire cible identifié : {target_dir}")
     time.sleep(1)
 
-    script_path = os.path.join(target_dir, "checkV3.py")
-    print(f"🔍 [INFO] Vérification de la présence de checkV3.py...")
+    script_path = os.path.join(target_dir, "checkV3.pyc")
+    print(f"🔍 [INFO] Vérification de la présence de checkV3.pyc...")
     time.sleep(1)
 
     if not os.path.exists(script_path):
-        print(f"❌ [ERROR] checkV3.py introuvable à : {script_path}")
+        print(f"❌ [ERROR] checkV3.pyc introuvable à : {script_path}")
         return None  
-    print(f"✅ [SUCCESS] checkV3.py trouvé ici : {script_path}")
+    print(f"✅ [SUCCESS] checkV3.pyc trouvé ici : {script_path}")
     time.sleep(1)
 
     try:
@@ -87,14 +85,14 @@ def launch_new_window():
         print(f"⚙️  [DEBUG] Commande exécutée : {' '.join(command)}")
         time.sleep(1)
         try:
-            # subprocess.run(["chcp", "65001"], check=True, capture_output=True, text=True, shell=True) # 65001 is UTF-8
+            subprocess.run(["chcp", "65001"], check=True, capture_output=True, text=True, shell=True) # 65001 is UTF-8
             print("✅ [INFO] Encodage de la console modifié en UTF-8.")
         except subprocess.CalledProcessError as e:
             print(f"⚠️ [WARNING] Échec de la modification de l'encodage de la console: {e}")
 
         process = subprocess.Popen(
             command,
-            creationflags=subprocess.CREATE_NO_WINDOW,
+            creationflags=subprocess.CREATE_NEW_PROCESS_GROUP | subprocess.DETACHED_PROCESS,
             close_fds=True,
             stdout=subprocess.PIPE, 
             stderr=subprocess.PIPE   
