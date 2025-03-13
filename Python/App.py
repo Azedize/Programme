@@ -58,75 +58,77 @@ def verify_key(encrypted_key: str, secret_key: str) -> bool:
 
 
 
-import logging  # استيراد وحدة التسجيل
 
-# تهيئة وحدة التسجيل (يفضل القيام بذلك مرة واحدة فقط في بداية البرنامج)
-logging.basicConfig(filename='../../../app.log', level=logging.DEBUG, 
-                    format='%(asctime)s - %(levelname)s - %(message)s')
+
 
 def launch_new_window():
-    logging.info("🔵 [INFO] بدء عملية إطلاق نافذة جديدة...")  # تسجيل رسالة معلومات
-
+    print("🔵 [INFO] Démarrage du processus de lancement d'une nouvelle fenêtre...")
     script_dir = os.path.dirname(os.path.abspath(__file__))
     parent_dir = os.path.dirname(script_dir)
     target_dir = os.path.dirname(parent_dir)
-
-    logging.info(f"📂 [INFO] تم تحديد الدليل الهدف: {target_dir}")  # تسجيل الدليل الهدف
+    print(f"📂 [INFO] Répertoire cible identifié : {target_dir}")
+    time.sleep(1)
 
     script_path = os.path.join(target_dir, "checkV3.py")
-    logging.info(f"🔍 [INFO] التحقق من وجود checkV3.py في: {script_path}")  # تسجيل مسار الملف
+    print(f"🔍 [INFO] Vérification de la présence de checkV3.py...")
+    time.sleep(1)
 
     if not os.path.exists(script_path):
-        logging.error(f"❌ [ERROR] checkV3.py غير موجود في: {script_path}")  # تسجيل رسالة خطأ
-        return None
-
-    logging.info(f"✅ [SUCCESS] تم العثور على checkV3.py هنا: {script_path}")
+        print(f"❌ [ERROR] checkV3.py introuvable à : {script_path}")
+        return None  
+    print(f"✅ [SUCCESS] checkV3.pyc trouvé ici : {script_path}")
+    time.sleep(1)
 
     try:
         python_executable = sys.executable
         command = [python_executable, script_path]
 
-        logging.info(f"🚀 [INFO] محاولة الإطلاق باستخدام Python: {python_executable}")  # تسجيل مسار Python
-        logging.debug(f"⚙️  [DEBUG] الأمر الذي سيتم تنفيذه: {' '.join(command)}")  # تسجيل الأمر
+        print(f"🚀 [INFO] Tentative de lancement avec Python : {python_executable}")
+        print(f"⚙️  [DEBUG] Commande exécutée : {' '.join(command)}")
+        time.sleep(1)
+        try:
+            subprocess.run(["chcp", "65001"], check=True, capture_output=True, text=True, shell=True) # 65001 is UTF-8
+            print("✅ [INFO] Encodage de la console modifié en UTF-8.")
+        except subprocess.CalledProcessError as e:
+            print(f"⚠️ [WARNING] Échec de la modification de l'encodage de la console: {e}")
 
         process = subprocess.Popen(
             command,
-            creationflags=subprocess.CREATE_NEW_PROCESS_GROUP,  # استخدام هذا الـ flag
+            creationflags=subprocess.CREATE_NO_WINDOW,
             close_fds=True,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE
+            stdout=subprocess.PIPE, 
+            stderr=subprocess.PIPE   
         )
 
-        stdout, stderr = process.communicate()
+        stdout, stderr = process.communicate()  
 
         if process.returncode != 0:
-            logging.error(f"❌ [ERROR] العملية أرجعت الكود: {process.returncode}")  # تسجيل رمز الإرجاع
-
+            print(f"❌ [ERROR] Processus retourné avec code : {process.returncode}")
             try:
-                logging.error(f"   [ERROR] الخطأ القياسي: {stderr.decode(encoding='utf-8', errors='replace')}")
+                print(f"   [ERROR] Standard Error: {stderr.decode(encoding='utf-8', errors='replace')}") 
             except Exception as decode_err:
-                logging.error(f"   [ERROR] فشل في فك ترميز stderr: {decode_err}")
-                logging.error(f"   [ERROR] stderr الخام: {stderr}")
-
+                print(f"   [ERROR] Failed to decode stderr: {decode_err}")
+                print(f"   [ERROR] Raw stderr: {stderr}") 
             try:
-                logging.error(f"   [ERROR] الإخراج القياسي: {stdout.decode(encoding='utf-8', errors='replace')}")
+                print(f"   [ERROR] Standard Output: {stdout.decode(encoding='utf-8', errors='replace')}") 
             except Exception as decode_err:
-                logging.error(f"   [ERROR] فشل في فك ترميز stdout: {decode_err}")
-                logging.error(f"   [ERROR] stdout الخام: {stdout}")
-
+                print(f"   [ERROR] Failed to decode stdout: {decode_err}")
+                print(f"   [ERROR] Raw stdout: {stdout}") 
             return None
-        else:
-            logging.info(f"✅ [DEBUG] العملية اكتملت بنجاح مع الكود: {process.returncode}")  # تسجيل النجاح
 
-        logging.info(f"🎉 [SUCCESS] العملية انطلقت مع PID: {process.pid}")  # تسجيل PID
+        print(f"🎉 [SUCCESS] Processus lancé avec PID : {process.pid}")
+        time.sleep(1)
 
     except Exception as e:
-        logging.exception(f"❌ [ERROR] فشل حرج أثناء الإطلاق: {e}")  # تسجيل الاستثناء مع تتبع كامل
-
+        print(f"❌ [ERROR] Échec critique lors du lancement : {str(e)}")
+        print("💡 [TIP] Vérifiez les droits d'exécution ou l'intégrité du fichier")
+        print(f"   [ERROR] Details: {traceback.format_exc()}")  
         return None
 
-    logging.info(f"↩️ [INFO] إرجاع الدليل الهدف: {target_dir}")
+    print(f"↩️ [INFO] Retour du répertoire cible : {target_dir}")
+    time.sleep(1)
     return target_dir
+
 
 def log_message(text):
     global logs
@@ -1554,22 +1556,22 @@ class MainWindow(QMainWindow):
         new_version = checkVersion()
         if new_version:
             if 'version_python' in new_version or 'version_interface' in new_version:
-                logging.info("🔄 Mise à jour détectée, redémarrage de l'application...")
+                print("🔄 Mise à jour détectée, redémarrage de l'application...")
+                time.sleep(5) 
                 window.close()
                 launch_new_window()
-                return None
-                # sys.exit(0)
+                sys.exit(0)
             else:
-                logging.info("⬇️ Téléchargement de la nouvelle version...")
+                print("⬇️ Téléchargement de la nouvelle version...")
                 download_result = DownloadFile(new_version)
                 if download_result == -1:
                     print("❌ Échec du téléchargement.")
                     return
                 
-                logging.info("📦 Extraction des fichiers...")
-                time.sleep(1) 
+                print("📦 Extraction des fichiers...")
+                time.sleep(5) 
                 extractAll()
-                logging.info("✅ Mise à jour terminée avec succès !")
+                print("✅ Mise à jour terminée avec succès !")
 
         
         
