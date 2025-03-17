@@ -952,7 +952,7 @@ QPushButton:pressed {
      <property name="styleSheet">
       <string notr="true">QLabel {
     color: #0E94A0; 
-    font-size: 24px; 
+    font-size: 20px; 
     font-family: &quot;Segoe UI&quot;;
     text-align: center;
     padding: 5px; 
@@ -1086,7 +1086,7 @@ QLineEdit::placeholder, QTextEdit::placeholder {
      <property name="styleSheet">
       <string notr="true">QLabel {
     color: #0E94A0; 
-    font-size: 24px; 
+    font-size: 20px; 
     font-family: &quot;Segoe UI&quot;;
     text-align: center;
     padding: 5px; 
