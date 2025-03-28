@@ -1198,6 +1198,9 @@ class CloseChromeThread(QThread):
 
 
 
+
+
+
 class VerticalTabBar(QtWidgets.QTabBar):
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -1262,6 +1265,8 @@ class VerticalTabBar(QtWidgets.QTabBar):
             )
             painter.drawText(text_rect, QtCore.Qt.AlignmentFlag.AlignVCenter | QtCore.Qt.AlignmentFlag.AlignLeft, text)
             painter.restore()
+
+
 
 
 class VerticalTabWidget(QtWidgets.QTabWidget):
@@ -1466,13 +1471,17 @@ class MainWindow(QMainWindow):
 
         self.scrollAreaWidget1 = self.findChild(QWidget, "scrollAreaWidgetContents")
         self.scrollAreaWidget2 = self.findChild(QWidget, "scrollAreaWidgetContents_3")
-        
+
+
         self.apply_scroll_area_style(self.scrollAreaWidget1)
         self.apply_scroll_area_style(self.scrollAreaWidget2)
         
         self.log_container = self.findChild(QWidget, "log")
         self.log_layout = QVBoxLayout(self.log_container)  
         self.log_layout.setAlignment(Qt.AlignmentFlag.AlignTop)
+
+        self.log_container.adjustSize() 
+        self.log_container.setFixedWidth(402)
         self.load_initial_options()
 
 
@@ -1522,6 +1531,7 @@ class MainWindow(QMainWindow):
 
     def update_logs_display(self, log_entry):
         log_label = QLabel(log_entry)
+
         log_label.setStyleSheet("""
             QLabel {
                 color: #ffffff;
@@ -1532,7 +1542,7 @@ class MainWindow(QMainWindow):
             }
         """)
 
-        self.log_layout.addWidget(log_label)  
+        self.log_layout.addWidget(log_label)
 
 
 
@@ -1650,6 +1660,32 @@ class MainWindow(QMainWindow):
 
 
 
+    def process_and_modify_json(self,input_json):
+        output_json = []  
+        current_section = []
+        found_open_message = False
+
+        def finalize_section():
+            """Ajoute la section courante à la sortie finale."""
+            if current_section:
+                output_json.extend(current_section)
+
+        for element in input_json:
+            if element.get("process") == "open_message":
+                found_open_message = True
+            
+            elif element.get("process") == "loop":
+                if found_open_message:
+                    sub_process = element.get("sub_process", [])
+                    contains_next = any(sp.get("process") == "next" for sp in sub_process)
+                    if contains_next:
+                        element.pop("check", None)  
+                current_section.append(element)
+                continue
+            current_section.append(element)
+        finalize_section()
+        return output_json
+
 
 
     def on_extraction_finished(self, window):
@@ -1665,28 +1701,30 @@ class MainWindow(QMainWindow):
     def on_submit_button_clicked(self, window):
 
 
-        new_version = checkVersion()
-        if new_version:
-            if 'version_python' in new_version or 'version_interface' in new_version:
-                print("🔄 Mise à jour détectée, redémarrage de l'application...")
-                window.close()
-                launch_new_window()
-                print("⭐ Program update successfully completed. Excellent work!")
-                time.sleep(1) 
-                sys.exit(0)
-            else:
-                print("⬇️ Téléchargement de la nouvelle version...")
-                download_result = DownloadFile(new_version)
-                if download_result == -1:
-                    print("❌ Échec du téléchargement.")
-                    return
+        # new_version = checkVersion()
+        # if new_version:
+        #     if 'version_python' in new_version or 'version_interface' in new_version:
+        #         print("🔄 Mise à jour détectée, redémarrage de l'application...")
+        #         window.close()
+        #         launch_new_window()
+        #         print("⭐ Program update successfully completed. Excellent work!")
+        #         time.sleep(1) 
+        #         sys.exit(0)
+        #     else:
+        #         print("⬇️ Téléchargement de la nouvelle version...")
+        #         download_result = DownloadFile(new_version)
+        #         if download_result == -1:
+        #             print("❌ Échec du téléchargement.")
+        #             return
                 
-                print("📦 Extraction des fichiers...")
-                time.sleep(5) 
-                extractAll()
-                print("✅ Mise à jour terminée avec succès !")
+        #         print("📦 Extraction des fichiers...")
+        #         time.sleep(5) 
+        #         extractAll()
+        #         print("✅ Mise à jour terminée avec succès !")
 
         
+
+
 
         interface_tab_widget = window.findChild(QTabWidget, "interface_2")
         if interface_tab_widget:
@@ -1828,12 +1866,14 @@ class MainWindow(QMainWindow):
         current_date = current_time.strftime("%Y-%m-%d")
         current_hour = current_time.strftime("%H-%M-%S") 
         modified_json = self.process_and_split_json(output_json)
-        output_json_final = self.process_and_handle_last_element(modified_json)
+        output_json = self.process_and_handle_last_element(modified_json)
+        output_json_final=self.process_and_modify_json(output_json)
+        print(json.dumps(output_json_final, indent=4, ensure_ascii=False))
         self.save_json_to_file(output_json_final)
-        with ThreadPoolExecutor(max_workers=2) as executor:
-            executor.submit(start_extraction, window, data_list , entered_number)
-            executor.submit(self.logs_thread.start)
-        extraction_thread.finished.connect(lambda: self.on_extraction_finished(window))
+        # with ThreadPoolExecutor(max_workers=2) as executor:
+        #     executor.submit(start_extraction, window, data_list , entered_number)
+        #     executor.submit(self.logs_thread.start)
+        # extraction_thread.finished.connect(lambda: self.on_extraction_finished(window))
 
 
 
@@ -1881,12 +1921,43 @@ class MainWindow(QMainWindow):
 
 
     def update_actions_color_and_handle_last_button(self):
+
+        arrow_down_path = os.path.join(script_dir, '..', "interface", "icons", "arrow_Down.png").replace("\\", "/")
+        arrow_up_path = os.path.join(script_dir, '..', "interface", "icons", "arrow_up.png").replace("\\", "/")
+        arrow_down_path_w = os.path.join(script_dir, '..', "interface", "icons", "arrow_Down_w.png").replace("\\", "/")
+        arrow_up_path_w = os.path.join(script_dir, '..', "interface", "icons", "arrow_up_w.png").replace("\\", "/")
+
+
+        down_exists = os.path.exists(arrow_down_path)
+        up_exists = os.path.exists(arrow_up_path)
+        down_exists_w = os.path.exists(arrow_down_path)
+        up_exists_w = os.path.exists(arrow_up_path)
+
+       
         for i in range(self.scenario_layout.count()):
             widget = self.scenario_layout.itemAt(i).widget()
 
             if widget:
                 if i != self.scenario_layout.count() - 1:
                     widget.setStyleSheet("background-color: #ffffff; border: 1px solid #0E94A0; border-radius: 8px;")
+
+                    label_list = [child for child in widget.children() if isinstance(child, QLabel)]
+                    for label in label_list:
+                        label.setStyleSheet("""
+                            QLabel {
+                                color: #0E94A0;
+                                font-weight: bold;
+                                font-size: 16px;
+                                border: none;
+                                border-radius: 4px;
+                                text-align: center;
+                                background-color: white;
+                                font-family: "Times", "Times New Roman", serif;
+                            }
+                        """)
+
+
+
                     buttons = [child for child in widget.children() if isinstance(child, QPushButton)]
                     if buttons:
                         last_button = buttons[-1]
@@ -1894,11 +1965,37 @@ class MainWindow(QMainWindow):
 
 
                     spin_boxes = [child for child in widget.children() if isinstance(child, QSpinBox)]
-                    if spin_boxes:
-                        current_style = spin_boxes[0].styleSheet()  
-                        additional_style = "padding: 2px;border: 1px solid #0E94A0;"  
-                        new_style = f"{current_style} {additional_style}" if current_style else additional_style
-                        spin_boxes[0].setStyleSheet(new_style)
+                    if spin_boxes and down_exists and up_exists:
+                        print(f"Application du nouveau style avec images blanches.")
+
+                        new_style = f"""
+                            QSpinBox {{
+                                padding: 2px; 
+                                border: 1px solid #0E94A0; 
+                                color: black;
+                            }}
+                            QSpinBox::down-button {{
+                                image: url("{arrow_down_path}");
+                                width: 13px;
+                                height: 13px;
+                                padding: 2px;  
+                                border-top-left-radius: 5px;
+                                border-bottom-left-radius: 5px;
+                            }}
+                            QSpinBox::up-button {{
+                                image: url("{arrow_up_path}");
+                                width: 13px;
+                                height: 13px;
+                                padding: 2px;
+                                border-top-left-radius: 5px;
+                                border-bottom-left-radius: 5px;
+                            }}
+                        """
+
+                        print(f"Nouveau style appliqué au QSpinBox : {new_style}")
+
+                        spin_boxes[0].setStyleSheet(new_style)  # Appliquer le style sans ajouter l'ancien
+
 
 
                     QCheckBox_list = [child for child in widget.children() if isinstance(child, QCheckBox)]
@@ -1927,9 +2024,81 @@ class MainWindow(QMainWindow):
                         new_style = f"{current_style} {additional_style}" if current_style else additional_style
                         checkbox.setStyleSheet(new_style)
 
+                    QComboBox_list = [child for child in widget.children() if isinstance(child, PyQt6.QtWidgets.QComboBox)]
+                    if QComboBox_list:
+                        QComboBox = QComboBox_list[0]
+                        arrow_down_path = os.path.join(script_dir, '..', "interface", "icons", "arrow_Down.png").replace("\\", "/")
+
+                        down_exists = os.path.exists(arrow_down_path)
+                        if down_exists:
+                            old_style = QComboBox.styleSheet()
+                            new_style = f"""
+                                QComboBox::down-arrow {{
+                                    image: url("{arrow_down_path}");
+                                    width: 13px;
+                                    height: 13px;
+                                    border: 1px solid #0E94A0; 
+                                    background-color: white;
+                                }}
+                                QComboBox::drop-down {{
+                                    border: 1px solid #0E94A0; 
+                                    width: 20px;
+                                    outline: none;
+                                }}
+                                
+                                QComboBox QAbstractItemView {{
+                                    min-width: 90px; 
+                                    border: 1px solid #0E94A0; 
+                                    background: white;
+                                    selection-background-color: #0E94A0;
+                                    selection-color: white;
+                                    padding: 3px; 
+                                    margin: 0px;  
+                                    alignment: center; 
+                                }}
+                                QComboBox {{
+                                    padding-left: 10px; 
+                                    font-size: 12px;
+                                    font-family: "Times", "Times New Roman", serif;
+                                    border: 1px solid #0E94A0; 
+                                }}
+                                QComboBox QAbstractItemView::item {{
+                                    padding: 5px; 
+                                    font-size: 12px;
+                                    color: #333;
+                                    border: none; 
+                                }}
+                                QComboBox QAbstractItemView::item:selected {{
+                                    background-color: #0E94A0;
+                                    color: white;
+                                    border-radius: 3px;
+                                }}
+                                QComboBox:focus {{
+                                    border: 1px solid #0E94A0; 
+                                }}
+                            """
+                            combined_style = old_style + new_style
+                            QComboBox.setStyleSheet(combined_style)
 
                 if i == self.scenario_layout.count() - 1:
+
+
+
                     widget.setStyleSheet("background-color: #0E94A0; border-radius: 8px;")
+                    label_list = [child for child in widget.children() if isinstance(child, QLabel)]
+                    for label in label_list:
+                        label.setStyleSheet("""
+                            QLabel {
+                                color: #0E94A0;
+                                font-weight: bold;
+                                font-size: 16px;
+                                border: none;
+                                border-radius: 4px;
+                                text-align: center;
+                                background-color: white;
+                                font-family: "Times", "Times New Roman", serif;
+                            }
+                        """)
 
                     buttons = [child for child in widget.children() if isinstance(child, QPushButton)]
                     if buttons:
@@ -1941,19 +2110,43 @@ class MainWindow(QMainWindow):
                             last_button.clicked.disconnect()
                         except TypeError:
                             pass  
-                        
                         last_button.clicked.connect(self.go_to_previous_state)
             
                     spin_boxes = [child for child in widget.children() if isinstance(child, QSpinBox)]
-                    if spin_boxes:
-                        current_style = spin_boxes[0].styleSheet()  
-                        additional_style = "padding: 2px;border: 1px solid #ffffff;"  
-                        new_style = f"{current_style} {additional_style}" if current_style else additional_style
-                        spin_boxes[0].setStyleSheet(new_style)
+                    if spin_boxes and down_exists_w and up_exists_w:
+                        print(f"Application du nouveau style avec images blanches.")
+
+                        new_style = f"""
+                            QSpinBox {{
+                                padding: 2px; 
+                                border: 1px solid white; 
+                                color: white;
+                            }}
+                            QSpinBox::down-button {{
+                                image: url("{arrow_down_path_w}");
+                                width: 13px;
+                                height: 13px;
+                                padding: 2px;  
+                                border-top-left-radius: 5px;
+                                border-bottom-left-radius: 5px;
+                            }}
+                            QSpinBox::up-button {{
+                                image: url("{arrow_up_path_w}");
+                                width: 13px;
+                                height: 13px;
+                                padding: 2px;
+                                border-top-left-radius: 5px;
+                                border-bottom-left-radius: 5px;
+                            }}
+                        """
+
+                        print(f"Nouveau style appliqué au QSpinBox : {new_style}")
+
+                        spin_boxes[0].setStyleSheet(new_style)  # Appliquer le style sans ajouter l'ancien
+
 
 
                     QCheckBox_list_last = [child for child in widget.children() if isinstance(child, QCheckBox)]
-
                     if QCheckBox_list_last:  
                         checkbox = QCheckBox_list_last[0]
                         
@@ -1978,11 +2171,12 @@ class MainWindow(QMainWindow):
                         new_style = f"{current_style} {additional_style}" if current_style else additional_style
                         checkbox.setStyleSheet(new_style)
 
+
                 QComboBox_list = [child for child in widget.children() if isinstance(child, PyQt6.QtWidgets.QComboBox)]
                 if QComboBox_list:
                     QComboBox = QComboBox_list[0]
                     arrow_down_path = os.path.join(script_dir, '..', "interface", "icons", "arrow_Down.png").replace("\\", "/")
-                    
+
                     down_exists = os.path.exists(arrow_down_path)
                     if down_exists:
                         old_style = QComboBox.styleSheet()
@@ -1991,10 +2185,50 @@ class MainWindow(QMainWindow):
                                 image: url("{arrow_down_path}");
                                 width: 13px;
                                 height: 13px;
+                                border: none;
+                                background-color: white;
+                            }}
+                            QComboBox::drop-down {{
+                                border: none;
+                                width: 20px;
+                                outline: none;
+                            }}
+                            
+                            QComboBox QAbstractItemView {{
+                                min-width: 90px; 
+                                border: none; /* إزالة الحدود هنا */
+                                background: white;
+                                selection-background-color: #0E94A0;
+                                selection-color: white;
+                                padding: 3px; 
+                                margin: 0px;  
+                                alignment: center; 
+                            }}
+                            QComboBox {{
+                                padding-left: 10px; 
+                                font-size: 12px;
+                                font-family: "Times", "Times New Roman", serif;
+                                border: 1px solid #0E94A0; 
+                                outline: none; 
+                            }}
+                            QComboBox QAbstractItemView::item {{
+                                padding: 5px; 
+                                font-size: 12px;
+                                color: #333;
+                                border: none; 
+                            }}
+                            QComboBox QAbstractItemView::item:selected {{
+                                background-color: #0E94A0;
+                                color: white;
+                                border-radius: 3px;
+                            }}
+                            QComboBox:focus {{
+                                border: 1px solid #0E94A0; 
                             }}
                         """
                         combined_style = old_style + new_style
                         QComboBox.setStyleSheet(combined_style)
+
 
 
 
