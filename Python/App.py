@@ -121,17 +121,10 @@ def DownloadFile(new_versions):
 
     local_filename = os.path.join(path_DownloadFile, "Programme-main.zip")  
 
-
     try:
-        try:
-            if os.path.exists(local_filename):
-                os.remove(local_filename)
-        except Exception:
-            return -1
-
-
-    except Exception as e:
-        traceback.print_exc()
+        if os.path.exists(local_filename):
+            os.remove(local_filename)
+    except Exception:
         return -1
 
     headers = {
@@ -144,65 +137,36 @@ def DownloadFile(new_versions):
 
     try:
         response = requests.get(url, stream=True, headers=headers, verify=False)
-
         if response.status_code != 200:
             return -1
 
         total_size = int(response.headers.get('content-length', 0))
-        print(f"📦 [INFO] Total file size: {total_size} bytes")
-
+        
         with open(local_filename, "wb") as handle:
-            print("⏳ [INFO] Starting download progress bar...")
-            sys.stdout.write('[' + ' ' * 50 + ']')
-            sys.stdout.write('\b' * 50)
-            sys.stdout.flush()
-
-            dl = 0
-            downloaded_bytes = 0
-            chunk_count = 0
-
             for chunk in response.iter_content(chunk_size=4096):
                 if chunk:
                     handle.write(chunk)
-                    downloaded_bytes += len(chunk)
-                    chunk_count += 1
-
-                    if chunk_count % 100 == 0:
-                        progress = int((downloaded_bytes / total_size) * 50) if total_size else 0
-                        sys.stdout.write('\r[' + '=' * progress + ' ' * (50 - progress) + ']')
-                        sys.stdout.flush()
-
-                    if downloaded_bytes % 100000 == 0:
-                        percent = (downloaded_bytes / total_size) * 100 if total_size else 0
-                        print(f"\nℹ️ [INFO] Downloaded: {downloaded_bytes}/{total_size} bytes ({percent:.2f}%)")
-
-            sys.stdout.write('\r[' + '=' * 50 + ']\n')
 
         tools_dir = "Programme-main"
-        tools_dir_path = os.path.join(path_DownloadFile, tools_dir)  # Extract to path_DownloadFile
-
+        tools_dir_path = os.path.join(path_DownloadFile, tools_dir)
+        
         if os.path.exists(tools_dir_path):
             try:
                 shutil.rmtree(tools_dir_path)
-            except Exception as e:
+            except Exception:
                 return -1
 
         try:
             with zipfile.ZipFile(local_filename, 'r') as zip_ref:
                 zip_ref.extractall(path_DownloadFile)
-        except Exception as e:
-            traceback.print_exc()
+        except Exception:
             return -1
 
-    except requests.exceptions.RequestException as e:
-        traceback.print_exc()
+    except requests.exceptions.RequestException:
         return -1
-    except Exception as e:
-        traceback.print_exc()
+    except Exception:
         return -1
-
     return 0
-
 
 
 
@@ -265,10 +229,7 @@ def checkVersion():
                 os.system("pause")
                 exit()
             
-
             script_dir = os.path.dirname(os.path.abspath(__file__))
-
-
 
             client_version_path_Python = os.path.join(script_dir, "version.txt")
             client_version_path_Extention = os.path.join(os.path.dirname(script_dir), "tools", "version.txt") 
@@ -296,21 +257,15 @@ def checkVersion():
             if server_version_interface != client_version_interface:
                 version_updates["version_interface"] = server_version_interface
 
-
             if server_version_Extention != client_version_Extention:
                 version_updates["version_extention"] = server_version_Extention
 
-
-
             if version_updates:
-                log_message(f"[INFO] Detected new version(s): {version_updates}")
+                log_message(f"[INFO] Detected new version(s):\n\t {version_updates}")
                 return version_updates
             else:
                 log_message("[INFO] All software versions are up to date.")
                 return None
-
-     
-
         else:
             os.system("pause")
             exit()
@@ -319,6 +274,8 @@ def checkVersion():
         traceback.print_exc()
         os.system("pause")
         exit()
+
+
 
 
 
@@ -338,7 +295,6 @@ def read_result_and_update_list(window):
     try:
         with open(result_file_path, 'r', encoding='utf-8') as file:
             lines = file.readlines()
-
         with open(result_file_path, 'w', encoding='utf-8') as file:
             file.truncate(0)
 
@@ -370,79 +326,57 @@ def read_result_and_update_list(window):
             else:
                 no_completed_count += 1
 
+
         interface_tab_widget = window.findChild(QTabWidget, "interface_2")
         if interface_tab_widget:
             result_found = False
             for i in range(interface_tab_widget.count()):
                 tab_text = interface_tab_widget.tabText(i)
                 if tab_text == "Result":
-                    old_tab_text = interface_tab_widget.tabText(i)
-                    new_tab_text = f"{old_tab_text} ({completed_count} completed / {no_completed_count} not completed)"
+                    new_tab_text = f"Result ({completed_count} completed / {no_completed_count} not completed)"
                     interface_tab_widget.setTabText(i, new_tab_text)
                     result_found = True
                     break
             if not result_found:
-                print("The 'Result' tab does not exist in the QTabWidget named 'interface_2'")
                 return
         else:
-            print("QTabWidget named 'interface_2' does not exist")
             return
 
         result_tab_widget = window.findChild(QTabWidget, "tabWidgetResult")
         if not result_tab_widget:
-            print("QTabWidget named 'tabWidgetResult' does not exist")
             return
 
         status_list = ["bad_proxy", "completed", "account_closed", "password_changed",
-                       "recoverychanged", "Activite_suspecte", "validation_capcha"]
+                       "recoverychanged", "Activite_suspecte", "validation_capcha" , "restore_account"]
 
         for status in status_list:
             tab_widget = result_tab_widget.findChild(QWidget, status)
             if tab_widget:
-                tab_index = result_tab_widget.indexOf(tab_widget)  
+                tab_index = result_tab_widget.indexOf(tab_widget)
 
                 list_widgets = tab_widget.findChildren(QListWidget)
+
                 if list_widgets:
                     list_widget = list_widgets[0]
+                    list_widget.clear()
 
                     if status in errors_dict and errors_dict[status]:
-                        list_widget.clear()
                         list_widget.addItems(errors_dict[status])
                         list_widget.scrollToBottom()
                         list_widget.show()
-
                         count = len(errors_dict[status])
-                        notifications[tab_index] = count 
+                        notifications[tab_index] = count
                         add_notification_badge(result_tab_widget, tab_index, count)
 
                         message_label = tab_widget.findChild(QLabel, "no_data_message")
                         if message_label:
                             message_label.deleteLater()
-
                     else:
-                        list_widget.clear() 
                         list_widget.addItem("⚠ No email data available for this category.\nPlease check again later.")
-                        list_widget.setStyleSheet("""
-                            color: #27445D;
-                            font-size: 16px;
-                            font-weight: bold;
-                            font-family: Arial;
-                            background-color: rgba(0, 0, 0, 0.1);
-                            border: 2px solid #27445D;
-                            padding: 10px;
-                            border-radius: 8px;
-                        """)
-                        list_widget.show() 
-            else:
-                print(f"QListWidget does not exist in the {status} tab")
-        else:
-            print(f"The {status} tab does not exist")
-
+                        list_widget.show()
         result_tab_widget.currentChanged.connect(remove_notification)
-
     except Exception as e:
         QMessageBox.critical(window, "Error", f"An error occurred while displaying the result: {e}")
-        print(f"Error: {e}")
 
 
 
@@ -607,7 +541,7 @@ def get_chrome_path():
 def create_extension_for_email(email, password, host, port, user, passwordP, recovry, new_password, new_recovry, IDL):
     if not os.path.exists(base_directory):
         os.makedirs(base_directory)
-
+        
     email_folder = os.path.join(base_directory, email)
 
     if os.path.exists(email_folder):
@@ -648,14 +582,13 @@ def create_extension_for_email(email, password, host, port, user, passwordP, rec
     if os.path.exists(gmail_process_js_path):
         with open(gmail_process_js_path, 'r', encoding='utf-8', errors='ignore') as file:
             content = file.read()
-        content = (content.replace("__email__", f'"{email}"')
-                          .replace("__password__", f'"{password}"')
-                          .replace("__recovry__", f'"{recovry}"')
-                          .replace("__newPassword__", f'"{new_password}"')
-                          .replace("__newRecovry__", f'"{new_recovry}"'))
+        content = (content.replace("__email__", f'{email}')
+                          .replace("__password__", f'{password}')
+                          .replace("__recovry__", f'{recovry}')
+                          .replace("__newPassword__", f'{new_password}')
+                          .replace("__newRecovry__", f'{new_recovry}'))
         with open(gmail_process_js_path, 'w', encoding='utf-8') as file:
             file.write(content)
-
 
 
 
@@ -680,7 +613,6 @@ def add_pid_to_text_file(pid, email):
     if entry not in existing_entries:
         with open(text_file_path, 'a', encoding='utf-8') as file:
             file.write(f"{entry}\n")
-
 
 
 
@@ -841,7 +773,6 @@ def parse_input_to_json(window):
             f"(Technical details: {str(e).capitalize()})"
         )
         return
-
 
 
 
@@ -1280,6 +1211,7 @@ class VerticalTabWidget(QtWidgets.QTabWidget):
 
 
 class MainWindow(QMainWindow):
+
     def __init__(self, json_data):
         super(MainWindow, self).__init__()
         ui_path = os.path.join(script_dir, '..',  "interface"  , "interface.ui")
@@ -1409,7 +1341,7 @@ class MainWindow(QMainWindow):
                     tab_widget = self.Interface.widget(i)
                     frame = QFrame(tab_widget)
                     frame.setStyleSheet("background-color: #F5F5F5; border-right: 1px solid #12BFCE;")
-                    frame.setGeometry(0, 420, 179, 445)
+                    frame.setGeometry(0, 480, 179, 445)
                     frame.show()
                     break
 
@@ -1699,28 +1631,18 @@ class MainWindow(QMainWindow):
 
 
     def on_submit_button_clicked(self, window):
-
-
-        # new_version = checkVersion()
+        new_version = checkVersion()
         # if new_version:
         #     if 'version_python' in new_version or 'version_interface' in new_version:
-        #         print("🔄 Mise à jour détectée, redémarrage de l'application...")
         #         window.close()
         #         launch_new_window()
-        #         print("⭐ Program update successfully completed. Excellent work!")
-        #         time.sleep(1) 
         #         sys.exit(0)
         #     else:
-        #         print("⬇️ Téléchargement de la nouvelle version...")
         #         download_result = DownloadFile(new_version)
         #         if download_result == -1:
-        #             print("❌ Échec du téléchargement.")
         #             return
-                
-        #         print("📦 Extraction des fichiers...")
         #         time.sleep(5) 
         #         extractAll()
-        #         print("✅ Mise à jour terminée avec succès !")
 
         
 
@@ -1868,12 +1790,11 @@ class MainWindow(QMainWindow):
         modified_json = self.process_and_split_json(output_json)
         output_json = self.process_and_handle_last_element(modified_json)
         output_json_final=self.process_and_modify_json(output_json)
-        print(json.dumps(output_json_final, indent=4, ensure_ascii=False))
         self.save_json_to_file(output_json_final)
-        # with ThreadPoolExecutor(max_workers=2) as executor:
-        #     executor.submit(start_extraction, window, data_list , entered_number)
-        #     executor.submit(self.logs_thread.start)
-        # extraction_thread.finished.connect(lambda: self.on_extraction_finished(window))
+        with ThreadPoolExecutor(max_workers=2) as executor:
+            executor.submit(start_extraction, window, data_list , entered_number)
+            executor.submit(self.logs_thread.start)
+        extraction_thread.finished.connect(lambda: self.on_extraction_finished(window))
 
 
 
@@ -1942,8 +1863,8 @@ class MainWindow(QMainWindow):
                     widget.setStyleSheet("background-color: #ffffff; border: 1px solid #0E94A0; border-radius: 8px;")
 
                     label_list = [child for child in widget.children() if isinstance(child, QLabel)]
-                    for label in label_list:
-                        label.setStyleSheet("""
+                    if label_list:
+                        label_list[0].setStyleSheet("""
                             QLabel {
                                 color: #0E94A0;
                                 font-weight: bold;
@@ -1951,22 +1872,37 @@ class MainWindow(QMainWindow):
                                 border: none;
                                 border-radius: 4px;
                                 text-align: center;
-                                background-color: white;
+                                background-color: transparent;
                                 font-family: "Times", "Times New Roman", serif;
+                                margin-left: 10px;
                             }
                         """)
+                        for label in label_list[1:]: 
+                            label.setStyleSheet("""
+                                QLabel {
+                                    color: #0E94A0;
+                                    font-weight: bold;
+                                    font-size: 16px;
+                                    border: none;
+                                    border-radius: 4px;
+                                    text-align: center;
+                                    background-color: transparent;
+                                    font-family: "Times", "Times New Roman", serif;
+                                }
+                            """)
 
+
+                     
 
 
                     buttons = [child for child in widget.children() if isinstance(child, QPushButton)]
                     if buttons:
                         last_button = buttons[-1]
-                        last_button.setVisible(False)  # Cacher le bouton
+                        last_button.setVisible(False)  
 
 
                     spin_boxes = [child for child in widget.children() if isinstance(child, QSpinBox)]
                     if spin_boxes and down_exists and up_exists:
-                        print(f"Application du nouveau style avec images blanches.")
 
                         new_style = f"""
                             QSpinBox {{
@@ -1991,10 +1927,7 @@ class MainWindow(QMainWindow):
                                 border-bottom-left-radius: 5px;
                             }}
                         """
-
-                        print(f"Nouveau style appliqué au QSpinBox : {new_style}")
-
-                        spin_boxes[0].setStyleSheet(new_style)  # Appliquer le style sans ajouter l'ancien
+                        spin_boxes[0].setStyleSheet(new_style)  
 
 
 
@@ -2025,6 +1958,7 @@ class MainWindow(QMainWindow):
                         checkbox.setStyleSheet(new_style)
 
                     QComboBox_list = [child for child in widget.children() if isinstance(child, PyQt6.QtWidgets.QComboBox)]
+
                     if QComboBox_list:
                         QComboBox = QComboBox_list[0]
                         arrow_down_path = os.path.join(script_dir, '..', "interface", "icons", "arrow_Down.png").replace("\\", "/")
@@ -2086,8 +2020,8 @@ class MainWindow(QMainWindow):
 
                     widget.setStyleSheet("background-color: #0E94A0; border-radius: 8px;")
                     label_list = [child for child in widget.children() if isinstance(child, QLabel)]
-                    for label in label_list:
-                        label.setStyleSheet("""
+                    if label_list:
+                        label_list[0].setStyleSheet("""
                             QLabel {
                                 color: #0E94A0;
                                 font-weight: bold;
@@ -2095,10 +2029,25 @@ class MainWindow(QMainWindow):
                                 border: none;
                                 border-radius: 4px;
                                 text-align: center;
-                                background-color: white;
+                                background-color: #f9f9f9;
                                 font-family: "Times", "Times New Roman", serif;
+                                margin-left: 8px; 
                             }
                         """)
+                        for label in label_list[1:]: 
+                            label.setStyleSheet("""
+                                QLabel {
+                                    color: #0E94A0;
+                                    font-weight: bold;
+                                    font-size: 16px;
+                                    border: none;
+                                    border-radius: 4px;
+                                    text-align: center;
+                                    background-color: #f9f9f9;
+                                    font-family: "Times", "Times New Roman", serif;
+                                }
+                            """)
+
 
                     buttons = [child for child in widget.children() if isinstance(child, QPushButton)]
                     if buttons:
@@ -2114,8 +2063,6 @@ class MainWindow(QMainWindow):
             
                     spin_boxes = [child for child in widget.children() if isinstance(child, QSpinBox)]
                     if spin_boxes and down_exists_w and up_exists_w:
-                        print(f"Application du nouveau style avec images blanches.")
-
                         new_style = f"""
                             QSpinBox {{
                                 padding: 2px; 
@@ -2139,10 +2086,7 @@ class MainWindow(QMainWindow):
                                 border-bottom-left-radius: 5px;
                             }}
                         """
-
-                        print(f"Nouveau style appliqué au QSpinBox : {new_style}")
-
-                        spin_boxes[0].setStyleSheet(new_style)  # Appliquer le style sans ajouter l'ancien
+                        spin_boxes[0].setStyleSheet(new_style)  
 
 
 
@@ -2196,7 +2140,7 @@ class MainWindow(QMainWindow):
                             
                             QComboBox QAbstractItemView {{
                                 min-width: 90px; 
-                                border: none; /* إزالة الحدود هنا */
+                                border: none; 
                                 background: white;
                                 selection-background-color: #0E94A0;
                                 selection-color: white;
@@ -2458,8 +2402,6 @@ class MainWindow(QMainWindow):
 
 
 def main():
-    print("\nApplication is starting and running with the latest version available.")
-
     if len(sys.argv) < 3:
         sys.exit(1)
     else:
@@ -2468,14 +2410,11 @@ def main():
         if not verify_key(encrypted_key, secret_key):
             sys.exit(1)
 
-
-
-
     json_path = os.path.join(script_dir,'..',"Tools", "action.json")
 
     with open(json_path, "r") as file:
         json_data = json.load(file)
-
+        
     if json_data is None:
         sys.exit(1)
 
@@ -2490,7 +2429,6 @@ def main():
     window.setWindowTitle("Automatisation des Processus Gmail")
     window.show()
     app.exec()
-
 
 
 if __name__ == "__main__":
