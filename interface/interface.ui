@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>2088</width>
-    <height>1118</height>
+    <height>1379</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -104,8 +104,8 @@ QGroupBox::title {
   <widget class="QFrame" name="Template2">
    <property name="geometry">
     <rect>
-     <x>460</x>
-     <y>920</y>
+     <x>390</x>
+     <y>1250</y>
      <width>691</width>
      <height>51</height>
     </rect>
@@ -265,8 +265,8 @@ QPushButton:pressed {
   <widget class="QFrame" name="Template1">
    <property name="geometry">
     <rect>
-     <x>460</x>
-     <y>990</y>
+     <x>390</x>
+     <y>1320</y>
      <width>691</width>
      <height>51</height>
     </rect>
@@ -614,7 +614,7 @@ QCheckBox{
      <x>0</x>
      <y>0</y>
      <width>2151</width>
-     <height>925</height>
+     <height>1131</height>
     </rect>
    </property>
    <property name="font">
@@ -708,7 +708,7 @@ QTabBar::tab:disabled {
      <property name="geometry">
       <rect>
        <x>840</x>
-       <y>820</y>
+       <y>911</y>
        <width>231</width>
        <height>41</height>
       </rect>
@@ -844,7 +844,7 @@ QLineEdit::placeholder, QTextEdit::placeholder {
      <property name="geometry">
       <rect>
        <x>100</x>
-       <y>260</y>
+       <y>353</y>
        <width>321</width>
        <height>551</height>
       </rect>
@@ -1114,7 +1114,7 @@ QLabel:disabled {
      <property name="geometry">
       <rect>
        <x>601</x>
-       <y>820</y>
+       <y>911</y>
        <width>231</width>
        <height>41</height>
       </rect>
@@ -1150,7 +1150,7 @@ QLabel:disabled {
      <property name="geometry">
       <rect>
        <x>430</x>
-       <y>260</y>
+       <y>351</y>
        <width>781</width>
        <height>551</height>
       </rect>
@@ -1250,7 +1250,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
      <property name="geometry">
       <rect>
        <x>1210</x>
-       <y>266</y>
+       <y>354</y>
        <width>418</width>
        <height>548</height>
       </rect>
@@ -1398,8 +1398,8 @@ QPushButton::menu-indicator {
     <widget class="QPushButton" name="TemepleteButton">
      <property name="geometry">
       <rect>
-       <x>110</x>
-       <y>820</y>
+       <x>120</x>
+       <y>910</y>
        <width>281</width>
        <height>51</height>
       </rect>
@@ -1435,6 +1435,142 @@ QPushButton::menu-indicator {
      </property>
      <property name="shortcut">
       <string/>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="browsers">
+     <property name="geometry">
+      <rect>
+       <x>700</x>
+       <y>254</y>
+       <width>431</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QComboBox {
+    padding: 5px 30px 5px 10px;
+    icon-size: 24px;
+    min-width: 150px;
+    border: 2px solid #0E94A0;
+    border-radius: 6px;
+    background-color:  #f3f6f9;
+    font-family: &quot;Times&quot;, &quot;Times New Roman&quot;, serif;
+    font-size: 14px;
+    color: #333333; 
+}
+
+
+
+QComboBox::drop-down {
+    subcontrol-origin: padding;
+    subcontrol-position: top right;
+    width: 30px;
+    border-left: 1px solid #ccc;
+}
+
+QComboBox:hover {
+    background-color: #e6e6e6;
+	color:black;
+}
+
+QComboBox:focus {
+    border: 1px solid #0078d7;
+	color:black;
+    color: #333333; 
+}
+
+QComboBox QAbstractItemView {
+    icon-size: 24px;
+    min-width: 200px;
+    padding: 5px;
+    background-color:  #f3f6f9;
+    border: 1px solid #ccc;
+    selection-background-color: #0078d7;
+    selection-color: #ffffff;
+    outline: none;
+}
+
+QComboBox QAbstractItemView::item {
+    height: 30px;
+    padding: 5px 10px 5px 30px;
+}
+
+QComboBox QAbstractItemView::item:hover {
+    background-color:  #f3f6f9;
+    color: #333333; 
+
+}
+</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_7">
+     <property name="geometry">
+      <rect>
+       <x>479</x>
+       <y>253</y>
+       <width>251</width>
+       <height>61</height>
+      </rect>
+     </property>
+     <property name="baseSize">
+      <size>
+       <width>10</width>
+       <height>12</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <family>Times</family>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="mouseTracking">
+      <bool>true</bool>
+     </property>
+     <property name="tabletTracking">
+      <bool>false</bool>
+     </property>
+     <property name="autoFillBackground">
+      <bool>false</bool>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLabel {
+    color: #0E94A0; 
+    font-size: 20px; 
+    font-family: &quot;Segoe UI&quot;;
+    text-align: center;
+    padding: 5px; 
+    border-radius: 12px;
+    text-align: center;
+    background-color: transparent;
+    font-family: &quot;Times&quot;, &quot;Times New Roman&quot;, serif;
+
+}
+
+
+QLabel:disabled {
+    color: #a0a0a0; 
+    background-color: #6d2e48; 
+    border: 3px solid #4d1f30; 
+    text-align: center; 
+
+}
+</string>
+     </property>
+     <property name="text">
+      <string>Browsers :</string>
+     </property>
+     <property name="textFormat">
+      <enum>Qt::TextFormat::PlainText</enum>
+     </property>
+     <property name="margin">
+      <number>10</number>
+     </property>
+     <property name="indent">
+      <number>0</number>
+     </property>
+     <property name="openExternalLinks">
+      <bool>false</bool>
      </property>
     </widget>
    </widget>
