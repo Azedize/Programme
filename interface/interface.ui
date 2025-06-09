@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>2088</width>
-    <height>1379</height>
+    <height>1974</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -112,8 +112,8 @@ QGroupBox::title {
    </property>
    <property name="styleSheet">
     <string notr="true">QFrame {
-    background-color: #0E94A0; 
-    border: 1px solid #0E94A0; 
+    background-color: #669bbc; 
+    border: 1px solid #669bbc; 
     border-radius: 8px; 
 	padding:0px;
     height: 51px;
@@ -139,13 +139,12 @@ QGroupBox::title {
      <string notr="true">QLabel {
     color: white;
     font-weight: bold;
-    font-size: 16px;
-    border: none;
+    font-size: 14px;
+	border: none;
     border-radius: 4px;
-    text-align: center;
-    background-color: #0E94A0;
+    background-color: #669bbc;
     font-family: &quot;Times&quot;, &quot;Times New Roman&quot;, serif;
-
+padding:1px;
 }
 </string>
     </property>
@@ -167,14 +166,11 @@ QGroupBox::title {
     color: white;
     font-weight: bold;
     font-size: 14px;
-    font-family: &quot;Segoe UI&quot;, Arial, sans-serif;
-    padding: 5px;
-    border: none;
+	border: none;
     border-radius: 4px;
-    text-align: center;
-    background-color: #0E94A0;
+    background-color: #669bbc;
     font-family: &quot;Times&quot;, &quot;Times New Roman&quot;, serif;
-
+padding:1px;
 }
 </string>
     </property>
@@ -273,8 +269,8 @@ QPushButton:pressed {
    </property>
    <property name="styleSheet">
     <string notr="true">QFrame {
-    background-color: #0E94A0; 
-    border: 1px solid #0E94A0; 
+    background-color: #669bbc; 
+    border: 1px solid #669bbc; 
     border-radius: 8px; 
 	padding:0px;
     height: 51px;
@@ -312,13 +308,12 @@ QPushButton:pressed {
      <string notr="true">QLabel {
     color: white;
     font-weight: bold;
-    font-size: 16px;
-    border: none;
-	border-radius: 4px;
-    text-align: center;
-    background-color: #0E94A0;
+    font-size: 14px;
+	border: none;
+    border-radius: 4px;
+    background-color: #669bbc;
     font-family: &quot;Times&quot;, &quot;Times New Roman&quot;, serif;
-
+padding:1px;
 }
 </string>
     </property>
@@ -339,11 +334,12 @@ QPushButton:pressed {
      <string notr="true">QLabel {
     color: white;
     font-weight: bold;
-    font-size: 16px;
+    font-size: 14px;
 	border: none;
     border-radius: 4px;
-    background-color: #0E94A0;
+    background-color: #669bbc;
     font-family: &quot;Times&quot;, &quot;Times New Roman&quot;, serif;
+padding:1px;
 }
 </string>
     </property>
@@ -437,13 +433,12 @@ QPushButton:pressed {
      <string notr="true">QLabel {
     color: white;
     font-weight: bold;
-    font-size: 16px;
+    font-size: 14px;
 	border: none;
     border-radius: 4px;
-    background-color: #0E94A0;
+    background-color: #669bbc;
     font-family: &quot;Times&quot;, &quot;Times New Roman&quot;, serif;
-    text-align: left;
-
+padding:1px;
 }
 </string>
     </property>
@@ -516,7 +511,7 @@ QPushButton:pressed {
      <rect>
       <x>423</x>
       <y>10</y>
-      <width>56</width>
+      <width>60</width>
       <height>30</height>
      </rect>
     </property>
@@ -524,12 +519,12 @@ QPushButton:pressed {
      <string notr="true">QLabel {
     color: white;
     font-weight: bold;
-    font-size: 16px;
-    border: none;
+    font-size: 14px;
+	border: none;
     border-radius: 4px;
-    background-color: #0E94A0;
+    background-color: #669bbc;
     font-family: &quot;Times&quot;, &quot;Times New Roman&quot;, serif;
-
+padding:1px;
 }
 </string>
     </property>
@@ -540,7 +535,7 @@ QPushButton:pressed {
    <widget class="QCheckBox" name="checkBox_3">
     <property name="geometry">
      <rect>
-      <x>481</x>
+      <x>486</x>
       <y>14</y>
       <width>48</width>
       <height>23</height>
@@ -560,7 +555,7 @@ QPushButton:pressed {
 }
 
 QCheckBox::indicator:checked {
-    background-color: #0E94A0; 
+    background-color: #669bbc; 
     border: 2px solid #FFFFFF; 
     border-radius: 8px; 
     margin: 0; 
@@ -586,7 +581,7 @@ QCheckBox{
    <widget class="QLineEdit" name="lineEdit_search">
     <property name="geometry">
      <rect>
-      <x>538</x>
+      <x>543</x>
       <y>10</y>
       <width>88</width>
       <height>27</height>
@@ -642,28 +637,29 @@ QTabBar {
 }
 
 QTabBar::tab {
-    background-color: #ecf0f1;
-    color: #7f8c8d;
+    background-color: #f8f9fa;
+    color: #669bbc;
     padding: 10px 20px;
-    font-size: 14px;
+    font-size: 18px;
     min-height: 30px;
     min-width: 820px;
     text-align: center;
     border-radius: 0;
+    border: 1px solid #ced4da;
     font-family: &quot;Times&quot;, &quot;Times New Roman&quot;, serif;
 }
 
 
 QTabBar::tab:selected {
-    background-color: #0E94A0;
-    color: #ffffff;
+    background-color: #ecf0f1;
+    color: #669bbc;
     font-weight: bold;
     border-radius:  0  8px   0   8px;
     padding: 10px 20px;
 }
 
 QTabBar::tab:hover {
-    background-color: #bdc3c7;
+    background-color: #669bbc;
     color: #2c3e50;
 }
 
@@ -702,159 +698,34 @@ QTabBar::tab:disabled {
       <normaloff>../../../../../../.designer/backup/icons/tritement.png</normaloff>../../../../../../.designer/backup/icons/tritement.png</iconset>
     </attribute>
     <attribute name="title">
-     <string>Tritement</string>
+     <string>Actions</string>
     </attribute>
-    <widget class="QPushButton" name="stopButton">
-     <property name="geometry">
-      <rect>
-       <x>840</x>
-       <y>911</y>
-       <width>231</width>
-       <height>41</height>
-      </rect>
-     </property>
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-       <horstretch>0</horstretch>
-       <verstretch>3</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="cursor">
-      <cursorShape>PointingHandCursor</cursorShape>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">QPushButton {
-    background-color: #0E94A0; 
-    color: white; 
-    font-size: 14px; 
-    font-weight: bold; 
-    border-radius: 8px; 
-    text-align: center; 
-    padding-right: 40px;
-    font-family: &quot;Times&quot;, &quot;Times New Roman&quot;, serif;
-
-}
-
-QPushButton::menu-indicator {
-    image: none; 
-}
-
-
-</string>
-     </property>
-     <property name="text">
-      <string>Stop All</string>
-     </property>
-     <property name="icon">
-      <iconset>
-       <normaloff>../../../../../../.designer/backup/icons/stop.png</normaloff>../../../../../../.designer/backup/icons/stop.png</iconset>
-     </property>
-    </widget>
-    <widget class="QTextEdit" name="textEdit_4">
-     <property name="geometry">
-      <rect>
-       <x>698</x>
-       <y>190</y>
-       <width>431</width>
-       <height>61</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">QLineEdit {
-    background-color: #f3f6f9;
-    border: 2px solid #0E94A0;
-    border-radius: 8px;
-    color: #333333; 
-    padding: 5px 10px; 
-    font-size: 12px;
-    font-family: &quot;Times&quot;, &quot;Times New Roman&quot;, serif;
-
-}
-
-QTextEdit {
-    background-color: #f3f6f9;
-    border: 2px solid #0E94A0;
-    border-radius: 8px;
-    color: #333333;
-    padding: 8px 10px;
-    font-size: 12px;
-    font-family: &quot;Times&quot;, &quot;Times New Roman&quot;, serif;
-
-}
-
-QLineEdit:disabled, QTextEdit:disabled {
-    background-color: #e0e0e0;
-    border: 2px solid #0E94A0;
-    color: #a0a0a0; 
-}
-
-
-
-QLineEdit, QTextEdit {
-    font-size: 12px;
-    font-family: &quot;Times&quot;, &quot;Times New Roman&quot;, serif;
-
-}
-
-QLineEdit::placeholder, QTextEdit::placeholder {
-    font-size: 10px; 
-    color: #a0a0a0; 
-    font-family: &quot;Times&quot;, &quot;Times New Roman&quot;, serif;
-
-}</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_5">
-     <property name="geometry">
-      <rect>
-       <x>764</x>
-       <y>10</y>
-       <width>193</width>
-       <height>34</height>
-      </rect>
-     </property>
-     <property name="whatsThis">
-      <string>QLabel {
-    font-size: 24px;
-    font-weight: bold;
-    color: #d32f2f; 
-    text-align: center; 
-}
-</string>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">QLabel {
-    color: #0E94A0;
-    font-size: 20px;
-    font-weight: bold;
-    font-family: &quot;Segoe UI&quot;, Arial, sans-serif;
-    qproperty-alignment: 'AlignCenter';
-    letter-spacing: 1px;
-    margin: 5px auto;
-    font-family: &quot;Times&quot;, &quot;Times New Roman&quot;, serif;
-
-}
-</string>
-     </property>
-     <property name="text">
-      <string>New Action</string>
-     </property>
-    </widget>
     <widget class="QGroupBox" name="resetOptionsContainer">
      <property name="geometry">
       <rect>
-       <x>100</x>
-       <y>353</y>
-       <width>321</width>
+       <x>15</x>
+       <y>11</y>
+       <width>320</width>
        <height>551</height>
       </rect>
      </property>
      <property name="styleSheet">
       <string notr="true">QGroupBox {
     color: #0E94A0;
-    font-weight: bold; 
+    font-weight: 600; 
+    background: #fff;
+    border-radius: 16px;
+    border:1px solid #ced4da;
+    font-size: 16px;
+
 }
-</string>
+QGroupBox::title {
+    color: #669bbc;
+    subcontrol-origin: margin;
+    subcontrol-position: top center;
+    padding:  3px;
+
+}</string>
      </property>
      <property name="title">
       <string>Reset Options</string>
@@ -862,10 +733,10 @@ QLineEdit::placeholder, QTextEdit::placeholder {
      <widget class="QPushButton" name="Button_Initaile_state">
       <property name="geometry">
        <rect>
-        <x>120</x>
+        <x>110</x>
         <y>0</y>
-        <width>81</width>
-        <height>16</height>
+        <width>107</width>
+        <height>25</height>
        </rect>
       </property>
       <property name="cursor">
@@ -875,7 +746,7 @@ QLineEdit::placeholder, QTextEdit::placeholder {
        <string notr="true">QPushButton {
     background-color: transparent; 
     color: white; 
-    font-size: 14px; 
+    font-size: 18px;
     font-weight: bold; 
     border-radius: 8px; 
     text-align: left; 
@@ -904,356 +775,64 @@ QPushButton:pressed {
       </property>
      </widget>
     </widget>
-    <widget class="QLabel" name="label">
-     <property name="geometry">
-      <rect>
-       <x>479</x>
-       <y>60</y>
-       <width>251</width>
-       <height>61</height>
-      </rect>
-     </property>
-     <property name="baseSize">
-      <size>
-       <width>10</width>
-       <height>12</height>
-      </size>
-     </property>
-     <property name="font">
-      <font>
-       <family>Times</family>
-       <bold>true</bold>
-      </font>
-     </property>
-     <property name="mouseTracking">
-      <bool>true</bool>
-     </property>
-     <property name="tabletTracking">
-      <bool>false</bool>
-     </property>
-     <property name="autoFillBackground">
-      <bool>false</bool>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">QLabel {
-    color: #0E94A0; 
-    font-size: 20px; 
-    font-family: &quot;Segoe UI&quot;;
-    text-align: center;
-    padding: 5px; 
-    border-radius: 12px;
-    text-align: center;
-    background-color: transparent;
-    font-family: &quot;Times&quot;, &quot;Times New Roman&quot;, serif;
-
-}
-
-
-QLabel:disabled {
-    color: #a0a0a0; 
-    background-color: #6d2e48; 
-    border: 3px solid #4d1f30; 
-    text-align: center; 
-
-}
-</string>
-     </property>
-     <property name="text">
-      <string>Data Processing :</string>
-     </property>
-     <property name="textFormat">
-      <enum>Qt::TextFormat::PlainText</enum>
-     </property>
-     <property name="margin">
-      <number>10</number>
-     </property>
-     <property name="indent">
-      <number>0</number>
-     </property>
-     <property name="openExternalLinks">
-      <bool>false</bool>
-     </property>
-    </widget>
-    <widget class="QTextEdit" name="textEdit_3">
-     <property name="geometry">
-      <rect>
-       <x>698</x>
-       <y>61</y>
-       <width>431</width>
-       <height>127</height>
-      </rect>
-     </property>
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Expanding" vsizetype="Ignored">
-       <horstretch>0</horstretch>
-       <verstretch>4</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="minimumSize">
-      <size>
-       <width>6</width>
-       <height>0</height>
-      </size>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">QLineEdit {
-    background-color: #f3f6f9;
-    border: 2px solid #0E94A0;
-    border-radius: 8px;
-    color: #333333; 
-    padding: 5px 10px; 
-    font-size: 12px;
-    font-family: &quot;Times&quot;, &quot;Times New Roman&quot;, serif;
-
-}
-
-
-
-
-QTextEdit {
-    background-color: #f3f6f9;
-    border: 2px solid #0E94A0;
-    border-radius: 8px;
-    color: #333333;
-    padding: 8px 10px;
-    font-size: 12px;
-    font-family: &quot;Times&quot;, &quot;Times New Roman&quot;, serif;
-
-}
-
-
-
-
-
-QLineEdit:disabled, QTextEdit:disabled {
-    background-color: #e0e0e0;
-    border: 2px solid #0E94A0;
-    color: #a0a0a0; 
-}
-QLineEdit, QTextEdit {
-    font-size: 12px;
-}
-
-QLineEdit::placeholder, QTextEdit::placeholder {
-    color: #a0a0a0; 
-}
-</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_6">
-     <property name="geometry">
-      <rect>
-       <x>479</x>
-       <y>190</y>
-       <width>251</width>
-       <height>61</height>
-      </rect>
-     </property>
-     <property name="baseSize">
-      <size>
-       <width>10</width>
-       <height>12</height>
-      </size>
-     </property>
-     <property name="font">
-      <font>
-       <family>Times</family>
-       <bold>true</bold>
-      </font>
-     </property>
-     <property name="mouseTracking">
-      <bool>true</bool>
-     </property>
-     <property name="tabletTracking">
-      <bool>false</bool>
-     </property>
-     <property name="autoFillBackground">
-      <bool>false</bool>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">QLabel {
-    color: #0E94A0; 
-    font-size: 20px; 
-    font-family: &quot;Segoe UI&quot;;
-    text-align: center;
-    padding: 5px; 
-    border-radius: 12px;
-    text-align: center;
-    background-color: transparent;
-    font-family: &quot;Times&quot;, &quot;Times New Roman&quot;, serif;
-
-}
-
-
-QLabel:disabled {
-    color: #a0a0a0; 
-    background-color: #6d2e48; 
-    border: 3px solid #4d1f30; 
-    text-align: center; 
-
-}
-</string>
-     </property>
-     <property name="text">
-      <string>Process Count :</string>
-     </property>
-     <property name="textFormat">
-      <enum>Qt::TextFormat::PlainText</enum>
-     </property>
-     <property name="margin">
-      <number>10</number>
-     </property>
-     <property name="indent">
-      <number>0</number>
-     </property>
-     <property name="openExternalLinks">
-      <bool>false</bool>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="submitButton">
-     <property name="geometry">
-      <rect>
-       <x>601</x>
-       <y>911</y>
-       <width>231</width>
-       <height>41</height>
-      </rect>
-     </property>
-     <property name="cursor">
-      <cursorShape>PointingHandCursor</cursorShape>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">QPushButton {
-    background-color: transparent; 
-    color: #0E94A0; 
-    font-size: 14px;
-    font-weight: bold;
-    border: 2px solid #0E94A0; 
-    border-radius: 8px;
-    padding: 5px 15px;
-    text-align: center;
-    font-family: &quot;Times&quot;, &quot;Times New Roman&quot;, serif;
-
-}
-
-</string>
-     </property>
-     <property name="text">
-      <string>Submit</string>
-     </property>
-     <property name="icon">
-      <iconset>
-       <normaloff>../../../../../../.designer/backup/icons/start.png</normaloff>../../../../../../.designer/backup/icons/start.png</iconset>
-     </property>
-    </widget>
-    <widget class="QScrollArea" name="scrollArea">
-     <property name="geometry">
-      <rect>
-       <x>430</x>
-       <y>351</y>
-       <width>781</width>
-       <height>551</height>
-      </rect>
-     </property>
-     <property name="widgetResizable">
-      <bool>true</bool>
-     </property>
-     <widget class="QWidget" name="scrollAreaWidgetContents">
-      <property name="geometry">
-       <rect>
-        <x>0</x>
-        <y>0</y>
-        <width>767</width>
-        <height>1700</height>
-       </rect>
-      </property>
-      <property name="minimumSize">
-       <size>
-        <width>0</width>
-        <height>1700</height>
-       </size>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">QScrollArea {
-    border: none; 
-    background-color: white;
-}
-
-QScrollBar:vertical {
-    background: #f0f0f0; 
-    width: 10px;
-    margin: 0px 0px 0px 0px;
-}
-
-QScrollBar::handle:vertical {
-    background: #a0a0a0; 
-    min-height: 20px;
-    border-radius: 5px;
-}
-
-QScrollBar::add-line:vertical {
-    height: 0px;
-    subcontrol-position: bottom;
-    subcontrol-origin: margin;
-}
-
-QScrollBar::sub-line:vertical {
-    height: 0px;
-    subcontrol-position: top;
-    subcontrol-origin: margin;
-}
-
-QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
-    background: none; 
-}</string>
-      </property>
-      <widget class="QGroupBox" name="scenarioContainer">
-       <property name="geometry">
-        <rect>
-         <x>4</x>
-         <y>0</y>
-         <width>761</width>
-         <height>1695</height>
-        </rect>
-       </property>
-       <property name="minimumSize">
-        <size>
-         <width>0</width>
-         <height>1200</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>16777215</width>
-         <height>16777215</height>
-        </size>
-       </property>
-       <property name="toolTipDuration">
-        <number>-1</number>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">QGroupBox {
-    color: #0E94A0;
-    font-weight: bold; 
-    font-family: &quot;Times&quot;, &quot;Times New Roman&quot;, serif;
-
-}
-</string>
-       </property>
-       <property name="title">
-        <string>Scenario</string>
-       </property>
-      </widget>
-     </widget>
-    </widget>
     <widget class="QScrollArea" name="scrollArea_3">
      <property name="geometry">
       <rect>
-       <x>1210</x>
-       <y>354</y>
-       <width>418</width>
-       <height>548</height>
+       <x>18</x>
+       <y>573</y>
+       <width>1647</width>
+       <height>365</height>
       </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">           QScrollArea {
+                background: #fff;
+                border: none;
+                border-radius: 16px;
+                padding: 0px ;
+			    margin:0px;
+		        padding:0px;
+            }
+
+
+QScrollBar:vertical {
+    background: #F3F3F3;
+    width: 8px;
+    margin: 0;
+    padding: 0;
+    border: none;
+    border-radius: 20px;
+}
+
+QScrollBar::handle:vertical {
+    background: #C0C0C0;
+    min-height: 25px;
+    border: none;
+    border-radius: 20px;
+    margin: 0;
+    padding: 0;
+}
+
+QScrollBar::handle:vertical:hover {
+    background: #A8A8A8;
+}
+
+QScrollBar::add-line:vertical,
+QScrollBar::sub-line:vertical {
+    height: 0px;
+    border: none;
+    margin: 0;
+    padding: 0;
+}
+
+QScrollBar::add-page:vertical,
+QScrollBar::sub-page:vertical {
+    background: none;
+    border: none;
+    margin: 0;
+    padding: 0;
+}
+</string>
      </property>
      <property name="widgetResizable">
       <bool>true</bool>
@@ -1263,7 +842,7 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>404</width>
+        <width>1639</width>
         <height>9900</height>
        </rect>
       </property>
@@ -1312,8 +891,8 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
         <rect>
          <x>2</x>
          <y>-3</y>
-         <width>402</width>
-         <height>9900</height>
+         <width>1627</width>
+         <height>9905</height>
         </rect>
        </property>
        <property name="minimumSize">
@@ -1333,32 +912,34 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
        </property>
        <property name="styleSheet">
         <string notr="true">QGroupBox {
-    color: #0E94A0;
-    font-weight: bold; 
-    border-bottom: 5px solid transparent;
-    background-color: #000000;
-   padding-left: 10px;  
+            color: #0E94A0;
+            font-weight: bold; 
+            border-bottom: 5px solid transparent;
+            background-color: #161a1d;
+            padding-left: 10px;  
+            border-radius: 16px;
 
-}
-QGroupBox::title {
-    font-size: 18px;
-    font-family: 'Arial';
-    font-weight: bold;
-    padding: 5px;  
-    border-radius: 5px; 
-    font-family: &quot;Times&quot;, &quot;Times New Roman&quot;, serif;
+        }
+        QGroupBox::title {
+            padding: 5px;  
+            border-radius: 5px; 
+            font-family: &quot;Times&quot;, &quot;Times New Roman&quot;, serif;
+            color : #669bbc;
+            border-radius: 3px;
+            margin:7px 5px 5px  2px;
+            subcontrol-position: top left;
+        }
 
-}
 </string>
        </property>
        <property name="title">
-        <string>Log</string>
+        <string>Console de logs</string>
        </property>
        <widget class="QPushButton" name="ClearButton">
         <property name="geometry">
          <rect>
-          <x>370</x>
-          <y>11</y>
+          <x>1562</x>
+          <y>21</y>
           <width>31</width>
           <height>41</height>
          </rect>
@@ -1395,26 +976,215 @@ QPushButton::menu-indicator {
       </widget>
      </widget>
     </widget>
-    <widget class="QPushButton" name="TemepleteButton">
+    <widget class="QFrame" name="frame_2">
      <property name="geometry">
       <rect>
-       <x>120</x>
-       <y>910</y>
-       <width>281</width>
-       <height>51</height>
+       <x>347</x>
+       <y>21</y>
+       <width>837</width>
+       <height>537</height>
       </rect>
      </property>
-     <property name="cursor">
-      <cursorShape>PointingHandCursor</cursorShape>
-     </property>
      <property name="styleSheet">
-      <string notr="true">QPushButton {
-    background-color: #0E94A0; 
+      <string notr="true">QFrame {
+                background: #fff;
+                border-radius: 16px;
+                padding: 5px;
+                border : 1px solid #ced4da;
+        }
+</string>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::Shape::StyledPanel</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Shadow::Raised</enum>
+     </property>
+     <widget class="QScrollArea" name="scrollArea">
+      <property name="geometry">
+       <rect>
+        <x>4</x>
+        <y>4</y>
+        <width>831</width>
+        <height>474</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">           QScrollArea {
+                background: #fff;
+                border: none;
+                border-radius: 16px;
+                padding: 0px ;
+                margin:0px;
+                padding:4px;
+            }
+            QScrollBar:vertical {
+                background: #F3F3F3;
+                width: 8px;
+                margin: 0;
+                padding: 0;
+                border: none;
+                border-radius: 20px;
+            }
+
+            QScrollBar::handle:vertical {
+                background: #C0C0C0;
+                min-height: 25px;
+                border: none;
+                border-radius: 20px;
+                margin: 0;
+                padding: 0;
+            }
+
+            QScrollBar::handle:vertical:hover {
+                background: #A8A8A8;
+            }
+
+            QScrollBar::add-line:vertical,
+            QScrollBar::sub-line:vertical {
+                height: 0px;
+                border: none;
+                margin: 0;
+                padding: 0;
+            }
+
+            QScrollBar::add-page:vertical,
+            QScrollBar::sub-page:vertical {
+                background: none;
+                border: none;
+                margin: 0;
+                padding: 0;
+            }
+            </string>
+      </property>
+      <property name="widgetResizable">
+       <bool>true</bool>
+      </property>
+      <widget class="QWidget" name="scrollAreaWidgetContents">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>815</width>
+         <height>1700</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>1700</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QScrollArea {
+    border: none; 
+    background: #fff;
+}
+
+QScrollBar:vertical {
+    background: #f0f0f0; 
+    width: 10px;
+    margin: 0px 0px 0px 0px;
+}
+
+QScrollBar::handle:vertical {
+    background: #a0a0a0; 
+    min-height: 20px;
+    border-radius: 5px;
+}
+
+QScrollBar::add-line:vertical {
+    height: 0px;
+    subcontrol-position: bottom;
+    subcontrol-origin: margin;
+}
+
+QScrollBar::sub-line:vertical {
+    height: 0px;
+    subcontrol-position: top;
+    subcontrol-origin: margin;
+}
+
+QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
+    background: none; 
+}</string>
+       </property>
+       <widget class="QGroupBox" name="scenarioContainer">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>-1</y>
+          <width>817</width>
+          <height>1701</height>
+         </rect>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>1200</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="toolTipDuration">
+         <number>-1</number>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QGroupBox {
+    background: #fff;
+    border: none;
+    border-radius: 0px 0px 16px 16px;
+    padding: 10px;
+    font-weight: bold; 
+    font-family: &quot;Times&quot;, &quot;Times New Roman&quot;, serif;
+padding:0px 20px 0px 40px ;
+margin:0px;
+}
+
+QGroupBox::title {
+    color: #fff; 
+    subcontrol-origin: margin;
+    subcontrol-position: top center;
+    padding: 0 3px;
+}
+</string>
+        </property>
+        <property name="title">
+         <string>Scenario</string>
+        </property>
+       </widget>
+      </widget>
+     </widget>
+     <widget class="QPushButton" name="stopButton">
+      <property name="geometry">
+       <rect>
+        <x>390</x>
+        <y>490</y>
+        <width>231</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>3</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="cursor">
+       <cursorShape>PointingHandCursor</cursorShape>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton {
+    background-color: #c1121f; 
     color: white; 
     font-size: 14px; 
     font-weight: bold; 
     border-radius: 8px; 
-    text-align: left; 
+    text-align: center; 
     padding-right: 40px;
     font-family: &quot;Times&quot;, &quot;Times New Roman&quot;, serif;
 
@@ -1424,34 +1194,431 @@ QPushButton::menu-indicator {
     image: none; 
 }
 
+
 </string>
-     </property>
-     <property name="text">
-      <string>Open Inbox</string>
-     </property>
-     <property name="icon">
-      <iconset>
-       <normaloff>../../../../../../.designer/backup/icons/icon.png</normaloff>../../../../../../.designer/backup/icons/icon.png</iconset>
-     </property>
-     <property name="shortcut">
-      <string/>
-     </property>
+      </property>
+      <property name="text">
+       <string>Stop All</string>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>../../../../../../.designer/backup/icons/stop.png</normaloff>../../../../../../.designer/backup/icons/stop.png</iconset>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="submitButton">
+      <property name="geometry">
+       <rect>
+        <x>150</x>
+        <y>490</y>
+        <width>231</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="cursor">
+       <cursorShape>PointingHandCursor</cursorShape>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton {
+            background-color: #008000; 
+            color: #fff; 
+            font-size: 14px;
+            font-weight: bold;
+            border: 2px solid #4f772d; 
+            border-radius: 8px;
+            padding: 5px 15px;
+            text-align: center;
+            font-family: &quot;Times&quot;, &quot;Times New Roman&quot;, serif;
+
+        }
+
+</string>
+      </property>
+      <property name="text">
+       <string>Submit</string>
+      </property>
+      <property name="icon">
+       <iconset>
+        <normaloff>../../../../../../.designer/backup/icons/start.png</normaloff>../../../../../../.designer/backup/icons/start.png</iconset>
+      </property>
+     </widget>
     </widget>
-    <widget class="QComboBox" name="browsers">
+    <widget class="QGroupBox" name="Data_Info">
      <property name="geometry">
       <rect>
-       <x>700</x>
-       <y>254</y>
-       <width>431</width>
-       <height>51</height>
+       <x>1200</x>
+       <y>10</y>
+       <width>451</width>
+       <height>551</height>
       </rect>
      </property>
      <property name="styleSheet">
-      <string notr="true">QComboBox {
+      <string notr="true">QGroupBox {
+            color: #0E94A0;
+            font-weight: 600; 
+            background: #fff;
+            border-radius: 16px;
+            border:1px solid #ced4da;
+            font-size: 16px;
+        }
+        QGroupBox::title {
+            color: #669bbc;
+            subcontrol-origin: margin;
+            subcontrol-position: top center;
+            padding: 0 3px;
+        }
+        </string>
+     </property>
+     <property name="title">
+      <string>Data Info</string>
+     </property>
+     <widget class="QLabel" name="label">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>30</y>
+        <width>251</width>
+        <height>61</height>
+       </rect>
+      </property>
+      <property name="baseSize">
+       <size>
+        <width>10</width>
+        <height>12</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <family>Times</family>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="mouseTracking">
+       <bool>true</bool>
+      </property>
+      <property name="tabletTracking">
+       <bool>false</bool>
+      </property>
+      <property name="autoFillBackground">
+       <bool>false</bool>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QLabel {
+    color: #0E94A0; 
+    font-size: 16px; 
+    font-family: &quot;Segoe UI&quot;;
+    text-align: center;
+    padding: 5px; 
+    border-radius: 12px;
+    text-align: center;
+    background-color: transparent;
+    font-family: &quot;Times&quot;, &quot;Times New Roman&quot;, serif;
+border : none
+
+}
+
+
+QLabel:disabled {
+    color: #a0a0a0; 
+    background-color: #6d2e48; 
+    border: 3px solid #4d1f30; 
+    text-align: center; 
+
+}
+</string>
+      </property>
+      <property name="text">
+       <string>Data Processing :</string>
+      </property>
+      <property name="textFormat">
+       <enum>Qt::TextFormat::PlainText</enum>
+      </property>
+      <property name="margin">
+       <number>10</number>
+      </property>
+      <property name="indent">
+       <number>0</number>
+      </property>
+      <property name="openExternalLinks">
+       <bool>false</bool>
+      </property>
+     </widget>
+     <widget class="QTextEdit" name="textEdit_3">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>80</y>
+        <width>421</width>
+        <height>127</height>
+       </rect>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Ignored">
+        <horstretch>0</horstretch>
+        <verstretch>4</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>6</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QLineEdit {
+    background-color: #f3f6f9;
+    border: 1px solid #ced4da;
+    border-radius: 8px;
+    color: #333333; 
+    padding: 5px 10px; 
+    font-size: 12px;
+    font-family: &quot;Times&quot;, &quot;Times New Roman&quot;, serif;
+
+}
+
+
+
+
+QTextEdit {
+    background-color: #f3f6f9;
+    border: 1px solid #ced4da;
+    border-radius: 8px;
+    color: #333333;
+    padding: 8px 10px;
+    font-size: 12px;
+    font-family: &quot;Times&quot;, &quot;Times New Roman&quot;, serif;
+
+}
+
+
+
+
+
+QLineEdit:disabled, QTextEdit:disabled {
+    background-color: #e0e0e0;
+    border: 1px solid #0E94A0;
+    color: #a0a0a0; 
+}
+QLineEdit, QTextEdit {
+    font-size: 12px;
+}
+
+QLineEdit::placeholder, QTextEdit::placeholder {
+    color: #a0a0a0; 
+}
+</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_6">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>200</y>
+        <width>251</width>
+        <height>61</height>
+       </rect>
+      </property>
+      <property name="baseSize">
+       <size>
+        <width>10</width>
+        <height>12</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <family>Times</family>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="mouseTracking">
+       <bool>true</bool>
+      </property>
+      <property name="tabletTracking">
+       <bool>false</bool>
+      </property>
+      <property name="autoFillBackground">
+       <bool>false</bool>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QLabel {
+    color: #0E94A0; 
+    font-size: 16px; 
+    font-family: &quot;Segoe UI&quot;;
+    text-align: center;
+    padding: 5px; 
+    border-radius: 12px;
+    text-align: center;
+    background-color: transparent;
+    font-family: &quot;Times&quot;, &quot;Times New Roman&quot;, serif;
+border : none;
+
+}
+
+
+QLabel:disabled {
+    color: #a0a0a0; 
+    background-color: #6d2e48; 
+    border: 3px solid #4d1f30; 
+    text-align: center; 
+
+}
+</string>
+      </property>
+      <property name="text">
+       <string>Process Count :</string>
+      </property>
+      <property name="textFormat">
+       <enum>Qt::TextFormat::PlainText</enum>
+      </property>
+      <property name="margin">
+       <number>10</number>
+      </property>
+      <property name="indent">
+       <number>0</number>
+      </property>
+      <property name="openExternalLinks">
+       <bool>false</bool>
+      </property>
+     </widget>
+     <widget class="QTextEdit" name="textEdit_4">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>250</y>
+        <width>421</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QLineEdit {
+    background-color: #f3f6f9;
+    border: 1px solid #ced4da;
+    border-radius: 8px;
+    color: #333333; 
+    padding: 5px 10px; 
+    font-size: 12px;
+    font-family: &quot;Times&quot;, &quot;Times New Roman&quot;, serif;
+
+}
+
+QTextEdit {
+    background-color: #f3f6f9;
+    border: 1px solid #ced4da;
+    border-radius: 8px;
+    color: #333333;
+    padding: 8px 10px;
+    font-size: 12px;
+    font-family: &quot;Times&quot;, &quot;Times New Roman&quot;, serif;
+
+}
+
+QLineEdit:disabled, QTextEdit:disabled {
+    background-color: #e0e0e0;
+    border: 1px solid #0E94A0;
+    color: #a0a0a0; 
+}
+
+
+
+QLineEdit, QTextEdit {
+    font-size: 12px;
+    font-family: &quot;Times&quot;, &quot;Times New Roman&quot;, serif;
+
+}
+
+QLineEdit::placeholder, QTextEdit::placeholder {
+    font-size: 10px; 
+    color: #a0a0a0; 
+    font-family: &quot;Times&quot;, &quot;Times New Roman&quot;, serif;
+
+}</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_7">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>280</y>
+        <width>251</width>
+        <height>61</height>
+       </rect>
+      </property>
+      <property name="baseSize">
+       <size>
+        <width>10</width>
+        <height>12</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <family>Times</family>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="mouseTracking">
+       <bool>true</bool>
+      </property>
+      <property name="tabletTracking">
+       <bool>false</bool>
+      </property>
+      <property name="autoFillBackground">
+       <bool>false</bool>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QLabel {
+    color: #0E94A0; 
+    font-size: 16px; 
+    font-family: &quot;Segoe UI&quot;;
+    text-align: center;
+    padding: 5px; 
+    border-radius: 12px;
+    text-align: center;
+    background-color: transparent;
+    font-family: &quot;Times&quot;, &quot;Times New Roman&quot;, serif;
+border :none;
+
+}
+
+
+QLabel:disabled {
+    color: #a0a0a0; 
+    background-color: #6d2e48; 
+    border: 3px solid #4d1f30; 
+    text-align: center; 
+
+}
+</string>
+      </property>
+      <property name="text">
+       <string>Browser :</string>
+      </property>
+      <property name="textFormat">
+       <enum>Qt::TextFormat::PlainText</enum>
+      </property>
+      <property name="margin">
+       <number>10</number>
+      </property>
+      <property name="indent">
+       <number>0</number>
+      </property>
+      <property name="openExternalLinks">
+       <bool>false</bool>
+      </property>
+     </widget>
+     <widget class="QComboBox" name="browsers">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>330</y>
+        <width>421</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QComboBox {
     padding: 5px 30px 5px 10px;
     icon-size: 24px;
     min-width: 150px;
-    border: 2px solid #0E94A0;
+    border: 1px solid #ced4da;
     border-radius: 6px;
     background-color:  #f3f6f9;
     font-family: &quot;Times&quot;, &quot;Times New Roman&quot;, serif;
@@ -1501,78 +1668,49 @@ QComboBox QAbstractItemView::item:hover {
 
 }
 </string>
-     </property>
+      </property>
+     </widget>
     </widget>
-    <widget class="QLabel" name="label_7">
+    <widget class="QPushButton" name="Button_Initaile_state_2">
      <property name="geometry">
       <rect>
-       <x>479</x>
-       <y>253</y>
-       <width>251</width>
-       <height>61</height>
+       <x>726</x>
+       <y>6</y>
+       <width>81</width>
+       <height>31</height>
       </rect>
      </property>
-     <property name="baseSize">
-      <size>
-       <width>10</width>
-       <height>12</height>
-      </size>
-     </property>
-     <property name="font">
-      <font>
-       <family>Times</family>
-       <bold>true</bold>
-      </font>
-     </property>
-     <property name="mouseTracking">
-      <bool>true</bool>
-     </property>
-     <property name="tabletTracking">
-      <bool>false</bool>
-     </property>
-     <property name="autoFillBackground">
-      <bool>false</bool>
+     <property name="cursor">
+      <cursorShape>ArrowCursor</cursorShape>
      </property>
      <property name="styleSheet">
-      <string notr="true">QLabel {
-    color: #0E94A0; 
-    font-size: 20px; 
-    font-family: &quot;Segoe UI&quot;;
-    text-align: center;
-    padding: 5px; 
-    border-radius: 12px;
-    text-align: center;
-    background-color: transparent;
+      <string notr="true">QPushButton {
+    background-color: #fff; 
+    color: black; 
+    font-size: 18px;
+    border-radius: 16px; 
+    text-align: left; 
+    padding: 5px;
     font-family: &quot;Times&quot;, &quot;Times New Roman&quot;, serif;
+    color: #669bbc;
+    subcontrol-origin: margin;
+    subcontrol-position: top center;
+    padding: 0 3px;
+	    font-weight: 500; 
 
 }
 
-
-QLabel:disabled {
-    color: #a0a0a0; 
-    background-color: #6d2e48; 
-    border: 3px solid #4d1f30; 
-    text-align: center; 
-
-}
 </string>
      </property>
      <property name="text">
-      <string>Browsers :</string>
-     </property>
-     <property name="textFormat">
-      <enum>Qt::TextFormat::PlainText</enum>
-     </property>
-     <property name="margin">
-      <number>10</number>
-     </property>
-     <property name="indent">
-      <number>0</number>
-     </property>
-     <property name="openExternalLinks">
-      <bool>false</bool>
+      <string>Scenario</string>
      </property>
     </widget>
+    <zorder>Data_Info</zorder>
+    <zorder>resetOptionsContainer</zorder>
+    <zorder>scrollArea_3</zorder>
+    <zorder>frame_2</zorder>
+    <zorder>Button_Initaile_state_2</zorder>
    </widget>
    <widget class="QWidget" name="result">
     <property name="cursor">
@@ -1627,7 +1765,7 @@ QTabWidget {
 }
 
 QTabBar {
-    background-color: #f1f1f1;
+    background-color: #0E94A0;
     padding: 4px 0;
     border: None;
 }
@@ -1642,7 +1780,7 @@ QTabBar::tab {
 }
 
 QTabBar::tab:selected {
-    background-color: #10ADBC;
+    background-color: #0E94A0;
     color: #ffffff;
     font-weight: bold;
     border-radius: 5px ;
@@ -1670,7 +1808,7 @@ QTabBar::tab:disabled {
       <enum>QTabWidget::TabShape::Rounded</enum>
      </property>
      <property name="currentIndex">
-      <number>7</number>
+      <number>10</number>
      </property>
      <property name="iconSize">
       <size>
@@ -1687,6 +1825,99 @@ QTabBar::tab:disabled {
      <property name="movable">
       <bool>false</bool>
      </property>
+     <widget class="QWidget" name="all">
+      <attribute name="title">
+       <string>All</string>
+      </attribute>
+      <widget class="QListWidget" name="listWidget_10">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>30</y>
+         <width>821</width>
+         <height>581</height>
+        </rect>
+       </property>
+       <property name="contextMenuPolicy">
+        <enum>Qt::ContextMenuPolicy::DefaultContextMenu</enum>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QListWidget {
+    background: #F5F7FA;
+    border: 2px solid #D1D9E6;
+    border-radius: 10px;
+    padding: 6px;
+    font-family: 'Times', 'Times New Roman', serif;
+    font-size: 14px;
+    color: #2C3E50;
+    outline: none;
+}
+
+QListWidget::item {
+    background: #ffffff;
+    border-radius: 6px;
+    padding: 10px;
+    margin: 4px 2px;
+    border: 1px solid #D1D9E6;
+    font-weight: 500;
+    color: #2C3E50;
+}
+
+QListWidget::item:hover {
+    background: #ECF0F3;
+    border-left: 4px solid #3498DB;
+    padding-left: 14px;
+    border-radius: 6px;
+}
+
+QListWidget::item:selected {
+    background: #3498DB;
+    color: #ffffff;
+    font-weight: bold;
+    border-left: 4px solid #2980B9;
+    padding-left: 14px;
+    border-radius: 6px;
+}
+
+QScrollBar:vertical {
+    border: none;
+    background: #F5F7FA;
+    width: 8px;
+    margin: 4px 2px;
+    border-radius: 4px;
+}
+
+QScrollBar::handle:vertical {
+    background: #BDC3C7;
+    border-radius: 4px;
+    min-height: 20px;
+}
+
+QScrollBar::handle:vertical:hover {
+    background: #AAB7C4;
+}
+
+QScrollBar::add-line:vertical, 
+QScrollBar::sub-line:vertical {
+    background: none;
+    border: none;
+}
+
+QScrollBar::add-page:vertical, 
+QScrollBar::sub-page:vertical {
+    background: none;
+}
+
+</string>
+       </property>
+       <property name="verticalScrollBarPolicy">
+        <enum>Qt::ScrollBarPolicy::ScrollBarAsNeeded</enum>
+       </property>
+       <property name="viewMode">
+        <enum>QListView::ViewMode::ListMode</enum>
+       </property>
+      </widget>
+     </widget>
      <widget class="QWidget" name="completed">
       <attribute name="title">
        <string>Completed</string>
@@ -2143,6 +2374,99 @@ QScrollBar::sub-page:vertical {
        </property>
       </widget>
      </widget>
+     <widget class="QWidget" name="code_de_validation">
+      <attribute name="title">
+       <string>code de validation</string>
+      </attribute>
+      <widget class="QListWidget" name="listWidget_11">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>30</y>
+         <width>821</width>
+         <height>581</height>
+        </rect>
+       </property>
+       <property name="contextMenuPolicy">
+        <enum>Qt::ContextMenuPolicy::DefaultContextMenu</enum>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QListWidget {
+    background: #F5F7FA;
+    border: 2px solid #D1D9E6;
+    border-radius: 10px;
+    padding: 6px;
+    font-family: 'Times', 'Times New Roman', serif;
+    font-size: 14px;
+    color: #2C3E50;
+    outline: none;
+}
+
+QListWidget::item {
+    background: #ffffff;
+    border-radius: 6px;
+    padding: 10px;
+    margin: 4px 2px;
+    border: 1px solid #D1D9E6;
+    font-weight: 500;
+    color: #2C3E50;
+}
+
+QListWidget::item:hover {
+    background: #ECF0F3;
+    border-left: 4px solid #3498DB;
+    padding-left: 14px;
+    border-radius: 6px;
+}
+
+QListWidget::item:selected {
+    background: #3498DB;
+    color: #ffffff;
+    font-weight: bold;
+    border-left: 4px solid #2980B9;
+    padding-left: 14px;
+    border-radius: 6px;
+}
+
+QScrollBar:vertical {
+    border: none;
+    background: #F5F7FA;
+    width: 8px;
+    margin: 4px 2px;
+    border-radius: 4px;
+}
+
+QScrollBar::handle:vertical {
+    background: #BDC3C7;
+    border-radius: 4px;
+    min-height: 20px;
+}
+
+QScrollBar::handle:vertical:hover {
+    background: #AAB7C4;
+}
+
+QScrollBar::add-line:vertical, 
+QScrollBar::sub-line:vertical {
+    background: none;
+    border: none;
+}
+
+QScrollBar::add-page:vertical, 
+QScrollBar::sub-page:vertical {
+    background: none;
+}
+
+</string>
+       </property>
+       <property name="verticalScrollBarPolicy">
+        <enum>Qt::ScrollBarPolicy::ScrollBarAsNeeded</enum>
+       </property>
+       <property name="viewMode">
+        <enum>QListView::ViewMode::ListMode</enum>
+       </property>
+      </widget>
+     </widget>
      <widget class="QWidget" name="recoverychanged">
       <attribute name="title">
        <string>Recovry Changed</string>
@@ -2395,8 +2719,143 @@ QScrollBar::sub-page:vertical {
        </property>
       </widget>
      </widget>
+     <widget class="QWidget" name="others">
+      <attribute name="title">
+       <string>Others</string>
+      </attribute>
+      <widget class="QListWidget" name="listWidget_12">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>30</y>
+         <width>821</width>
+         <height>581</height>
+        </rect>
+       </property>
+       <property name="contextMenuPolicy">
+        <enum>Qt::ContextMenuPolicy::DefaultContextMenu</enum>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QListWidget {
+    background: #F5F7FA;
+    border: 2px solid #D1D9E6;
+    border-radius: 10px;
+    padding: 6px;
+    font-family: 'Times', 'Times New Roman', serif;
+    font-size: 14px;
+    color: #2C3E50;
+    outline: none;
+}
+
+QListWidget::item {
+    background: #ffffff;
+    border-radius: 6px;
+    padding: 10px;
+    margin: 4px 2px;
+    border: 1px solid #D1D9E6;
+    font-weight: 500;
+    color: #2C3E50;
+}
+
+QListWidget::item:hover {
+    background: #ECF0F3;
+    border-left: 4px solid #3498DB;
+    padding-left: 14px;
+    border-radius: 6px;
+}
+
+QListWidget::item:selected {
+    background: #3498DB;
+    color: #ffffff;
+    font-weight: bold;
+    border-left: 4px solid #2980B9;
+    padding-left: 14px;
+    border-radius: 6px;
+}
+
+QScrollBar:vertical {
+    border: none;
+    background: #F5F7FA;
+    width: 8px;
+    margin: 4px 2px;
+    border-radius: 4px;
+}
+
+QScrollBar::handle:vertical {
+    background: #BDC3C7;
+    border-radius: 4px;
+    min-height: 20px;
+}
+
+QScrollBar::handle:vertical:hover {
+    background: #AAB7C4;
+}
+
+QScrollBar::add-line:vertical, 
+QScrollBar::sub-line:vertical {
+    background: none;
+    border: none;
+}
+
+QScrollBar::add-page:vertical, 
+QScrollBar::sub-page:vertical {
+    background: none;
+}
+
+</string>
+       </property>
+       <property name="verticalScrollBarPolicy">
+        <enum>Qt::ScrollBarPolicy::ScrollBarAsNeeded</enum>
+       </property>
+       <property name="viewMode">
+        <enum>QListView::ViewMode::ListMode</enum>
+       </property>
+      </widget>
+     </widget>
     </widget>
    </widget>
+  </widget>
+  <widget class="QPushButton" name="TemepleteButton">
+   <property name="geometry">
+    <rect>
+     <x>90</x>
+     <y>1240</y>
+     <width>281</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton {
+    background-color: #669bbc		; 
+    color: white; 
+    font-size: 14px; 
+    font-weight: bold; 
+    border-radius: 8px; 
+    text-align: left; 
+    padding-right: 40px;
+    font-family: &quot;Times&quot;, &quot;Times New Roman&quot;, serif;
+
+}
+
+QPushButton::menu-indicator {
+    image: none; 
+}
+
+</string>
+   </property>
+   <property name="text">
+    <string>Open Inbox</string>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normaloff>../../../../../../.designer/backup/icons/icon.png</normaloff>../../../../../../.designer/backup/icons/icon.png</iconset>
+   </property>
+   <property name="shortcut">
+    <string/>
+   </property>
   </widget>
  </widget>
  <resources/>
