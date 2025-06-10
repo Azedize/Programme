@@ -268,7 +268,6 @@ border:none;
      <property name="font">
       <font>
        <family>Times</family>
-       <pointsize>-1</pointsize>
        <bold>true</bold>
       </font>
      </property>
@@ -333,7 +332,6 @@ QLabel:disabled {
      <property name="font">
       <font>
        <family>Times</family>
-       <pointsize>-1</pointsize>
        <bold>true</bold>
       </font>
      </property>
@@ -441,7 +439,6 @@ QLineEdit::placeholder, QTextEdit::placeholder {
      <property name="font">
       <font>
        <family>Times</family>
-       <pointsize>-1</pointsize>
        <bold>true</bold>
       </font>
      </property>
@@ -549,7 +546,6 @@ QLineEdit::placeholder, QTextEdit::placeholder {
      <property name="font">
       <font>
        <family>Times</family>
-       <pointsize>-1</pointsize>
        <bold>true</bold>
       </font>
      </property>
