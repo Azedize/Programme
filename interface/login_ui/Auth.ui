@@ -380,47 +380,6 @@ QLabel:disabled {
       <bool>false</bool>
      </property>
     </widget>
-    <widget class="QTextEdit" name="loginInput">
-     <property name="geometry">
-      <rect>
-       <x>40</x>
-       <y>350</y>
-       <width>431</width>
-       <height>51</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">QLineEdit, QTextEdit {
-    background-color: #f3f6f9;
-    border: 2px solid #ced4da;
-    border-radius: 8px;
-    color: #333333;
-    padding: 5px 10px;
-    font-size: 12px;
-    font-family: &quot;Times&quot;, &quot;Times New Roman&quot;, serif;
-}
-
-/* Zone de texte plus grande (QTextEdit) peut avoir plus de padding */
-QTextEdit {
-    padding: 8px 10px;
-}
-
-/* Style lorsqu’ils sont désactivés */
-QLineEdit:disabled, QTextEdit:disabled {
-    background-color: #e0e0e0;
-    border: 2px solid black;
-    color: #a0a0a0;
-}
-
-/* Style des placeholders (texte grisé à l’intérieur) */
-QLineEdit::placeholder, QTextEdit::placeholder {
-    font-size: 10px;
-    color: #a0a0a0;
-    font-family: &quot;Times&quot;, &quot;Times New Roman&quot;, serif;
-}
-</string>
-     </property>
-    </widget>
     <widget class="QLabel" name="label_3">
      <property name="geometry">
       <rect>
@@ -485,47 +444,6 @@ QLabel:disabled {
      </property>
      <property name="openExternalLinks">
       <bool>false</bool>
-     </property>
-    </widget>
-    <widget class="QTextEdit" name="passwordInput">
-     <property name="geometry">
-      <rect>
-       <x>40</x>
-       <y>430</y>
-       <width>431</width>
-       <height>51</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">QLineEdit, QTextEdit {
-    background-color: #f3f6f9;
-    border: 2px solid #ced4da;
-    border-radius: 8px;
-    color: #333333;
-    padding: 5px 10px;
-    font-size: 12px;
-    font-family: &quot;Times&quot;, &quot;Times New Roman&quot;, serif;
-}
-
-/* Zone de texte plus grande (QTextEdit) peut avoir plus de padding */
-QTextEdit {
-    padding: 8px 10px;
-}
-
-/* Style lorsqu’ils sont désactivés */
-QLineEdit:disabled, QTextEdit:disabled {
-    background-color: #e0e0e0;
-    border: 2px solid black;
-    color: #a0a0a0;
-}
-
-/* Style des placeholders (texte grisé à l’intérieur) */
-QLineEdit::placeholder, QTextEdit::placeholder {
-    font-size: 10px;
-    color: #a0a0a0;
-    font-family: &quot;Times&quot;, &quot;Times New Roman&quot;, serif;
-}
-</string>
      </property>
     </widget>
     <widget class="QLabel" name="erreur">
@@ -665,6 +583,85 @@ QLabel:disabled {
      </property>
      <property name="frameShadow">
       <enum>QFrame::Shadow::Raised</enum>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="loginInput">
+     <property name="geometry">
+      <rect>
+       <x>42</x>
+       <y>347</y>
+       <width>431</width>
+       <height>47</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLineEdit {
+    background-color: #f3f6f9;
+    border: 2px solid #ced4da;
+    border-radius: 8px;
+    color: #333333;
+    padding: 5px 10px;
+    font-size: 12px;
+    font-family: &quot;Times&quot;, &quot;Times New Roman&quot;, serif;
+}
+
+QLineEdit {
+    padding: 8px 10px;
+}
+
+QLineEdit:disabled {
+    background-color: #e0e0e0;
+    border: 2px solid black;
+    color: #a0a0a0;
+}
+
+QLineEdit::placeholder {
+    font-size: 10px;
+    color: #a0a0a0;
+    font-family: &quot;Times&quot;, &quot;Times New Roman&quot;, serif;
+}
+</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="passwordInput">
+     <property name="geometry">
+      <rect>
+       <x>42</x>
+       <y>423</y>
+       <width>431</width>
+       <height>47</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLineEdit {
+    background-color: #f3f6f9;
+    border: 2px solid #ced4da;
+    border-radius: 8px;
+    color: #333333;
+    padding: 5px 10px;
+    font-size: 12px;
+    font-family: &quot;Times&quot;, &quot;Times New Roman&quot;, serif;
+}
+
+QLineEdit {
+    padding: 8px 10px;
+}
+
+QLineEdit:disabled {
+    background-color: #e0e0e0;
+    border: 2px solid black;
+    color: #a0a0a0;
+}
+
+QLineEdit::placeholder {
+    font-size: 10px;
+    color: #a0a0a0;
+    font-family: &quot;Times&quot;, &quot;Times New Roman&quot;, serif;
+}
+</string>
+     </property>
+     <property name="echoMode">
+      <enum>QLineEdit::EchoMode::Password</enum>
      </property>
     </widget>
    </widget>
