@@ -33,7 +33,7 @@
     },
     "SelectAddStar": {
         "id": "add_star",
-        "label": "Mark Add Star",
+        "label": "Add Star",
         "actions": ["SelectMarkAsImportant","SelectMarkAsRead","SelectArchive"],
         "Template": "Template2"
     },
@@ -124,7 +124,7 @@
     },
     "spamSelectAddStar": {
         "id": "add_star",
-        "label": "Mark Add Star",
+        "label": "Add Star",
         "actions": ["spamSelectMarkAsRead","spamSelectMarkAsImportant","spamSelectArchive","spamSelectNotSpam"],
         "Template": "Template2"
     },
