@@ -514,7 +514,7 @@ QLabel:disabled {
      <property name="geometry">
       <rect>
        <x>40</x>
-       <y>500</y>
+       <y>501</y>
        <width>431</width>
        <height>61</height>
       </rect>
