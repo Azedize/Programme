@@ -138,13 +138,12 @@ QGroupBox::title {
     <property name="styleSheet">
      <string notr="true">QLabel {
     color: white;
-    font-weight: bold;
-    font-size: 14px;
+    font-size: 16px;
 	border: none;
     border-radius: 4px;
     background-color: #669bbc;
     font-family: &quot;Times&quot;, &quot;Times New Roman&quot;, serif;
-padding:1px;
+    padding:1px;
 }
 </string>
     </property>
@@ -164,8 +163,7 @@ padding:1px;
     <property name="styleSheet">
      <string notr="true">QLabel {
     color: white;
-    font-weight: bold;
-    font-size: 14px;
+    font-size: 16px;
 	border: none;
     border-radius: 4px;
     background-color: #669bbc;
@@ -307,8 +305,7 @@ QPushButton:pressed {
     <property name="styleSheet">
      <string notr="true">QLabel {
     color: white;
-    font-weight: bold;
-    font-size: 14px;
+    font-size: 16px;
 	border: none;
     border-radius: 4px;
     background-color: #669bbc;
@@ -333,8 +330,7 @@ padding:1px;
     <property name="styleSheet">
      <string notr="true">QLabel {
     color: white;
-    font-weight: bold;
-    font-size: 14px;
+    font-size: 16px;
 	border: none;
     border-radius: 4px;
     background-color: #669bbc;
@@ -433,7 +429,7 @@ padding:1px;
      <string notr="true">QLabel {
     color: white;
     font-weight: bold;
-    font-size: 14px;
+    font-size: 16px;
 	border: none;
     border-radius: 4px;
     background-color: #669bbc;
@@ -518,8 +514,7 @@ QPushButton:pressed {
     <property name="styleSheet">
      <string notr="true">QLabel {
     color: white;
-    font-weight: bold;
-    font-size: 14px;
+    font-size: 16px;
 	border: none;
     border-radius: 4px;
     background-color: #669bbc;
@@ -704,7 +699,7 @@ QTabBar::tab:disabled {
      <property name="geometry">
       <rect>
        <x>15</x>
-       <y>11</y>
+       <y>34</y>
        <width>320</width>
        <height>551</height>
       </rect>
@@ -779,7 +774,7 @@ QPushButton:pressed {
      <property name="geometry">
       <rect>
        <x>18</x>
-       <y>573</y>
+       <y>603</y>
        <width>1647</width>
        <height>365</height>
       </rect>
@@ -980,9 +975,9 @@ QPushButton::menu-indicator {
      <property name="geometry">
       <rect>
        <x>347</x>
-       <y>21</y>
+       <y>45</y>
        <width>837</width>
-       <height>537</height>
+       <height>540</height>
       </rect>
      </property>
      <property name="styleSheet">
@@ -1181,8 +1176,7 @@ QGroupBox::title {
        <string notr="true">QPushButton {
     background-color: #c1121f; 
     color: white; 
-    font-size: 14px; 
-    font-weight: bold; 
+    font-size: 16px; 
     border-radius: 8px; 
     text-align: center; 
     padding-right: 40px;
@@ -1221,8 +1215,7 @@ QPushButton::menu-indicator {
        <string notr="true">QPushButton {
             background-color: #008000; 
             color: #fff; 
-            font-size: 14px;
-            font-weight: bold;
+            font-size: 16px;
             border: 2px solid #4f772d; 
             border-radius: 8px;
             padding: 5px 15px;
@@ -1246,7 +1239,7 @@ QPushButton::menu-indicator {
      <property name="geometry">
       <rect>
        <x>1200</x>
-       <y>10</y>
+       <y>34</y>
        <width>451</width>
        <height>551</height>
       </rect>
@@ -1303,7 +1296,7 @@ QPushButton::menu-indicator {
       </property>
       <property name="styleSheet">
        <string notr="true">QLabel {
-    color: #0E94A0; 
+    color: #669bbc;
     font-size: 16px; 
     font-family: &quot;Segoe UI&quot;;
     text-align: center;
@@ -1440,7 +1433,7 @@ QLineEdit::placeholder, QTextEdit::placeholder {
       </property>
       <property name="styleSheet">
        <string notr="true">QLabel {
-    color: #0E94A0; 
+    color:  #669bbc; 
     font-size: 16px; 
     font-family: &quot;Segoe UI&quot;;
     text-align: center;
@@ -1565,7 +1558,7 @@ QLineEdit::placeholder, QTextEdit::placeholder {
       </property>
       <property name="styleSheet">
        <string notr="true">QLabel {
-    color: #0E94A0; 
+    color:  #669bbc; 
     font-size: 16px; 
     font-family: &quot;Segoe UI&quot;;
     text-align: center;
@@ -1675,7 +1668,7 @@ QComboBox QAbstractItemView::item:hover {
      <property name="geometry">
       <rect>
        <x>726</x>
-       <y>6</y>
+       <y>26</y>
        <width>81</width>
        <height>31</height>
       </rect>
@@ -1706,11 +1699,42 @@ QComboBox QAbstractItemView::item:hover {
       <string>Scenario</string>
      </property>
     </widget>
+    <widget class="QPushButton" name="LogOut">
+     <property name="geometry">
+      <rect>
+       <x>1622</x>
+       <y>0</y>
+       <width>88</width>
+       <height>36</height>
+      </rect>
+     </property>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+    background-color: transparent;
+    color: #c1121f;
+    border: none;
+    border-radius: 6px;
+    padding: 0px;
+    font-size: 14px;
+    font-weight: normal;       
+    text-align: center;
+    icon-size: 18px 18px;
+}
+</string>
+     </property>
+     <property name="text">
+      <string>LogOut</string>
+     </property>
+    </widget>
     <zorder>Data_Info</zorder>
     <zorder>resetOptionsContainer</zorder>
     <zorder>scrollArea_3</zorder>
     <zorder>frame_2</zorder>
     <zorder>Button_Initaile_state_2</zorder>
+    <zorder>LogOut</zorder>
    </widget>
    <widget class="QWidget" name="result">
     <property name="cursor">
@@ -2831,8 +2855,7 @@ QScrollBar::sub-page:vertical {
     <string notr="true">QPushButton {
     background-color: #669bbc		; 
     color: white; 
-    font-size: 14px; 
-    font-weight: bold; 
+    font-size: 16px; 
     border-radius: 8px; 
     text-align: left; 
     padding-right: 40px;
