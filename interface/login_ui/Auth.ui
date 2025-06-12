@@ -668,7 +668,7 @@ QLineEdit::placeholder {
    <widget class="QFrame" name="logoFrame">
     <property name="geometry">
      <rect>
-      <x>120</x>
+      <x>297</x>
       <y>30</y>
       <width>61</width>
       <height>61</height>
@@ -699,7 +699,7 @@ QLineEdit::placeholder {
    <widget class="QPushButton" name="title_2">
     <property name="geometry">
      <rect>
-      <x>190</x>
+      <x>357</x>
       <y>50</y>
       <width>251</width>
       <height>21</height>
@@ -723,15 +723,7 @@ border:none;
 </string>
     </property>
     <property name="text">
-     <string>Automated Gmail Management
-
-
-
-
-
-
-
-</string>
+     <string>AutoMailPro</string>
     </property>
     <property name="icon">
      <iconset>
