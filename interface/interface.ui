@@ -1157,7 +1157,7 @@ QGroupBox::title {
      <widget class="QPushButton" name="stopButton">
       <property name="geometry">
        <rect>
-        <x>390</x>
+        <x>419</x>
         <y>490</y>
         <width>231</width>
         <height>41</height>
@@ -1202,7 +1202,7 @@ QPushButton::menu-indicator {
      <widget class="QPushButton" name="submitButton">
       <property name="geometry">
        <rect>
-        <x>150</x>
+        <x>185</x>
         <y>490</y>
         <width>231</width>
         <height>41</height>
