@@ -776,7 +776,7 @@ QPushButton:pressed {
        <x>18</x>
        <y>603</y>
        <width>1647</width>
-       <height>365</height>
+       <height>340</height>
       </rect>
      </property>
      <property name="styleSheet">
@@ -1557,29 +1557,29 @@ QLineEdit::placeholder, QTextEdit::placeholder {
        <bool>false</bool>
       </property>
       <property name="styleSheet">
-       <string notr="true">QLabel {
-    color:  #669bbc; 
-    font-size: 16px; 
-    font-family: &quot;Segoe UI&quot;;
-    text-align: center;
-    padding: 5px; 
-    border-radius: 12px;
-    text-align: center;
-    background-color: transparent;
-    font-family: &quot;Times&quot;, &quot;Times New Roman&quot;, serif;
-border :none;
+       <string notr="true">
+            QLabel {
+                color:  #669bbc; 
+                font-size: 16px; 
+                font-family: &quot;Segoe UI&quot;;
+                text-align: center;
+                padding: 5px; 
+                border-radius: 12px;
+                text-align: center;
+                background-color: transparent;
+                font-family: &quot;Times&quot;, &quot;Times New Roman&quot;, serif;
+                border :none;
+            }
 
-}
 
+            QLabel:disabled {
+                color: #a0a0a0; 
+                background-color: #6d2e48; 
+                border: 3px solid #4d1f30; 
+                text-align: center; 
 
-QLabel:disabled {
-    color: #a0a0a0; 
-    background-color: #6d2e48; 
-    border: 3px solid #4d1f30; 
-    text-align: center; 
-
-}
-</string>
+            }
+        </string>
       </property>
       <property name="text">
        <string>Browser :</string>
@@ -1607,60 +1607,59 @@ QLabel:disabled {
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">QComboBox {
-    padding: 5px 30px 5px 10px;
-    icon-size: 24px;
-    min-width: 150px;
-    border: 1px solid #ced4da;
-    border-radius: 6px;
-    background-color:  #f3f6f9;
-    font-family: &quot;Times&quot;, &quot;Times New Roman&quot;, serif;
-    font-size: 14px;
-    color: #333333; 
-}
+       <string notr="true">
+       QComboBox {
+            padding: 5px 30px 5px 10px;
+            icon-size: 24px;
+            min-width: 150px;
+            border: 1px solid #ced4da;
+            border-radius: 6px;
+            background-color:  #f3f6f9;
+            font-family: &quot;Times&quot;, &quot;Times New Roman&quot;, serif;
+            font-size: 14px;
+            color: #333333; 
+        }
 
+        QComboBox::drop-down {
+            subcontrol-origin: padding;
+            subcontrol-position: top right;
+            width: 30px;
+            border-left: 1px solid #ccc;
+        }
 
+        QComboBox:hover {
+            background-color: #e6e6e6;
+            color:black;
+        }
 
-QComboBox::drop-down {
-    subcontrol-origin: padding;
-    subcontrol-position: top right;
-    width: 30px;
-    border-left: 1px solid #ccc;
-}
+        QComboBox:focus {
+            border: 1px solid #0078d7;
+            color:black;
+            color: #333333; 
+        }
 
-QComboBox:hover {
-    background-color: #e6e6e6;
-	color:black;
-}
+        QComboBox QAbstractItemView {
+            icon-size: 24px;
+            min-width: 200px;
+            padding: 5px;
+            background-color:  #f3f6f9;
+            border: 1px solid #ccc;
+            selection-background-color: #0078d7;
+            selection-color: #ffffff;
+            outline: none;
+        }
 
-QComboBox:focus {
-    border: 1px solid #0078d7;
-	color:black;
-    color: #333333; 
-}
+        QComboBox QAbstractItemView::item {
+            height: 30px;
+            padding: 5px 10px 5px 30px;
+        }
 
-QComboBox QAbstractItemView {
-    icon-size: 24px;
-    min-width: 200px;
-    padding: 5px;
-    background-color:  #f3f6f9;
-    border: 1px solid #ccc;
-    selection-background-color: #0078d7;
-    selection-color: #ffffff;
-    outline: none;
-}
+        QComboBox QAbstractItemView::item:hover {
+            background-color:  #f3f6f9;
+            color: #333333; 
 
-QComboBox QAbstractItemView::item {
-    height: 30px;
-    padding: 5px 10px 5px 30px;
-}
-
-QComboBox QAbstractItemView::item:hover {
-    background-color:  #f3f6f9;
-    color: #333333; 
-
-}
-</string>
+        }
+        </string>
       </property>
      </widget>
     </widget>
@@ -1677,21 +1676,21 @@ QComboBox QAbstractItemView::item:hover {
       <cursorShape>ArrowCursor</cursorShape>
      </property>
      <property name="styleSheet">
-      <string notr="true">QPushButton {
-    background-color: #fff; 
-    color: black; 
-    font-size: 18px;
-    border-radius: 16px; 
-    text-align: left; 
-    padding: 5px;
-    font-family: &quot;Times&quot;, &quot;Times New Roman&quot;, serif;
-    color: #669bbc;
-    subcontrol-origin: margin;
-    subcontrol-position: top center;
-    padding: 0 3px;
-	    font-weight: 500; 
-
-}
+      <string notr="true">
+        QPushButton {
+            background-color: #fff; 
+            color: black; 
+            font-size: 18px;
+            border-radius: 16px; 
+            text-align: left; 
+            padding: 5px;
+            font-family: &quot;Times&quot;, &quot;Times New Roman&quot;, serif;
+            color: #669bbc;
+            subcontrol-origin: margin;
+            subcontrol-position: top center;
+            padding: 0 3px;
+            font-weight: 500; 
+        }
 
 </string>
      </property>
@@ -1712,18 +1711,19 @@ QComboBox QAbstractItemView::item:hover {
       <cursorShape>PointingHandCursor</cursorShape>
      </property>
      <property name="styleSheet">
-      <string notr="true">QPushButton {
-    background-color: transparent;
-    color: #c1121f;
-    border: none;
-    border-radius: 6px;
-    padding: 0px;
-    font-size: 14px;
-    font-weight: normal;       
-    text-align: center;
-    icon-size: 18px 18px;
-}
-</string>
+    <string notr="true">
+        QPushButton {
+            background-color: transparent;
+            color: #c1121f;
+            border: none;
+            border-radius: 6px;
+            padding: 0px;
+            font-size: 14px;
+            font-weight: normal;       
+            text-align: center;
+            icon-size: 18px 18px;
+        }
+    </string>
      </property>
      <property name="text">
       <string>LogOut</string>
@@ -1778,52 +1778,53 @@ QComboBox QAbstractItemView::item:hover {
       <enum>Qt::LayoutDirection::LeftToRight</enum>
      </property>
      <property name="styleSheet">
-      <string notr="true">QTabBar::tab {
-    min-width: 30px;
+      <string notr="true">
+                QTabBar::tab {
+                    min-width: 30px;
 
-}
-QTabWidget {
-    background-color: transparent;
-    border: none;
+                }
+                QTabWidget {
+                    background-color: transparent;
+                    border: none;
 
-}
+                }
 
-QTabBar {
-    background-color: #0E94A0;
-    padding: 4px 0;
-    border: None;
-}
+                QTabBar {
+                    background-color: #0E94A0;
+                    padding: 4px 0;
+                    border: None;
+                }
 
-QTabBar::tab {
-    background-color: #ecf0f1;
-    color: #7f8c8d;
-    padding: 10px 20px;
-    font-size: 14px;
-    text-align: center;
+                QTabBar::tab {
+                    background-color: #ecf0f1;
+                    color: #7f8c8d;
+                    padding: 10px 20px;
+                    font-size: 14px;
+                    text-align: center;
 
-}
+                }
 
-QTabBar::tab:selected {
-    background-color: #0E94A0;
-    color: #ffffff;
-    font-weight: bold;
-    border-radius: 5px ;
-    padding: 10px 20px;
-}
+                QTabBar::tab:selected {
+                    background-color: #0E94A0;
+                    color: #ffffff;
+                    font-weight: bold;
+                    border-radius: 5px ;
+                    padding: 10px 20px;
+                }
 
-QTabBar::tab:hover {
-    background-color: #bdc3c7;
-    color: #2c3e50;
-}
+                QTabBar::tab:hover {
+                    background-color: #bdc3c7;
+                    color: #2c3e50;
+                }
 
-QTabBar::tab:disabled {
-    background-color: #e0e0e0;
-    color: #bdc3c7;
-    border: none;
-    opacity: 0.6;
-}
+                QTabBar::tab:disabled {
+                    background-color: #e0e0e0;
+                    color: #bdc3c7;
+                    border: none;
+                    opacity: 0.6;
+                }
 
-</string>
+        </string>
      </property>
      <property name="tabPosition">
       <enum>QTabWidget::TabPosition::West</enum>
@@ -1866,73 +1867,74 @@ QTabBar::tab:disabled {
         <enum>Qt::ContextMenuPolicy::DefaultContextMenu</enum>
        </property>
        <property name="styleSheet">
-        <string notr="true">QListWidget {
-    background: #F5F7FA;
-    border: 2px solid #D1D9E6;
-    border-radius: 10px;
-    padding: 6px;
-    font-family: 'Times', 'Times New Roman', serif;
-    font-size: 14px;
-    color: #2C3E50;
-    outline: none;
-}
+        <string notr="true">
+        QListWidget {
+            background: #F5F7FA;
+            border: 2px solid #D1D9E6;
+            border-radius: 10px;
+            padding: 6px;
+            font-family: 'Times', 'Times New Roman', serif;
+            font-size: 14px;
+            color: #2C3E50;
+            outline: none;
+        }
 
-QListWidget::item {
-    background: #ffffff;
-    border-radius: 6px;
-    padding: 10px;
-    margin: 4px 2px;
-    border: 1px solid #D1D9E6;
-    font-weight: 500;
-    color: #2C3E50;
-}
+        QListWidget::item {
+            background: #ffffff;
+            border-radius: 6px;
+            padding: 10px;
+            margin: 4px 2px;
+            border: 1px solid #D1D9E6;
+            font-weight: 500;
+            color: #2C3E50;
+        }
 
-QListWidget::item:hover {
-    background: #ECF0F3;
-    border-left: 4px solid #3498DB;
-    padding-left: 14px;
-    border-radius: 6px;
-}
+        QListWidget::item:hover {
+            background: #ECF0F3;
+            border-left: 4px solid #3498DB;
+            padding-left: 14px;
+            border-radius: 6px;
+        }
 
-QListWidget::item:selected {
-    background: #3498DB;
-    color: #ffffff;
-    font-weight: bold;
-    border-left: 4px solid #2980B9;
-    padding-left: 14px;
-    border-radius: 6px;
-}
+        QListWidget::item:selected {
+            background: #3498DB;
+            color: #ffffff;
+            font-weight: bold;
+            border-left: 4px solid #2980B9;
+            padding-left: 14px;
+            border-radius: 6px;
+        }
 
-QScrollBar:vertical {
-    border: none;
-    background: #F5F7FA;
-    width: 8px;
-    margin: 4px 2px;
-    border-radius: 4px;
-}
+        QScrollBar:vertical {
+            border: none;
+            background: #F5F7FA;
+            width: 8px;
+            margin: 4px 2px;
+            border-radius: 4px;
+        }
 
-QScrollBar::handle:vertical {
-    background: #BDC3C7;
-    border-radius: 4px;
-    min-height: 20px;
-}
+        QScrollBar::handle:vertical {
+            background: #BDC3C7;
+            border-radius: 4px;
+            min-height: 20px;
+        }
 
-QScrollBar::handle:vertical:hover {
-    background: #AAB7C4;
-}
+        QScrollBar::handle:vertical:hover {
+            background: #AAB7C4;
+        }
 
-QScrollBar::add-line:vertical, 
-QScrollBar::sub-line:vertical {
-    background: none;
-    border: none;
-}
+        QScrollBar::add-line:vertical, 
+        QScrollBar::sub-line:vertical {
+            background: none;
+            border: none;
+        }
 
-QScrollBar::add-page:vertical, 
-QScrollBar::sub-page:vertical {
-    background: none;
-}
+        QScrollBar::add-page:vertical, 
+        QScrollBar::sub-page:vertical {
+            background: none;
+        }
 
-</string>
+        </string>
        </property>
        <property name="verticalScrollBarPolicy">
         <enum>Qt::ScrollBarPolicy::ScrollBarAsNeeded</enum>
@@ -1959,73 +1961,74 @@ QScrollBar::sub-page:vertical {
         <enum>Qt::ContextMenuPolicy::DefaultContextMenu</enum>
        </property>
        <property name="styleSheet">
-        <string notr="true">QListWidget {
-    background: #F5F7FA;
-    border: 2px solid #D1D9E6;
-    border-radius: 10px;
-    padding: 6px;
-    font-family: 'Times', 'Times New Roman', serif;
-    font-size: 14px;
-    color: #2C3E50;
-    outline: none;
-}
+        <string notr="true">
+        QListWidget {
+            background: #F5F7FA;
+            border: 2px solid #D1D9E6;
+            border-radius: 10px;
+            padding: 6px;
+            font-family: 'Times', 'Times New Roman', serif;
+            font-size: 14px;
+            color: #2C3E50;
+            outline: none;
+        }
 
-QListWidget::item {
-    background: #ffffff;
-    border-radius: 6px;
-    padding: 10px;
-    margin: 4px 2px;
-    border: 1px solid #D1D9E6;
-    font-weight: 500;
-    color: #2C3E50;
-}
+        QListWidget::item {
+            background: #ffffff;
+            border-radius: 6px;
+            padding: 10px;
+            margin: 4px 2px;
+            border: 1px solid #D1D9E6;
+            font-weight: 500;
+            color: #2C3E50;
+        }
 
-QListWidget::item:hover {
-    background: #ECF0F3;
-    border-left: 4px solid #3498DB;
-    padding-left: 14px;
-    border-radius: 6px;
-}
+        QListWidget::item:hover {
+            background: #ECF0F3;
+            border-left: 4px solid #3498DB;
+            padding-left: 14px;
+            border-radius: 6px;
+        }
 
-QListWidget::item:selected {
-    background: #3498DB;
-    color: #ffffff;
-    font-weight: bold;
-    border-left: 4px solid #2980B9;
-    padding-left: 14px;
-    border-radius: 6px;
-}
+        QListWidget::item:selected {
+            background: #3498DB;
+            color: #ffffff;
+            font-weight: bold;
+            border-left: 4px solid #2980B9;
+            padding-left: 14px;
+            border-radius: 6px;
+        }
 
-QScrollBar:vertical {
-    border: none;
-    background: #F5F7FA;
-    width: 8px;
-    margin: 4px 2px;
-    border-radius: 4px;
-}
+        QScrollBar:vertical {
+            border: none;
+            background: #F5F7FA;
+            width: 8px;
+            margin: 4px 2px;
+            border-radius: 4px;
+        }
 
-QScrollBar::handle:vertical {
-    background: #BDC3C7;
-    border-radius: 4px;
-    min-height: 20px;
-}
+        QScrollBar::handle:vertical {
+            background: #BDC3C7;
+            border-radius: 4px;
+            min-height: 20px;
+        }
 
-QScrollBar::handle:vertical:hover {
-    background: #AAB7C4;
-}
+        QScrollBar::handle:vertical:hover {
+            background: #AAB7C4;
+        }
 
-QScrollBar::add-line:vertical, 
-QScrollBar::sub-line:vertical {
-    background: none;
-    border: none;
-}
+        QScrollBar::add-line:vertical, 
+        QScrollBar::sub-line:vertical {
+            background: none;
+            border: none;
+        }
 
-QScrollBar::add-page:vertical, 
-QScrollBar::sub-page:vertical {
-    background: none;
-}
+        QScrollBar::add-page:vertical, 
+        QScrollBar::sub-page:vertical {
+            background: none;
+        }
 
-</string>
+        </string>
        </property>
        <property name="verticalScrollBarPolicy">
         <enum>Qt::ScrollBarPolicy::ScrollBarAsNeeded</enum>
@@ -2040,13 +2043,15 @@ QScrollBar::sub-page:vertical {
        <enum>Qt::ContextMenuPolicy::DefaultContextMenu</enum>
       </property>
       <property name="styleSheet">
-       <string notr="true">QTabBar::tab {
-    transform: rotate(90deg); /* تدوير النص 90 درجة */
-    min-width: 100px; /* ارتفاع التبويب عند التدوير */
-    min-height: 30px; /* عرض التبويب عند التدوير */
-    padding: 5px;
-    text-align: center;
-}</string>
+       <string notr="true">
+       QTabBar::tab {
+            transform: rotate(90deg); 
+            min-width: 100px; 
+            min-height: 30px; 
+            padding: 5px;
+            text-align: center;
+        }
+        </string>
       </property>
       <attribute name="title">
        <string>Activite suspecte</string>
@@ -2061,73 +2066,74 @@ QScrollBar::sub-page:vertical {
         </rect>
        </property>
        <property name="styleSheet">
-        <string notr="true">QListWidget {
-    background: #F5F7FA;
-    border: 2px solid #D1D9E6;
-    border-radius: 10px;
-    padding: 6px;
-    font-family: 'Times', 'Times New Roman', serif;
-    font-size: 14px;
-    color: #2C3E50;
-    outline: none;
-}
+        <string notr="true">
+        QListWidget {
+            background: #F5F7FA;
+            border: 2px solid #D1D9E6;
+            border-radius: 10px;
+            padding: 6px;
+            font-family: 'Times', 'Times New Roman', serif;
+            font-size: 14px;
+            color: #2C3E50;
+            outline: none;
+        }
 
-QListWidget::item {
-    background: #ffffff;
-    border-radius: 6px;
-    padding: 10px;
-    margin: 4px 2px;
-    border: 1px solid #D1D9E6;
-    font-weight: 500;
-    color: #2C3E50;
-}
+        QListWidget::item {
+            background: #ffffff;
+            border-radius: 6px;
+            padding: 10px;
+            margin: 4px 2px;
+            border: 1px solid #D1D9E6;
+            font-weight: 500;
+            color: #2C3E50;
+        }
 
-QListWidget::item:hover {
-    background: #ECF0F3;
-    border-left: 4px solid #3498DB;
-    padding-left: 14px;
-    border-radius: 6px;
-}
+        QListWidget::item:hover {
+            background: #ECF0F3;
+            border-left: 4px solid #3498DB;
+            padding-left: 14px;
+            border-radius: 6px;
+        }
 
-QListWidget::item:selected {
-    background: #3498DB;
-    color: #ffffff;
-    font-weight: bold;
-    border-left: 4px solid #2980B9;
-    padding-left: 14px;
-    border-radius: 6px;
-}
+        QListWidget::item:selected {
+            background: #3498DB;
+            color: #ffffff;
+            font-weight: bold;
+            border-left: 4px solid #2980B9;
+            padding-left: 14px;
+            border-radius: 6px;
+        }
 
-QScrollBar:vertical {
-    border: none;
-    background: #F5F7FA;
-    width: 8px;
-    margin: 4px 2px;
-    border-radius: 4px;
-}
+        QScrollBar:vertical {
+            border: none;
+            background: #F5F7FA;
+            width: 8px;
+            margin: 4px 2px;
+            border-radius: 4px;
+        }
 
-QScrollBar::handle:vertical {
-    background: #BDC3C7;
-    border-radius: 4px;
-    min-height: 20px;
-}
+        QScrollBar::handle:vertical {
+            background: #BDC3C7;
+            border-radius: 4px;
+            min-height: 20px;
+        }
 
-QScrollBar::handle:vertical:hover {
-    background: #AAB7C4;
-}
+        QScrollBar::handle:vertical:hover {
+            background: #AAB7C4;
+        }
 
-QScrollBar::add-line:vertical, 
-QScrollBar::sub-line:vertical {
-    background: none;
-    border: none;
-}
+        QScrollBar::add-line:vertical, 
+        QScrollBar::sub-line:vertical {
+            background: none;
+            border: none;
+        }
 
-QScrollBar::add-page:vertical, 
-QScrollBar::sub-page:vertical {
-    background: none;
-}
+        QScrollBar::add-page:vertical, 
+        QScrollBar::sub-page:vertical {
+            background: none;
+        }
 
-</string>
+        </string>
        </property>
       </widget>
      </widget>
@@ -2145,73 +2151,74 @@ QScrollBar::sub-page:vertical {
         </rect>
        </property>
        <property name="styleSheet">
-        <string notr="true">QListWidget {
-    background: #F5F7FA;
-    border: 2px solid #D1D9E6;
-    border-radius: 10px;
-    padding: 6px;
-    font-family: 'Times', 'Times New Roman', serif;
-    font-size: 14px;
-    color: #2C3E50;
-    outline: none;
-}
+        <string notr="true">
+        QListWidget {
+            background: #F5F7FA;
+            border: 2px solid #D1D9E6;
+            border-radius: 10px;
+            padding: 6px;
+            font-family: 'Times', 'Times New Roman', serif;
+            font-size: 14px;
+            color: #2C3E50;
+            outline: none;
+        }
 
-QListWidget::item {
-    background: #ffffff;
-    border-radius: 6px;
-    padding: 10px;
-    margin: 4px 2px;
-    border: 1px solid #D1D9E6;
-    font-weight: 500;
-    color: #2C3E50;
-}
+        QListWidget::item {
+            background: #ffffff;
+            border-radius: 6px;
+            padding: 10px;
+            margin: 4px 2px;
+            border: 1px solid #D1D9E6;
+            font-weight: 500;
+            color: #2C3E50;
+        }
 
-QListWidget::item:hover {
-    background: #ECF0F3;
-    border-left: 4px solid #3498DB;
-    padding-left: 14px;
-    border-radius: 6px;
-}
+        QListWidget::item:hover {
+            background: #ECF0F3;
+            border-left: 4px solid #3498DB;
+            padding-left: 14px;
+            border-radius: 6px;
+        }
 
-QListWidget::item:selected {
-    background: #3498DB;
-    color: #ffffff;
-    font-weight: bold;
-    border-left: 4px solid #2980B9;
-    padding-left: 14px;
-    border-radius: 6px;
-}
+        QListWidget::item:selected {
+            background: #3498DB;
+            color: #ffffff;
+            font-weight: bold;
+            border-left: 4px solid #2980B9;
+            padding-left: 14px;
+            border-radius: 6px;
+        }
 
-QScrollBar:vertical {
-    border: none;
-    background: #F5F7FA;
-    width: 8px;
-    margin: 4px 2px;
-    border-radius: 4px;
-}
+        QScrollBar:vertical {
+            border: none;
+            background: #F5F7FA;
+            width: 8px;
+            margin: 4px 2px;
+            border-radius: 4px;
+        }
 
-QScrollBar::handle:vertical {
-    background: #BDC3C7;
-    border-radius: 4px;
-    min-height: 20px;
-}
+        QScrollBar::handle:vertical {
+            background: #BDC3C7;
+            border-radius: 4px;
+            min-height: 20px;
+        }
 
-QScrollBar::handle:vertical:hover {
-    background: #AAB7C4;
-}
+        QScrollBar::handle:vertical:hover {
+            background: #AAB7C4;
+        }
 
-QScrollBar::add-line:vertical, 
-QScrollBar::sub-line:vertical {
-    background: none;
-    border: none;
-}
+        QScrollBar::add-line:vertical, 
+        QScrollBar::sub-line:vertical {
+            background: none;
+            border: none;
+        }
 
-QScrollBar::add-page:vertical, 
-QScrollBar::sub-page:vertical {
-    background: none;
-}
+        QScrollBar::add-page:vertical, 
+        QScrollBar::sub-page:vertical {
+            background: none;
+        }
 
-</string>
+        </string>
        </property>
       </widget>
      </widget>
@@ -2244,73 +2251,74 @@ QScrollBar::sub-page:vertical {
         </rect>
        </property>
        <property name="styleSheet">
-        <string notr="true">QListWidget {
-    background: #F5F7FA;
-    border: 2px solid #D1D9E6;
-    border-radius: 10px;
-    padding: 6px;
-    font-family: 'Times', 'Times New Roman', serif;
-    font-size: 14px;
-    color: #2C3E50;
-    outline: none;
-}
+        <string notr="true">
+        QListWidget {
+            background: #F5F7FA;
+            border: 2px solid #D1D9E6;
+            border-radius: 10px;
+            padding: 6px;
+            font-family: 'Times', 'Times New Roman', serif;
+            font-size: 14px;
+            color: #2C3E50;
+            outline: none;
+        }
 
-QListWidget::item {
-    background: #ffffff;
-    border-radius: 6px;
-    padding: 10px;
-    margin: 4px 2px;
-    border: 1px solid #D1D9E6;
-    font-weight: 500;
-    color: #2C3E50;
-}
+        QListWidget::item {
+            background: #ffffff;
+            border-radius: 6px;
+            padding: 10px;
+            margin: 4px 2px;
+            border: 1px solid #D1D9E6;
+            font-weight: 500;
+            color: #2C3E50;
+        }
 
-QListWidget::item:hover {
-    background: #ECF0F3;
-    border-left: 4px solid #3498DB;
-    padding-left: 14px;
-    border-radius: 6px;
-}
+        QListWidget::item:hover {
+            background: #ECF0F3;
+            border-left: 4px solid #3498DB;
+            padding-left: 14px;
+            border-radius: 6px;
+        }
 
-QListWidget::item:selected {
-    background: #3498DB;
-    color: #ffffff;
-    font-weight: bold;
-    border-left: 4px solid #2980B9;
-    padding-left: 14px;
-    border-radius: 6px;
-}
+        QListWidget::item:selected {
+            background: #3498DB;
+            color: #ffffff;
+            font-weight: bold;
+            border-left: 4px solid #2980B9;
+            padding-left: 14px;
+            border-radius: 6px;
+        }
 
-QScrollBar:vertical {
-    border: none;
-    background: #F5F7FA;
-    width: 8px;
-    margin: 4px 2px;
-    border-radius: 4px;
-}
+        QScrollBar:vertical {
+            border: none;
+            background: #F5F7FA;
+            width: 8px;
+            margin: 4px 2px;
+            border-radius: 4px;
+        }
 
-QScrollBar::handle:vertical {
-    background: #BDC3C7;
-    border-radius: 4px;
-    min-height: 20px;
-}
+        QScrollBar::handle:vertical {
+            background: #BDC3C7;
+            border-radius: 4px;
+            min-height: 20px;
+        }
 
-QScrollBar::handle:vertical:hover {
-    background: #AAB7C4;
-}
+        QScrollBar::handle:vertical:hover {
+            background: #AAB7C4;
+        }
 
-QScrollBar::add-line:vertical, 
-QScrollBar::sub-line:vertical {
-    background: none;
-    border: none;
-}
+        QScrollBar::add-line:vertical, 
+        QScrollBar::sub-line:vertical {
+            background: none;
+            border: none;
+        }
 
-QScrollBar::add-page:vertical, 
-QScrollBar::sub-page:vertical {
-    background: none;
-}
+        QScrollBar::add-page:vertical, 
+        QScrollBar::sub-page:vertical {
+            background: none;
+        }
 
-</string>
+        </string>
        </property>
       </widget>
      </widget>
@@ -2328,73 +2336,74 @@ QScrollBar::sub-page:vertical {
         </rect>
        </property>
        <property name="styleSheet">
-        <string notr="true">QListWidget {
-    background: #F5F7FA;
-    border: 2px solid #D1D9E6;
-    border-radius: 10px;
-    padding: 6px;
-    font-family: 'Times', 'Times New Roman', serif;
-    font-size: 14px;
-    color: #2C3E50;
-    outline: none;
-}
+        <string notr="true">
+        QListWidget {
+            background: #F5F7FA;
+            border: 2px solid #D1D9E6;
+            border-radius: 10px;
+            padding: 6px;
+            font-family: 'Times', 'Times New Roman', serif;
+            font-size: 14px;
+            color: #2C3E50;
+            outline: none;
+        }
 
-QListWidget::item {
-    background: #ffffff;
-    border-radius: 6px;
-    padding: 10px;
-    margin: 4px 2px;
-    border: 1px solid #D1D9E6;
-    font-weight: 500;
-    color: #2C3E50;
-}
+        QListWidget::item {
+            background: #ffffff;
+            border-radius: 6px;
+            padding: 10px;
+            margin: 4px 2px;
+            border: 1px solid #D1D9E6;
+            font-weight: 500;
+            color: #2C3E50;
+        }
 
-QListWidget::item:hover {
-    background: #ECF0F3;
-    border-left: 4px solid #3498DB;
-    padding-left: 14px;
-    border-radius: 6px;
-}
+        QListWidget::item:hover {
+            background: #ECF0F3;
+            border-left: 4px solid #3498DB;
+            padding-left: 14px;
+            border-radius: 6px;
+        }
 
-QListWidget::item:selected {
-    background: #3498DB;
-    color: #ffffff;
-    font-weight: bold;
-    border-left: 4px solid #2980B9;
-    padding-left: 14px;
-    border-radius: 6px;
-}
+        QListWidget::item:selected {
+            background: #3498DB;
+            color: #ffffff;
+            font-weight: bold;
+            border-left: 4px solid #2980B9;
+            padding-left: 14px;
+            border-radius: 6px;
+        }
 
-QScrollBar:vertical {
-    border: none;
-    background: #F5F7FA;
-    width: 8px;
-    margin: 4px 2px;
-    border-radius: 4px;
-}
+        QScrollBar:vertical {
+            border: none;
+            background: #F5F7FA;
+            width: 8px;
+            margin: 4px 2px;
+            border-radius: 4px;
+        }
 
-QScrollBar::handle:vertical {
-    background: #BDC3C7;
-    border-radius: 4px;
-    min-height: 20px;
-}
+        QScrollBar::handle:vertical {
+            background: #BDC3C7;
+            border-radius: 4px;
+            min-height: 20px;
+        }
 
-QScrollBar::handle:vertical:hover {
-    background: #AAB7C4;
-}
+        QScrollBar::handle:vertical:hover {
+            background: #AAB7C4;
+        }
 
-QScrollBar::add-line:vertical, 
-QScrollBar::sub-line:vertical {
-    background: none;
-    border: none;
-}
+        QScrollBar::add-line:vertical, 
+        QScrollBar::sub-line:vertical {
+            background: none;
+            border: none;
+        }
 
-QScrollBar::add-page:vertical, 
-QScrollBar::sub-page:vertical {
-    background: none;
-}
+        QScrollBar::add-page:vertical, 
+        QScrollBar::sub-page:vertical {
+            background: none;
+        }
 
-</string>
+        </string>
        </property>
       </widget>
      </widget>
@@ -2415,73 +2424,74 @@ QScrollBar::sub-page:vertical {
         <enum>Qt::ContextMenuPolicy::DefaultContextMenu</enum>
        </property>
        <property name="styleSheet">
-        <string notr="true">QListWidget {
-    background: #F5F7FA;
-    border: 2px solid #D1D9E6;
-    border-radius: 10px;
-    padding: 6px;
-    font-family: 'Times', 'Times New Roman', serif;
-    font-size: 14px;
-    color: #2C3E50;
-    outline: none;
-}
+        <string notr="true">
+        QListWidget {
+            background: #F5F7FA;
+            border: 2px solid #D1D9E6;
+            border-radius: 10px;
+            padding: 6px;
+            font-family: 'Times', 'Times New Roman', serif;
+            font-size: 14px;
+            color: #2C3E50;
+            outline: none;
+        }
 
-QListWidget::item {
-    background: #ffffff;
-    border-radius: 6px;
-    padding: 10px;
-    margin: 4px 2px;
-    border: 1px solid #D1D9E6;
-    font-weight: 500;
-    color: #2C3E50;
-}
+        QListWidget::item {
+            background: #ffffff;
+            border-radius: 6px;
+            padding: 10px;
+            margin: 4px 2px;
+            border: 1px solid #D1D9E6;
+            font-weight: 500;
+            color: #2C3E50;
+        }
 
-QListWidget::item:hover {
-    background: #ECF0F3;
-    border-left: 4px solid #3498DB;
-    padding-left: 14px;
-    border-radius: 6px;
-}
+        QListWidget::item:hover {
+            background: #ECF0F3;
+            border-left: 4px solid #3498DB;
+            padding-left: 14px;
+            border-radius: 6px;
+        }
 
-QListWidget::item:selected {
-    background: #3498DB;
-    color: #ffffff;
-    font-weight: bold;
-    border-left: 4px solid #2980B9;
-    padding-left: 14px;
-    border-radius: 6px;
-}
+        QListWidget::item:selected {
+            background: #3498DB;
+            color: #ffffff;
+            font-weight: bold;
+            border-left: 4px solid #2980B9;
+            padding-left: 14px;
+            border-radius: 6px;
+        }
 
-QScrollBar:vertical {
-    border: none;
-    background: #F5F7FA;
-    width: 8px;
-    margin: 4px 2px;
-    border-radius: 4px;
-}
+        QScrollBar:vertical {
+            border: none;
+            background: #F5F7FA;
+            width: 8px;
+            margin: 4px 2px;
+            border-radius: 4px;
+        }
 
-QScrollBar::handle:vertical {
-    background: #BDC3C7;
-    border-radius: 4px;
-    min-height: 20px;
-}
+        QScrollBar::handle:vertical {
+            background: #BDC3C7;
+            border-radius: 4px;
+            min-height: 20px;
+        }
 
-QScrollBar::handle:vertical:hover {
-    background: #AAB7C4;
-}
+        QScrollBar::handle:vertical:hover {
+            background: #AAB7C4;
+        }
 
-QScrollBar::add-line:vertical, 
-QScrollBar::sub-line:vertical {
-    background: none;
-    border: none;
-}
+        QScrollBar::add-line:vertical, 
+        QScrollBar::sub-line:vertical {
+            background: none;
+            border: none;
+        }
 
-QScrollBar::add-page:vertical, 
-QScrollBar::sub-page:vertical {
-    background: none;
-}
+        QScrollBar::add-page:vertical, 
+        QScrollBar::sub-page:vertical {
+            background: none;
+        }
 
-</string>
+        </string>
        </property>
        <property name="verticalScrollBarPolicy">
         <enum>Qt::ScrollBarPolicy::ScrollBarAsNeeded</enum>
@@ -2505,73 +2515,74 @@ QScrollBar::sub-page:vertical {
         </rect>
        </property>
        <property name="styleSheet">
-        <string notr="true">QListWidget {
-    background: #F5F7FA;
-    border: 2px solid #D1D9E6;
-    border-radius: 10px;
-    padding: 6px;
-    font-family: 'Times', 'Times New Roman', serif;
-    font-size: 14px;
-    color: #2C3E50;
-    outline: none;
-}
+        <string notr="true">
+        QListWidget {
+            background: #F5F7FA;
+            border: 2px solid #D1D9E6;
+            border-radius: 10px;
+            padding: 6px;
+            font-family: 'Times', 'Times New Roman', serif;
+            font-size: 14px;
+            color: #2C3E50;
+            outline: none;
+        }
 
-QListWidget::item {
-    background: #ffffff;
-    border-radius: 6px;
-    padding: 10px;
-    margin: 4px 2px;
-    border: 1px solid #D1D9E6;
-    font-weight: 500;
-    color: #2C3E50;
-}
+        QListWidget::item {
+            background: #ffffff;
+            border-radius: 6px;
+            padding: 10px;
+            margin: 4px 2px;
+            border: 1px solid #D1D9E6;
+            font-weight: 500;
+            color: #2C3E50;
+        }
 
-QListWidget::item:hover {
-    background: #ECF0F3;
-    border-left: 4px solid #3498DB;
-    padding-left: 14px;
-    border-radius: 6px;
-}
+        QListWidget::item:hover {
+            background: #ECF0F3;
+            border-left: 4px solid #3498DB;
+            padding-left: 14px;
+            border-radius: 6px;
+        }
 
-QListWidget::item:selected {
-    background: #3498DB;
-    color: #ffffff;
-    font-weight: bold;
-    border-left: 4px solid #2980B9;
-    padding-left: 14px;
-    border-radius: 6px;
-}
+        QListWidget::item:selected {
+            background: #3498DB;
+            color: #ffffff;
+            font-weight: bold;
+            border-left: 4px solid #2980B9;
+            padding-left: 14px;
+            border-radius: 6px;
+        }
 
-QScrollBar:vertical {
-    border: none;
-    background: #F5F7FA;
-    width: 8px;
-    margin: 4px 2px;
-    border-radius: 4px;
-}
+        QScrollBar:vertical {
+            border: none;
+            background: #F5F7FA;
+            width: 8px;
+            margin: 4px 2px;
+            border-radius: 4px;
+        }
 
-QScrollBar::handle:vertical {
-    background: #BDC3C7;
-    border-radius: 4px;
-    min-height: 20px;
-}
+        QScrollBar::handle:vertical {
+            background: #BDC3C7;
+            border-radius: 4px;
+            min-height: 20px;
+        }
 
-QScrollBar::handle:vertical:hover {
-    background: #AAB7C4;
-}
+        QScrollBar::handle:vertical:hover {
+            background: #AAB7C4;
+        }
 
-QScrollBar::add-line:vertical, 
-QScrollBar::sub-line:vertical {
-    background: none;
-    border: none;
-}
+        QScrollBar::add-line:vertical, 
+        QScrollBar::sub-line:vertical {
+            background: none;
+            border: none;
+        }
 
-QScrollBar::add-page:vertical, 
-QScrollBar::sub-page:vertical {
-    background: none;
-}
+        QScrollBar::add-page:vertical, 
+        QScrollBar::sub-page:vertical {
+            background: none;
+        }
 
-</string>
+        </string>
        </property>
       </widget>
      </widget>
@@ -2589,73 +2600,74 @@ QScrollBar::sub-page:vertical {
         </rect>
        </property>
        <property name="styleSheet">
-        <string notr="true">QListWidget {
-    background: #F5F7FA;
-    border: 2px solid #D1D9E6;
-    border-radius: 10px;
-    padding: 6px;
-    font-family: 'Times', 'Times New Roman', serif;
-    font-size: 14px;
-    color: #2C3E50;
-    outline: none;
-}
+        <string notr="true">
+        QListWidget {
+            background: #F5F7FA;
+            border: 2px solid #D1D9E6;
+            border-radius: 10px;
+            padding: 6px;
+            font-family: 'Times', 'Times New Roman', serif;
+            font-size: 14px;
+            color: #2C3E50;
+            outline: none;
+        }
 
-QListWidget::item {
-    background: #ffffff;
-    border-radius: 6px;
-    padding: 10px;
-    margin: 4px 2px;
-    border: 1px solid #D1D9E6;
-    font-weight: 500;
-    color: #2C3E50;
-}
+        QListWidget::item {
+            background: #ffffff;
+            border-radius: 6px;
+            padding: 10px;
+            margin: 4px 2px;
+            border: 1px solid #D1D9E6;
+            font-weight: 500;
+            color: #2C3E50;
+        }
 
-QListWidget::item:hover {
-    background: #ECF0F3;
-    border-left: 4px solid #3498DB;
-    padding-left: 14px;
-    border-radius: 6px;
-}
+        QListWidget::item:hover {
+            background: #ECF0F3;
+            border-left: 4px solid #3498DB;
+            padding-left: 14px;
+            border-radius: 6px;
+        }
 
-QListWidget::item:selected {
-    background: #3498DB;
-    color: #ffffff;
-    font-weight: bold;
-    border-left: 4px solid #2980B9;
-    padding-left: 14px;
-    border-radius: 6px;
-}
+        QListWidget::item:selected {
+            background: #3498DB;
+            color: #ffffff;
+            font-weight: bold;
+            border-left: 4px solid #2980B9;
+            padding-left: 14px;
+            border-radius: 6px;
+        }
 
-QScrollBar:vertical {
-    border: none;
-    background: #F5F7FA;
-    width: 8px;
-    margin: 4px 2px;
-    border-radius: 4px;
-}
+        QScrollBar:vertical {
+            border: none;
+            background: #F5F7FA;
+            width: 8px;
+            margin: 4px 2px;
+            border-radius: 4px;
+        }
 
-QScrollBar::handle:vertical {
-    background: #BDC3C7;
-    border-radius: 4px;
-    min-height: 20px;
-}
+        QScrollBar::handle:vertical {
+            background: #BDC3C7;
+            border-radius: 4px;
+            min-height: 20px;
+        }
 
-QScrollBar::handle:vertical:hover {
-    background: #AAB7C4;
-}
+        QScrollBar::handle:vertical:hover {
+            background: #AAB7C4;
+        }
 
-QScrollBar::add-line:vertical, 
-QScrollBar::sub-line:vertical {
-    background: none;
-    border: none;
-}
+        QScrollBar::add-line:vertical, 
+        QScrollBar::sub-line:vertical {
+            background: none;
+            border: none;
+        }
 
-QScrollBar::add-page:vertical, 
-QScrollBar::sub-page:vertical {
-    background: none;
-}
+        QScrollBar::add-page:vertical, 
+        QScrollBar::sub-page:vertical {
+            background: none;
+        }
 
-</string>
+        </string>
        </property>
       </widget>
      </widget>
@@ -2673,73 +2685,74 @@ QScrollBar::sub-page:vertical {
         </rect>
        </property>
        <property name="styleSheet">
-        <string notr="true">QListWidget {
-    background: #F5F7FA;
-    border: 2px solid #D1D9E6;
-    border-radius: 10px;
-    padding: 6px;
-    font-family: 'Times', 'Times New Roman', serif;
-    font-size: 14px;
-    color: #2C3E50;
-    outline: none;
-}
+        <string notr="true">
+        QListWidget {
+            background: #F5F7FA;
+            border: 2px solid #D1D9E6;
+            border-radius: 10px;
+            padding: 6px;
+            font-family: 'Times', 'Times New Roman', serif;
+            font-size: 14px;
+            color: #2C3E50;
+            outline: none;
+        }
 
-QListWidget::item {
-    background: #ffffff;
-    border-radius: 6px;
-    padding: 10px;
-    margin: 4px 2px;
-    border: 1px solid #D1D9E6;
-    font-weight: 500;
-    color: #2C3E50;
-}
+        QListWidget::item {
+            background: #ffffff;
+            border-radius: 6px;
+            padding: 10px;
+            margin: 4px 2px;
+            border: 1px solid #D1D9E6;
+            font-weight: 500;
+            color: #2C3E50;
+        }
 
-QListWidget::item:hover {
-    background: #ECF0F3;
-    border-left: 4px solid #3498DB;
-    padding-left: 14px;
-    border-radius: 6px;
-}
+        QListWidget::item:hover {
+            background: #ECF0F3;
+            border-left: 4px solid #3498DB;
+            padding-left: 14px;
+            border-radius: 6px;
+        }
 
-QListWidget::item:selected {
-    background: #3498DB;
-    color: #ffffff;
-    font-weight: bold;
-    border-left: 4px solid #2980B9;
-    padding-left: 14px;
-    border-radius: 6px;
-}
+        QListWidget::item:selected {
+            background: #3498DB;
+            color: #ffffff;
+            font-weight: bold;
+            border-left: 4px solid #2980B9;
+            padding-left: 14px;
+            border-radius: 6px;
+        }
 
-QScrollBar:vertical {
-    border: none;
-    background: #F5F7FA;
-    width: 8px;
-    margin: 4px 2px;
-    border-radius: 4px;
-}
+        QScrollBar:vertical {
+            border: none;
+            background: #F5F7FA;
+            width: 8px;
+            margin: 4px 2px;
+            border-radius: 4px;
+        }
 
-QScrollBar::handle:vertical {
-    background: #BDC3C7;
-    border-radius: 4px;
-    min-height: 20px;
-}
+        QScrollBar::handle:vertical {
+            background: #BDC3C7;
+            border-radius: 4px;
+            min-height: 20px;
+        }
 
-QScrollBar::handle:vertical:hover {
-    background: #AAB7C4;
-}
+        QScrollBar::handle:vertical:hover {
+            background: #AAB7C4;
+        }
 
-QScrollBar::add-line:vertical, 
-QScrollBar::sub-line:vertical {
-    background: none;
-    border: none;
-}
+        QScrollBar::add-line:vertical, 
+        QScrollBar::sub-line:vertical {
+            background: none;
+            border: none;
+        }
 
-QScrollBar::add-page:vertical, 
-QScrollBar::sub-page:vertical {
-    background: none;
-}
+        QScrollBar::add-page:vertical, 
+        QScrollBar::sub-page:vertical {
+            background: none;
+        }
 
-</string>
+        </string>
        </property>
       </widget>
      </widget>
@@ -2760,73 +2773,74 @@ QScrollBar::sub-page:vertical {
         <enum>Qt::ContextMenuPolicy::DefaultContextMenu</enum>
        </property>
        <property name="styleSheet">
-        <string notr="true">QListWidget {
-    background: #F5F7FA;
-    border: 2px solid #D1D9E6;
-    border-radius: 10px;
-    padding: 6px;
-    font-family: 'Times', 'Times New Roman', serif;
-    font-size: 14px;
-    color: #2C3E50;
-    outline: none;
-}
+        <string notr="true">
+        QListWidget {
+            background: #F5F7FA;
+            border: 2px solid #D1D9E6;
+            border-radius: 10px;
+            padding: 6px;
+            font-family: 'Times', 'Times New Roman', serif;
+            font-size: 14px;
+            color: #2C3E50;
+            outline: none;
+        }
 
-QListWidget::item {
-    background: #ffffff;
-    border-radius: 6px;
-    padding: 10px;
-    margin: 4px 2px;
-    border: 1px solid #D1D9E6;
-    font-weight: 500;
-    color: #2C3E50;
-}
+        QListWidget::item {
+            background: #ffffff;
+            border-radius: 6px;
+            padding: 10px;
+            margin: 4px 2px;
+            border: 1px solid #D1D9E6;
+            font-weight: 500;
+            color: #2C3E50;
+        }
 
-QListWidget::item:hover {
-    background: #ECF0F3;
-    border-left: 4px solid #3498DB;
-    padding-left: 14px;
-    border-radius: 6px;
-}
+        QListWidget::item:hover {
+            background: #ECF0F3;
+            border-left: 4px solid #3498DB;
+            padding-left: 14px;
+            border-radius: 6px;
+        }
 
-QListWidget::item:selected {
-    background: #3498DB;
-    color: #ffffff;
-    font-weight: bold;
-    border-left: 4px solid #2980B9;
-    padding-left: 14px;
-    border-radius: 6px;
-}
+        QListWidget::item:selected {
+            background: #3498DB;
+            color: #ffffff;
+            font-weight: bold;
+            border-left: 4px solid #2980B9;
+            padding-left: 14px;
+            border-radius: 6px;
+        }
 
-QScrollBar:vertical {
-    border: none;
-    background: #F5F7FA;
-    width: 8px;
-    margin: 4px 2px;
-    border-radius: 4px;
-}
+        QScrollBar:vertical {
+            border: none;
+            background: #F5F7FA;
+            width: 8px;
+            margin: 4px 2px;
+            border-radius: 4px;
+        }
 
-QScrollBar::handle:vertical {
-    background: #BDC3C7;
-    border-radius: 4px;
-    min-height: 20px;
-}
+        QScrollBar::handle:vertical {
+            background: #BDC3C7;
+            border-radius: 4px;
+            min-height: 20px;
+        }
 
-QScrollBar::handle:vertical:hover {
-    background: #AAB7C4;
-}
+        QScrollBar::handle:vertical:hover {
+            background: #AAB7C4;
+        }
 
-QScrollBar::add-line:vertical, 
-QScrollBar::sub-line:vertical {
-    background: none;
-    border: none;
-}
+        QScrollBar::add-line:vertical, 
+        QScrollBar::sub-line:vertical {
+            background: none;
+            border: none;
+        }
 
-QScrollBar::add-page:vertical, 
-QScrollBar::sub-page:vertical {
-    background: none;
-}
+        QScrollBar::add-page:vertical, 
+        QScrollBar::sub-page:vertical {
+            background: none;
+        }
 
-</string>
+        </string>
        </property>
        <property name="verticalScrollBarPolicy">
         <enum>Qt::ScrollBarPolicy::ScrollBarAsNeeded</enum>
@@ -2852,22 +2866,23 @@ QScrollBar::sub-page:vertical {
     <cursorShape>PointingHandCursor</cursorShape>
    </property>
    <property name="styleSheet">
-    <string notr="true">QPushButton {
-    background-color: #669bbc		; 
-    color: white; 
-    font-size: 16px; 
-    border-radius: 8px; 
-    text-align: left; 
-    padding-right: 40px;
-    font-family: &quot;Times&quot;, &quot;Times New Roman&quot;, serif;
+    <string notr="true">
+    QPushButton {
+        background-color: #669bbc		; 
+        color: white; 
+        font-size: 16px; 
+        border-radius: 8px; 
+        text-align: left; 
+        padding-right: 40px;
+        font-family: &quot;Times&quot;, &quot;Times New Roman&quot;, serif;
 
-}
+    }
 
-QPushButton::menu-indicator {
-    image: none; 
-}
+    QPushButton::menu-indicator {
+        image: none; 
+    }
 
-</string>
+    </string>
    </property>
    <property name="text">
     <string>Open Inbox</string>
