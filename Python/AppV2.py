@@ -521,38 +521,156 @@ def log_message(text):
 
 
 
+def DownloadAndExtract(new_versions):
+    """
+    Download a single ZIP from GitHub, extract it,
+    and replace Tools subfolders (Firefox/Chrome) if needed.
+    Detailed progress messages included with emojis.
+    """
+    try:
+        if not isinstance(new_versions, dict):
+            print("❌ [ERROR] Invalid new_versions (not a dict).")
+            return -1
+
+        path_DownloadFile = os.path.abspath(os.path.join(SCRIPT_DIR, os.pardir))
+        local_zip = os.path.join(path_DownloadFile, "Programme-main.zip")
+
+        need_firefox = "version_Extention_firefox" in new_versions
+        need_chrome = "version_Extention_Family_Chrome" in new_versions
+
+        if not need_firefox and not need_chrome:
+            print("✅ [INFO] No extension updates required.")
+            return 0
+
+        # Remove old ZIP if exists
+        if os.path.exists(local_zip):
+            print(f"🗑️ Removing old ZIP: {local_zip}")
+            os.remove(local_zip)
+
+        # Download ZIP
+        print("⬇️ Downloading update ZIP from GitHub...")
+        headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)'}
+        url = "https://github.com/Azedize/Programme/archive/refs/heads/main.zip"
+
+        resp = requests.get(url, stream=True, headers=headers, verify=False, timeout=60)
+        if resp.status_code != 200:
+            print(f"❌ [ERROR] Failed to download ZIP: HTTP {resp.status_code}")
+            return -1
+
+        with open(local_zip, "wb") as f:
+            for chunk in resp.iter_content(chunk_size=8192):
+                if chunk:
+                    f.write(chunk)
+        print(f"✅ Download completed: {local_zip}")
+
+        # Extract ZIP
+        print("📂 Extracting ZIP file...")
+        with zipfile.ZipFile(local_zip, 'r') as zip_ref:
+            names = [n for n in zip_ref.namelist() if n.strip()]
+            if not names:
+                print("❌ [ERROR] ZIP is empty.")
+                return -1
+            topdir = names[0].split('/')[0]
+            extracted_dir = os.path.join(path_DownloadFile, topdir)
+
+            if os.path.exists(extracted_dir):
+                print(f"🗑️ Removing existing extracted folder: {extracted_dir}")
+                shutil.rmtree(extracted_dir)
+
+            zip_ref.extractall(path_DownloadFile)
+        print(f"✅ Extraction completed: {extracted_dir}")
+
+        # Remove ZIP file after extraction
+        if os.path.exists(local_zip):
+            print(f"🗑️ Removing downloaded ZIP file: {local_zip}")
+            os.remove(local_zip)
+
+        # Prepare Tools folder
+        tools_target = os.path.join(PARENT_DIR, "tools")
+        new_tools_root = os.path.join(extracted_dir, "tools")
+        os.makedirs(tools_target, exist_ok=True)
+
+        # Firefox update
+        if need_firefox:
+            print("🧩 Updating Firefox extension...")
+            src = os.path.join(new_tools_root, "ExtensionTemplateFirefox")
+            dst = os.path.join(tools_target, "ExtensionTemplateFirefox")
+            if os.path.exists(src):
+                if os.path.exists(dst):
+                    print(f"🗑️ Removing old Firefox extension: {dst}")
+                    shutil.rmtree(dst)
+                print(f"🚚 Moving new Firefox extension to {tools_target}")
+                shutil.move(src, tools_target)
+                print("✅ Firefox extension updated successfully")
+            else:
+                print("❌ [ERROR] New Firefox extension folder not found in archive.")
+
+        # Chrome update
+        if need_chrome:
+            print("🧩 Updating Chrome extension...")
+            src = os.path.join(new_tools_root, "Extention_Family_Chrome")
+            dst = os.path.join(tools_target, "Extention_Family_Chrome")
+            if os.path.exists(src):
+                if os.path.exists(dst):
+                    print(f"🗑️ Removing old Chrome extension: {dst}")
+                    shutil.rmtree(dst)
+                print(f"🚚 Moving new Chrome extension to {tools_target}")
+                shutil.move(src, tools_target)
+                print("✅ Chrome extension updated successfully")
+            else:
+                print("❌ [ERROR] New Chrome extension folder not found in archive.")
+
+        # Cleanup extracted folder
+        if os.path.exists(extracted_dir):
+            print(f"🧹 Cleaning up extracted folder: {extracted_dir}")
+            shutil.rmtree(extracted_dir)
+
+        print("🎉 [SUCCESS] Download and update process completed.")
+        return 0
+
+    except Exception as e:
+        traceback.print_exc()
+        print(f"❌ [EXCEPTION] Unexpected error in DownloadAndExtract: {e}")
+        return -1
 
 
 
 # 🔍 Vérifie les versions distantes et locales des composants, puis signale les mises à jour nécessaires
 def checkVersion():
+    """
+    Check remote and local versions of Python, interface, and extensions.
+    Returns a dict with updates if available, "_1" on error, or None if up to date.
+    Detailed logging with emojis.
+    """
     url = "https://www.dropbox.com/scl/fi/78a38bc4papwzlw80hxti/version.json?rlkey=n7dx5mb8tcctvprn0wq4ojw7m&st=z6vzw0ox&dl=1"
-
+    
     try:
-        response = requests.get(url)
+        print("🌐 Checking latest versions from server...")
+        response = requests.get(url, timeout=15)
         if response.status_code != 200:
-            return "_1"  # مشكلة في الاستجابة
+            print(f"❌ [ERROR] Failed to fetch versions: HTTP {response.status_code}")
+            return "_1"
 
         data = response.json()
         version_updates = {}
 
-        # نسخ السيرفر
+        # Server versions
         server_version_python = data.get("version_python")
         server_version_interface = data.get("version_interface")
         server_version_Extention_firefox = data.get("version_Extention_firefox")
         server_version_Extention_Family_Chrome = data.get("version_Extention_Family_Chrome")
 
-        # تحقق من وجود كل النسخ
         if not all([server_version_python, server_version_interface,
                     server_version_Extention_firefox, server_version_Extention_Family_Chrome]):
-            return "_1"  # أي نسخة مفقودة
+            print("❌ [ERROR] Missing version information on server.")
+            return "_1"
 
-        # ملفات النسخ المحلية
+        # Local versions files
         client_files = {
             "version_python": os.path.join(SCRIPT_DIR, "version.txt"),
-            "version_interface": os.path.join(os.path.dirname(SCRIPT_DIR), "interface", "version.txt"),
-            "version_Extention_firefox": os.path.join(os.path.dirname(SCRIPT_DIR), "tools", "ExtensionTemplateFirefox", "version.txt"),
-            "version_Extention_Family_Chrome": os.path.join(os.path.dirname(SCRIPT_DIR), "tools", "Extention_Family_Chrome", "version.txt"),
+            "version_interface": os.path.join(PARENT_DIR, "interface", "version.txt"),
+            "version_Extention_firefox": os.path.join(PARENT_DIR, "Tools", "ExtensionTemplateFirefox", "version.txt"),
+            "version_Extention_Family_Chrome": os.path.join(PARENT_DIR, "Tools", "Extention_Family_Chrome", "version.txt"),
         }
 
         client_versions = {}
@@ -560,31 +678,36 @@ def checkVersion():
             if os.path.exists(path):
                 with open(path, "r") as f:
                     client_versions[key] = f.read().strip()
+                print(f"📄 {key}: Local version = {client_versions[key]}")
             else:
                 client_versions[key] = None
+                print(f"⚠️ {key}: Local version file not found.")
 
-        # مقارنة النسخ
+        # Compare versions
         if server_version_python != client_versions["version_python"]:
             version_updates["version_python"] = server_version_python
+            print(f"⬆️ Python update available: {server_version_python}")
         if server_version_interface != client_versions["version_interface"]:
             version_updates["version_interface"] = server_version_interface
+            print(f"⬆️ Interface update available: {server_version_interface}")
         if server_version_Extention_firefox != client_versions["version_Extention_firefox"]:
             version_updates["version_Extention_firefox"] = server_version_Extention_firefox
+            print(f"⬆️ Firefox extension update available: {server_version_Extention_firefox}")
         if server_version_Extention_Family_Chrome != client_versions["version_Extention_Family_Chrome"]:
             version_updates["version_Extention_Family_Chrome"] = server_version_Extention_Family_Chrome
+            print(f"⬆️ Chrome extension update available: {server_version_Extention_Family_Chrome}")
 
-        # النتيجة النهائية
         if version_updates:
-            log_message(f"[INFO] Detected new version(s): {version_updates}")
+            print(f"✅ Updates detected: {version_updates}")
             return version_updates
         else:
-            log_message("[INFO] All software versions are up to date.")
+            print("✅ All software versions are up to date.")
             return None
 
     except Exception as e:
         traceback.print_exc()
-        return "_1"  # أي استثناء سيتم التعامل معه هنا
-
+        print(f"❌ [EXCEPTION] Error checking versions: {e}")
+        return "_1"
 
 
 
@@ -3950,7 +4073,6 @@ class MainWindow(QMainWindow):
 
         new_versions = checkVersion()
 
-        # First, check for an error
         if new_versions == "_1":
             show_critical_message(
                 window,
@@ -3959,398 +4081,384 @@ class MainWindow(QMainWindow):
                 "Please check your internet connection or try again later.\n"
                 "If the problem persists, contact Support for assistance."
             )
-            return  # Stop further update processing
+            return
 
-        # Check if everything is up to date
         if not new_versions:
             log_message("✅ Everything is up to date, no updates required")
             return
 
         if 'version_python' in new_versions or 'version_interface' in new_versions:
-            log_message("🔄 Python or interface update detected, restarting the program")
+            print("🔄 Python or interface update detected, restarting the program")
             window.close()
             launch_new_window()
             sys.exit(0)
         else:
-            # Handle Firefox Extension update
+            # تحديث الإضافات
             if 'version_Extention_firefox' in new_versions:
-                log_message("⬇️ Downloading new Firefox extension update...")
-                if DownloadFile(new_versions) == 0:
-                    old_dir = os.path.join(PARENT_DIR, "Tools", "ExtensionTemplateFirefox")
-                    new_dir = os.path.join(os.path.dirname(PARENT_DIR), "Programme-main", "Tools", "ExtensionTemplateFirefox")
-
-                    if os.path.exists(old_dir):
-                        shutil.rmtree(old_dir)
-                    shutil.move(new_dir, os.path.join(PARENT_DIR, "Tools"))
-                    log_message("✅ Firefox extension updated successfully")
-                else:
-                    log_message("❌ Failed to update Firefox extension")
-
-            # Handle Chrome Extension update
+                print("⬇️ Downloading new Firefox extension update...")
             if 'version_Extention_Family_Chrome' in new_versions:
-                log_message("⬇️ Downloading new Chrome extension update...")
-                if DownloadFile(new_versions) == 0:
-                    old_dir = os.path.join(PARENT_DIR, "Tools", "Extention_Family_Chrome")
-                    new_dir = os.path.join(os.path.dirname(PARENT_DIR), "Programme-main", "Tools", "Extention_Family_Chrome")
+                print("⬇️ Downloading new Chrome extension update...")
 
-                    if os.path.exists(old_dir):
-                        shutil.rmtree(old_dir)
-                    shutil.move(new_dir, os.path.join(PARENT_DIR, "Tools"))
-                    log_message("✅ Chrome extension updated successfully")
-                else:
-                    log_message("❌ Failed to update Chrome extension")
-
-
-
-
-
-        selected_Browser = self.browser.currentText().lower()
-        print('selected_Browser : ', selected_Browser)
-
-        if selected_Browser == "chrome":
-            print('selected_Browser :', selected_Browser)
-
-            print("\n🔍 Étape 1 : Vérification du dossier de configuration ...")
-            if not os.path.exists(CONFIG_PROFILE):
-                print(f"⚠️ Le dossier requis '{CONFIG_PROFILE}' est introuvable.")
-                print("👉 Veuillez contacter le support avant de continuer.")
-                return
-            print("📂 Dossier de configuration trouvé :", CONFIG_PROFILE)
-
-            print("\n🔍 Étape 2 : Vérification de l'extension locale ...")
-            if not os.path.exists(EXTENTION_REP):
-                os.makedirs(EXTENTION_REP, exist_ok=True)
-                print(f"📂 Le dossier '{EXTENTION_REP}' a été créé car il n'existait pas.")
-                print("📥 Téléchargement de la dernière version de l'extension...")
-                if update_from_github(None):
-                    print("✅ Extension installée avec succès.")
-                else:
-                    show_critical_message(window, "Échec installation extension",
-                                        "❌ Échec de l'installation de l'extension. Veuillez contacter le support.")
-                    return
+            if DownloadAndExtract(new_versions) == 0:
+                if 'version_Extention_firefox' in new_versions:
+                    print("✅ Firefox extension updated successfully")
+                if 'version_Extention_Family_Chrome' in new_versions:
+                    print("✅ Chrome extension updated successfully")
             else:
-                print(f"📂 Extension trouvée : {EXTENTION_REP}")
-                remote_version = check_version_Extention(window)
+                print("❌ Failed to update one or more extensions")
 
-                if isinstance(remote_version, str):  # 🔥 veut dire mise à jour nécessaire
-                    if update_from_github(remote_version):
-                        print("✅ Mise à jour réussie : l'extension a été mise à jour avec succès !")
-                    else:
-                        show_critical_message(window, "Échec mise à jour extension",
-                                            "❌ Échec de la mise à jour depuis GitHub. Veuillez contacter le support.")
-                        return
-                elif remote_version is True:
-                    print("✅ L'extension locale est déjà à jour.")
-                else:
-                    show_critical_message(window, "Erreur version extension",
-                                        "⚠️ Impossible de vérifier la version correctement. Veuillez contacter le support.")
-                    return
+
+
+
+
+
+        # selected_Browser = self.browser.currentText().lower()
+        # print('selected_Browser : ', selected_Browser)
+
+        # if selected_Browser == "chrome":
+        #     print('selected_Browser :', selected_Browser)
+
+        #     print("\n🔍 Étape 1 : Vérification du dossier de configuration ...")
+        #     if not os.path.exists(CONFIG_PROFILE):
+        #         print(f"⚠️ Le dossier requis '{CONFIG_PROFILE}' est introuvable.")
+        #         print("👉 Veuillez contacter le support avant de continuer.")
+        #         return
+        #     print("📂 Dossier de configuration trouvé :", CONFIG_PROFILE)
+
+        #     print("\n🔍 Étape 2 : Vérification de l'extension locale ...")
+        #     if not os.path.exists(EXTENTION_REP):
+        #         os.makedirs(EXTENTION_REP, exist_ok=True)
+        #         print(f"📂 Le dossier '{EXTENTION_REP}' a été créé car il n'existait pas.")
+        #         print("📥 Téléchargement de la dernière version de l'extension...")
+        #         if update_from_github(None):
+        #             print("✅ Extension installée avec succès.")
+        #         else:
+        #             show_critical_message(window, "Échec installation extension",
+        #                                 "❌ Échec de l'installation de l'extension. Veuillez contacter le support.")
+        #             return
+        #     else:
+        #         print(f"📂 Extension trouvée : {EXTENTION_REP}")
+        #         remote_version = check_version_Extention(window)
+
+        #         if isinstance(remote_version, str):  # 🔥 veut dire mise à jour nécessaire
+        #             if update_from_github(remote_version):
+        #                 print("✅ Mise à jour réussie : l'extension a été mise à jour avec succès !")
+        #             else:
+        #                 show_critical_message(window, "Échec mise à jour extension",
+        #                                     "❌ Échec de la mise à jour depuis GitHub. Veuillez contacter le support.")
+        #                 return
+        #         elif remote_version is True:
+        #             print("✅ L'extension locale est déjà à jour.")
+        #         else:
+        #             show_critical_message(window, "Erreur version extension",
+        #                                 "⚠️ Impossible de vérifier la version correctement. Veuillez contacter le support.")
+        #             return
 
 
 
 
 
         
-        interface_tab_widget = window.findChild(QTabWidget, "interface_2")
-        if interface_tab_widget:
-            for i in range(interface_tab_widget.count()):
-                tab_text = interface_tab_widget.tabText(i)
-                if tab_text.startswith("Result"):
-                    interface_tab_widget.setTabText(i, "Result")
-                    break
+        # interface_tab_widget = window.findChild(QTabWidget, "interface_2")
+        # if interface_tab_widget:
+        #     for i in range(interface_tab_widget.count()):
+        #         tab_text = interface_tab_widget.tabText(i)
+        #         if tab_text.startswith("Result"):
+        #             interface_tab_widget.setTabText(i, "Result")
+        #             break
         
-        LOGS_RUNNING =True
+        # LOGS_RUNNING =True
 
-        output_json = [
-            {
-                "process": "login",  
-                "sleep": 1  
-            }
-        ]
+        # output_json = [
+        #     {
+        #         "process": "login",  
+        #         "sleep": 1  
+        #     }
+        # ]
 
-        if self.scenario_layout.count() == 0:
-            show_critical_message(
-                window,  
-                "Error - Empty Scenario", 
-                "No actions added. Please add actions before submitting." 
-            )
-            return
+        # if self.scenario_layout.count() == 0:
+        #     show_critical_message(
+        #         window,  
+        #         "Error - Empty Scenario", 
+        #         "No actions added. Please add actions before submitting." 
+        #     )
+        #     return
         
-        i = 0
-        while i < self.scenario_layout.count():
-            widget = self.scenario_layout.itemAt(i).widget()  
-            if widget:
+        # i = 0
+        # while i < self.scenario_layout.count():
+        #     widget = self.scenario_layout.itemAt(i).widget()  
+        #     if widget:
                 
-                full_state = widget.property("full_state")
-                hidden_id = full_state.get("id") if full_state else None
+        #         full_state = widget.property("full_state")
+        #         hidden_id = full_state.get("id") if full_state else None
                 
-                print(f"📋 full_state: {full_state}")  # عرض محتوى full_state
-                print(f"📋 hidden_id: {hidden_id}")    # عرض قيمة hidden_id
-                checkbox = next((child for child in widget.children() if isinstance(child, QCheckBox)), None)
+        #         print(f"📋 full_state: {full_state}")  # عرض محتوى full_state
+        #         print(f"📋 hidden_id: {hidden_id}")    # عرض قيمة hidden_id
+        #         checkbox = next((child for child in widget.children() if isinstance(child, QCheckBox)), None)
 
-                if full_state and not full_state.get("showOnInit", False) and not hidden_id.startswith("google") and  hidden_id.startswith("youtube"):
-                    print(f"✅ Condition remplie ! Le code à l'intérieur du if sera exécuté ✅ hidden_id : {hidden_id}")
-                    qlineedits = [child for child in widget.children() if isinstance(child, QLineEdit)]
+        #         if full_state and not full_state.get("showOnInit", False) and not hidden_id.startswith("google") and  hidden_id.startswith("youtube"):
+        #             print(f"✅ Condition remplie ! Le code à l'intérieur du if sera exécuté ✅ hidden_id : {hidden_id}")
+        #             qlineedits = [child for child in widget.children() if isinstance(child, QLineEdit)]
 
-                    if len(qlineedits) > 1:
-                        limit_text = qlineedits[0].text()
-                        sleep_text = qlineedits[1].text()
+        #             if len(qlineedits) > 1:
+        #                 limit_text = qlineedits[0].text()
+        #                 sleep_text = qlineedits[1].text()
 
-                        try:
-                            limit_value = parse_random_range(limit_text)
-                        except ValueError:
-                            limit_value = 0
+        #                 try:
+        #                     limit_value = parse_random_range(limit_text)
+        #                 except ValueError:
+        #                     limit_value = 0
 
-                        try:
-                            sleep_value = parse_random_range(sleep_text)
-                        except ValueError:
-                            sleep_value = 0
+        #                 try:
+        #                     sleep_value = parse_random_range(sleep_text)
+        #                 except ValueError:
+        #                     sleep_value = 0
 
-                        # 👇 Ajouter UN SEUL objet avec process, limit et sleep
-                        if  hidden_id.startswith("youtube"):
-                            output_json.append({
-                                "process": "CheckLoginYoutube",
-                                "sleep":  random.randint(1, 3)
-                            })
-                            output_json.append({
-                                "process": hidden_id,
-                                "limit": limit_value,
-                                "sleep": sleep_value
-                            })
-                        else:
-                            output_json.append({
-                                "process": hidden_id,
-                                "limit": limit_value,
-                                "sleep": sleep_value
-                            })
+        #                 # 👇 Ajouter UN SEUL objet avec process, limit et sleep
+        #                 if  hidden_id.startswith("youtube"):
+        #                     output_json.append({
+        #                         "process": "CheckLoginYoutube",
+        #                         "sleep":  random.randint(1, 3)
+        #                     })
+        #                     output_json.append({
+        #                         "process": hidden_id,
+        #                         "limit": limit_value,
+        #                         "sleep": sleep_value
+        #                     })
+        #                 else:
+        #                     output_json.append({
+        #                         "process": hidden_id,
+        #                         "limit": limit_value,
+        #                         "sleep": sleep_value
+        #                     })
 
-                    else:
-                        # S'il n'y a qu'un seul QLineEdit → utilisé pour sleep seulement
-                        sleep_text = qlineedits[0].text() if qlineedits else "0"
-                        print("✅ QLineEdit utilisé comme sleep uniquement:", sleep_text)
+        #             else:
+        #                 # S'il n'y a qu'un seul QLineEdit → utilisé pour sleep seulement
+        #                 sleep_text = qlineedits[0].text() if qlineedits else "0"
+        #                 print("✅ QLineEdit utilisé comme sleep uniquement:", sleep_text)
 
-                        try:
-                            sleep_value = parse_random_range(sleep_text)
-                        except ValueError:
-                            sleep_value = 0
+        #                 try:
+        #                     sleep_value = parse_random_range(sleep_text)
+        #                 except ValueError:
+        #                     sleep_value = 0
 
-                        output_json.append({
-                            "process": hidden_id,
-                            "sleep": sleep_value
-                        })
+        #                 output_json.append({
+        #                     "process": hidden_id,
+        #                     "sleep": sleep_value
+        #                 })
 
-                    i += 1
-                    continue
+        #             i += 1
+        #             continue
 
-                if full_state and full_state.get("showOnInit", False) and checkbox:
-                    sub_process = []  
-                    # spinbox = next((child.value() for child in widget.children() if isinstance(child, QSpinBox)), 0)
-                    # openInbox
-                    output_json.append({
-                        "process": hidden_id,
-                        "sleep": random.randint(1, 3)
-                    })
+        #         if full_state and full_state.get("showOnInit", False) and checkbox:
+        #             sub_process = []  
+        #             # spinbox = next((child.value() for child in widget.children() if isinstance(child, QSpinBox)), 0)
+        #             # openInbox
+        #             output_json.append({
+        #                 "process": hidden_id,
+        #                 "sleep": random.randint(1, 3)
+        #             })
 
-                    if checkbox.isChecked():
-                        search_value = next((child.text() for child in reversed(widget.children()) if isinstance(child, QLineEdit)), None)
+        #             if checkbox.isChecked():
+        #                 search_value = next((child.text() for child in reversed(widget.children()) if isinstance(child, QLineEdit)), None)
                         
-                        if output_json and output_json[-1]["process"] == "open_spam":
-                            output_json.append({
-                                "process": "search",
-                                "value": f"in:spam {search_value}"
-                            })
-                        else:
-                            output_json.append({
-                                "process": "search",
-                                "value": search_value
-                            })
+        #                 if output_json and output_json[-1]["process"] == "open_spam":
+        #                     output_json.append({
+        #                         "process": "search",
+        #                         "value": f"in:spam {search_value}"
+        #                     })
+        #                 else:
+        #                     output_json.append({
+        #                         "process": "search",
+        #                         "value": search_value
+        #                     })
 
 
 
-                    i += 1
-                    while i < self.scenario_layout.count():
-                        sub_widget = self.scenario_layout.itemAt(i).widget()
-                        if not sub_widget:
-                            break
+        #             i += 1
+        #             while i < self.scenario_layout.count():
+        #                 sub_widget = self.scenario_layout.itemAt(i).widget()
+        #                 if not sub_widget:
+        #                     break
 
-                        sub_full_state = sub_widget.property("full_state")
-                        sub_hidden_id = sub_full_state.get("id") if sub_full_state else None
-                        # sub_spinbox = next((child.value() for child in sub_widget.children() if isinstance(child, QSpinBox)), 0)
-                        wait_process_txt = next((child.text() for child in sub_widget.children() if isinstance(child, QLineEdit)), "0")
-                        try:
-                            wait_process = parse_random_range(wait_process_txt)
-                        except ValueError:
-                            wait_process = 0
-                        sub_checkbox = next((child for child in sub_widget.children() if isinstance(child, QCheckBox)), None)
+        #                 sub_full_state = sub_widget.property("full_state")
+        #                 sub_hidden_id = sub_full_state.get("id") if sub_full_state else None
+        #                 # sub_spinbox = next((child.value() for child in sub_widget.children() if isinstance(child, QSpinBox)), 0)
+        #                 wait_process_txt = next((child.text() for child in sub_widget.children() if isinstance(child, QLineEdit)), "0")
+        #                 try:
+        #                     wait_process = parse_random_range(wait_process_txt)
+        #                 except ValueError:
+        #                     wait_process = 0
+        #                 sub_checkbox = next((child for child in sub_widget.children() if isinstance(child, QCheckBox)), None)
 
-                        combobox = next((child for child in widget.children() if isinstance(child, QComboBox)), None)
-                        combo_value = combobox.currentText() if combobox else None
+        #                 combobox = next((child for child in widget.children() if isinstance(child, QComboBox)), None)
+        #                 combo_value = combobox.currentText() if combobox else None
 
-                        if sub_full_state and sub_full_state.get("showOnInit", False) or sub_hidden_id.startswith("google") or sub_hidden_id.startswith("youtube"):
-                            break
+        #                 if sub_full_state and sub_full_state.get("showOnInit", False) or sub_hidden_id.startswith("google") or sub_hidden_id.startswith("youtube"):
+        #                     break
 
-                        if not sub_checkbox:
-                            sub_process.append({
-                                "process": sub_hidden_id,
-                                "sleep": wait_process
-                            })
-                        else:
-                            break
+        #                 if not sub_checkbox:
+        #                     sub_process.append({
+        #                         "process": sub_hidden_id,
+        #                         "sleep": wait_process
+        #                     })
+        #                 else:
+        #                     break
 
-                        i += 1
+        #                 i += 1
 
-                    if len(sub_process) > 0:
-                        action = "return_back" if combo_value == "Return back" else "next"
-                        sub_process.append({
-                            "process": action
-                        })
-                    qlineedits = [child for child in widget.children() if isinstance(child, QLineEdit)]
+        #             if len(sub_process) > 0:
+        #                 action = "return_back" if combo_value == "Return back" else "next"
+        #                 sub_process.append({
+        #                     "process": action
+        #                 })
+        #             qlineedits = [child for child in widget.children() if isinstance(child, QLineEdit)]
 
-                    limit_loop_text = qlineedits[0].text() if len(qlineedits) > 1 else "0"
-                    Start_loop_text =qlineedits[1].text() if len(qlineedits) > 1 else "0"
+        #             limit_loop_text = qlineedits[0].text() if len(qlineedits) > 1 else "0"
+        #             Start_loop_text =qlineedits[1].text() if len(qlineedits) > 1 else "0"
 
-                    try:
-                        limit_loop = parse_random_range(limit_loop_text)
-                        Start_loop =  parse_random_range(Start_loop_text)
-                    except ValueError:
-                        limit_loop = 0
+        #             try:
+        #                 limit_loop = parse_random_range(limit_loop_text)
+        #                 Start_loop =  parse_random_range(Start_loop_text)
+        #             except ValueError:
+        #                 limit_loop = 0
 
-                    output_json.append({
-                        "process": "loop",
-                        "check": "is_empty_folder",
-                        "limit_loop": limit_loop,
-                        "start": Start_loop,
-                        "sub_process": sub_process
-                    })
-                    continue
+        #             output_json.append({
+        #                 "process": "loop",
+        #                 "check": "is_empty_folder",
+        #                 "limit_loop": limit_loop,
+        #                 "start": Start_loop,
+        #                 "sub_process": sub_process
+        #             })
+        #             continue
 
-                if full_state and full_state.get("showOnInit", False) and not checkbox:
-                    # spinbox = next((child.value() for child in widget.children() if isinstance(child, QSpinBox)), 0)
-                    wait_process_txt = next((child.text() for child in widget.children() if isinstance(child, QLineEdit)), "0")
-                    try:
-                        wait_process = parse_random_range(wait_process_txt)
-                    except ValueError:
-                        wait_process = 0
-                    output_json.append({
-                        "process": hidden_id,
-                        "sleep": wait_process
-                    })
+        #         if full_state and full_state.get("showOnInit", False) and not checkbox:
+        #             # spinbox = next((child.value() for child in widget.children() if isinstance(child, QSpinBox)), 0)
+        #             wait_process_txt = next((child.text() for child in widget.children() if isinstance(child, QLineEdit)), "0")
+        #             try:
+        #                 wait_process = parse_random_range(wait_process_txt)
+        #             except ValueError:
+        #                 wait_process = 0
+        #             output_json.append({
+        #                 "process": hidden_id,
+        #                 "sleep": wait_process
+        #             })
 
 
-                if full_state and not full_state.get("showOnInit", False) and (hidden_id.startswith("google") or hidden_id.startswith("youtube")):
-                    print("🔍 ✅ Condition principale remplie (if)")
-                    print(f"🔸 Identifiant caché (hidden_id) : {hidden_id}")
+        #         if full_state and not full_state.get("showOnInit", False) and (hidden_id.startswith("google") or hidden_id.startswith("youtube")):
+        #             print("🔍 ✅ Condition principale remplie (if)")
+        #             print(f"🔸 Identifiant caché (hidden_id) : {hidden_id}")
                     
-                    print(f"📋 État de la case à cocher : {'trouvée' if checkbox else 'non trouvée'}")
+        #             print(f"📋 État de la case à cocher : {'trouvée' if checkbox else 'non trouvée'}")
                     
-                    wait_process_txt = next((child.text() for child in widget.children() if isinstance(child, QLineEdit)), "0")
-                    print(f"📥 Valeur du champ de délai (wait_process_txt) : {wait_process_txt}")
+        #             wait_process_txt = next((child.text() for child in widget.children() if isinstance(child, QLineEdit)), "0")
+        #             print(f"📥 Valeur du champ de délai (wait_process_txt) : {wait_process_txt}")
                     
-                    try:
-                        wait_process = parse_random_range(wait_process_txt)
-                        print(f"⏳ Délai après conversion (wait_process) : {wait_process}")
-                    except ValueError:
-                        wait_process = 0
-                        print("⚠️ Erreur lors de la conversion du délai. Valeur par défaut utilisée : 0")
+        #             try:
+        #                 wait_process = parse_random_range(wait_process_txt)
+        #                 print(f"⏳ Délai après conversion (wait_process) : {wait_process}")
+        #             except ValueError:
+        #                 wait_process = 0
+        #                 print("⚠️ Erreur lors de la conversion du délai. Valeur par défaut utilisée : 0")
                     
-                    if checkbox and checkbox.isChecked():
-                        print("✅ La case à cocher est activée")
+        #             if checkbox and checkbox.isChecked():
+        #                 print("✅ La case à cocher est activée")
 
-                        qlineedits = [child for child in widget.children() if isinstance(child, QLineEdit)]
-                        print(f"✏️ Nombre total de champs QLineEdit trouvés : {len(qlineedits)}")
+        #                 qlineedits = [child for child in widget.children() if isinstance(child, QLineEdit)]
+        #                 print(f"✏️ Nombre total de champs QLineEdit trouvés : {len(qlineedits)}")
 
-                        for idx, line_edit in enumerate(qlineedits, start=1):
-                            print(f"   ➤ Champ QLineEdit {idx} : \"{line_edit.text()}\"")
+        #                 for idx, line_edit in enumerate(qlineedits, start=1):
+        #                     print(f"   ➤ Champ QLineEdit {idx} : \"{line_edit.text()}\"")
 
-                        if len(qlineedits) > 1:
-                            search_value = qlineedits[1].text()
-                            print(f"🔎 Valeur de recherche utilisée (deuxième champ) : {search_value}")
-                        elif len(qlineedits) == 1:
-                            search_value = qlineedits[0].text()
-                            print(f"🔎 Un seul champ trouvé, valeur de recherche utilisée : {search_value}")
-                        else:
-                            search_value = ""
-                            print("⚠️ Aucun champ QLineEdit trouvé, valeur de recherche vide.")
+        #                 if len(qlineedits) > 1:
+        #                     search_value = qlineedits[1].text()
+        #                     print(f"🔎 Valeur de recherche utilisée (deuxième champ) : {search_value}")
+        #                 elif len(qlineedits) == 1:
+        #                     search_value = qlineedits[0].text()
+        #                     print(f"🔎 Un seul champ trouvé, valeur de recherche utilisée : {search_value}")
+        #                 else:
+        #                     search_value = ""
+        #                     print("⚠️ Aucun champ QLineEdit trouvé, valeur de recherche vide.")
 
-                        output_json.append({
-                            "process": hidden_id,
-                            "search": search_value,
-                            "sleep": wait_process
-                        })
-                        print("📤 Données ajoutées à output_json avec valeur de recherche.")
-                    else:
-                        output_json.append({
-                            "process": hidden_id,
-                            "sleep": wait_process
-                        })
-                        print("🚫 La case à cocher n’est pas activée. Aucune donnée ajoutée.")
-
-
-
-            i += 1
+        #                 output_json.append({
+        #                     "process": hidden_id,
+        #                     "search": search_value,
+        #                     "sleep": wait_process
+        #                 })
+        #                 print("📤 Données ajoutées à output_json avec valeur de recherche.")
+        #             else:
+        #                 output_json.append({
+        #                     "process": hidden_id,
+        #                     "sleep": wait_process
+        #                 })
+        #                 print("🚫 La case à cocher n’est pas activée. Aucune donnée ajoutée.")
 
 
-        try:
-            result = parse_input_to_json(window)
 
-            if not result:  
-                return
-            data_list, entered_number = result  
+        #     i += 1
 
-        except Exception as e:
-            QMessageBox.critical(window, "Error", f"Error while parsing the JSON: {e}")
-            return
+
+        # try:
+        #     result = parse_input_to_json(window)
+
+        #     if not result:  
+        #         return
+        #     data_list, entered_number = result  
+
+        # except Exception as e:
+        #     QMessageBox.critical(window, "Error", f"Error while parsing the JSON: {e}")
+        #     return
     
-        print("📦 JSON test:")
+        # print("📦 JSON test:")
 
-        print(json.dumps(output_json, indent=4, ensure_ascii=False))
+        # print(json.dumps(output_json, indent=4, ensure_ascii=False))
         
-        current_time = datetime.datetime.now()
-        current_date = current_time.strftime("%Y-%m-%d")
-        current_hour = current_time.strftime("%H-%M-%S") 
-        modified_json = self.process_and_split_json(output_json)
-        output_json = self.process_and_handle_last_element(modified_json)
-        output_json_final=self.process_and_modify_json(output_json)
-        self.save_json_to_file(output_json_final , selected_Browser)
-        print("📦 JSON Final:")
-        print(json.dumps(output_json_final, indent=4, ensure_ascii=False))
+        # current_time = datetime.datetime.now()
+        # current_date = current_time.strftime("%Y-%m-%d")
+        # current_hour = current_time.strftime("%H-%M-%S") 
+        # modified_json = self.process_and_split_json(output_json)
+        # output_json = self.process_and_handle_last_element(modified_json)
+        # output_json_final=self.process_and_modify_json(output_json)
+        # self.save_json_to_file(output_json_final , selected_Browser)
+        # print("📦 JSON Final:")
+        # print(json.dumps(output_json_final, indent=4, ensure_ascii=False))
 
  
-        try:
-            with open( os.path.join(SCRIPT_DIR, "Isp.txt"), 'w', encoding='utf-8') as f:
-                f.write(self.Isp.currentText().strip())
-            print(f"📄 Fichier Isp.txt mis à jour avec : '{self.Isp.currentText().strip()}'")
-        except Exception as e:
-            print(f"❌ Erreur lors de l'écriture dans Isp.txt : {e}")
+        # try:
+        #     with open( os.path.join(SCRIPT_DIR, "Isp.txt"), 'w', encoding='utf-8') as f:
+        #         f.write(self.Isp.currentText().strip())
+        #     print(f"📄 Fichier Isp.txt mis à jour avec : '{self.Isp.currentText().strip()}'")
+        # except Exception as e:
+        #     print(f"❌ Erreur lors de l'écriture dans Isp.txt : {e}")
 
 
 
-        json_string = json.dumps(output_json_final)
-        print("✈️​✈️​✈️​✈️​✈️​✈️​ : ",json_string)
+        # json_string = json.dumps(output_json_final)
+        # print("✈️​✈️​✈️​✈️​✈️​✈️​ : ",json_string)
 
-        parameters = { 
-            'p_owner':username,
-            'p_entity':p_entity,
-            'p_isp': self.Isp.currentText(),
-            'p_action_name': json.dumps(output_json_final), 
-            'p_app':'V4',
-            'p_python_version': f"{sys.version_info.major}.{sys.version_info.minor}", 
-            'p_browser': self.browser.currentText(),
-        }
+        # parameters = { 
+        #     'p_owner':username,
+        #     'p_entity':p_entity,
+        #     'p_isp': self.Isp.currentText(),
+        #     'p_action_name': json.dumps(output_json_final), 
+        #     'p_app':'V4',
+        #     'p_python_version': f"{sys.version_info.major}.{sys.version_info.minor}", 
+        #     'p_browser': self.browser.currentText(),
+        # }
 
-        unique_id=self.saveProcess(parameters)
+        # unique_id=self.saveProcess(parameters)
 
-        if unique_id==-1:
-            # print("Error getting process ID ")
-            # os.system("pause")
-            # exit()
-            return
+        # if unique_id==-1:
+        #     # print("Error getting process ID ")
+        #     # os.system("pause")
+        #     # exit()
+        #     return
 
 
-        with ThreadPoolExecutor(max_workers=2) as executor:
-            executor.submit(start_extraction, window, data_list , entered_number, selected_Browser, self.Isp.currentText() , unique_id , output_json_final, username)
-            executor.submit(self.logs_thread.start)
-        EXTRACTION_THREAD.finished.connect(lambda: self.on_extraction_finished(window))
+        # with ThreadPoolExecutor(max_workers=2) as executor:
+        #     executor.submit(start_extraction, window, data_list , entered_number, selected_Browser, self.Isp.currentText() , unique_id , output_json_final, username)
+        #     executor.submit(self.logs_thread.start)
+        # EXTRACTION_THREAD.finished.connect(lambda: self.on_extraction_finished(window))
 
 
 
