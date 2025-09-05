@@ -222,8 +222,139 @@
         "actions": [],
         "Template": "Template2",
         "INITAILE"  :true
-
+    },
+    "googleActions": {
+        "id": "google_actions",
+        "label": "Google Features",
+        "showOnInit": true,
+        "actions": ["googleMapsActions" , "trends_google" , "news_google"],
+        "Template": "Template2",
+        "isMultiSelect": true
+    },
+    "trends_google": {
+        "id": "google_trends",
+        "label": "Trends Google",
+        "actions": [],
+        "Template": "Template2"
+    },
+    "googleMapsActions": {
+        "id": "google_maps_actions",
+        "label": "Google Maps Features",
+        "actions": ["save_location", "search_activities"],
+        "Template": "Template2"
+      },
+      "news_google": {
+        "id": "google_news",
+        "label": "News Google",
+        "actions": [],
+        "Template": "Template2"
+      },
+      "save_location": {
+        "id": "save_location",
+        "label": "Save Location",
+        "actions": ["preferred_addresses", "places_to_visit", "travel_projects", "favorite_places"],
+        "Template": "Template2"
+      },
+      "search_activities": {
+        "id": "search_activities",
+        "label": "Activity Search",
+        "actions": ["restaurants", "hotels", "attractions", "museums", "transit", "pharmacies", "atms"],
+        "Template": "Template2"
+      },
+      "restaurants": {
+        "id": "google_restaurants",
+        "label": "Find Restaurants",
+        "actions": [],
+        "Template": "Template2",
+        "description": "Discover dining options in the current area"
+      },
+      "hotels": {
+        "id": "google_hotels",
+        "label": "Find Hotels",
+        "actions": [],
+        "Template": "Template2",
+        "description": "Locate accommodation options near you"
+      },
+      "attractions": {
+        "id": "google_attractions",
+        "label": "Things to Do",
+        "actions": [],
+        "Template": "Template2",
+        "description": "Explore local attractions and activities"
+      },
+      "museums": {
+        "id": "google_museums",
+        "label": "Museum Search",
+        "actions": [],
+        "Template": "Template2",
+        "description": "Discover cultural institutions in the area"
+      },
+      "transit": {
+        "id": "google_transit",
+        "label": "Transit Options",
+        "actions": [],
+        "Template": "Template2",
+        "description": "Find public transportation routes and stations"
+      },
+      "pharmacies": {
+        "id": "google_pharmacies",
+        "label": "Pharmacy Locator",
+        "actions": [],
+        "Template": "Template2",
+        "description": "Locate nearby pharmacies and drugstores"
+      },
+      "atms": {
+        "id": "google_atms",
+        "label": "ATM Finder",
+        "actions": [],
+        "Template": "Template2",
+        "description": "Find nearby automated teller machines"
+      },
+      "preferred_addresses": {
+        "id": "google_preferred_addresses",
+        "label": "Preferred Addresses",
+        "actions": [],
+        "Template": "Template3"
+      },
+      "places_to_visit": {
+        "id": "google_places_to_visit",
+        "label": "Places to Visit",
+        "actions": [],
+        "Template": "Template3"
+      },
+      "travel_projects": {
+        "id": "google_travel_projects",
+        "label": "Travel Projects",
+        "actions": [],
+        "Template": "Template3"
+      },
+      "favorite_places": {
+        "id": "google_favorite_places",
+        "label": "Favorite Places",
+        "actions": [],
+        "Template": "Template3"
+      },
+      "youtubeActions": {
+        "id": "youtube_actions",
+        "label": "YouTube Features",
+        "showOnInit": true,
+        "actions": ["youtube_Shorts", "charts_youtube"],
+        "Template": "Template2",
+        "isMultiSelect": true
+    },
+    "youtube_Shorts": {
+        "id": "youtube_Shorts",
+        "label": "Youtube Shorts",
+        "actions": [],
+        "Template": "Template4"
+    },
+    "charts_youtube": {
+        "id": "youtube_charts",
+        "label": "Charts Youtube",
+        "actions": [],
+        "Template": "Template4"
     }
-    
+
 }
   
+
